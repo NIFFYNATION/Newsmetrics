@@ -142,19 +142,24 @@ const Header = ({ onSearch }) => {
           <div className="flex items-center gap-4 text-[#111418]">
             <div className="size-8 sm:size-10">
               <svg
+                className="w-full h-full"
                 viewBox="0 0 48 48"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <g clipPath="url(#clip0_6_319)">
                   <path
-                    d="M8.57829 8.57829C5.52816 11.6284 3.451 15.5145 2.60947 19.7452C1.76794 23.9758 2.19984 28.361 3.85056 32.3462C5.50128 36.3314 8.29667 39.7376 11.8832 42.134C15.4698 44.5305 19.6865 45.8096 24 45.8096C28.3135 45.8096 32.5302 44.5305 36.1168 42.134C39.7033 39.7375 42.4987 36.3314 44.1494 32.3462C45.8002 28.361 46.2321 23.9758 45.3905 19.7452C44.549 15.5145 42.4718 11.6284 39.4217 8.57829L24 24L8.57829 8.57829Z"
-                    fill="currentColor"
+                    className="fill-current text-red-600"
+                    d="M8.57829 8.57829C5.52816 11.6284 3.451 15.5145 2.60947 19.7452C1.76794 23.9758 2.19984 28.361 3.85056 32.3462C5.50128 36.3314 8.29667 39.7376 11.8832 42.134C15.4698 44.5305 19.6865 45.8096 24 45.8096L24 24L8.57829 8.57829Z"
+                  ></path>
+                  <path
+                    className="fill-current text-black"
+                    d="M24 45.8096C28.3135 45.8096 32.5302 44.5305 36.1168 42.134C39.7033 39.7375 42.4987 36.3314 44.1494 32.3462C45.8002 28.361 46.2321 23.9758 45.3905 19.7452C44.549 15.5145 42.4718 11.6284 39.4217 8.57829L24 24V45.8096Z"
                   ></path>
                 </g>
                 <defs>
                   <clipPath id="clip0_6_319">
-                    <rect width="48" height="48" fill="white"></rect>
+                    <rect className="w-full h-full fill-white" width="48" height="48"></rect>
                   </clipPath>
                 </defs>
               </svg>
@@ -564,9 +569,11 @@ const FeaturedArticle = ({
     <div className="p-4 @container">
       <div className="flex flex-col items-stretch justify-start rounded-xl sm:flex-row sm:items-start">
         <div
-          className="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl sm:w-1/2 lg:w-2/5"
+          className="w-full h-48 sm:h-full bg-center bg-no-repeat bg-cover rounded-xl sm:w-1/2 lg:w-2/5 overflow-hidden"
           style={{ backgroundImage: `url("${image}")` }}
-        ></div>
+        >
+          <img src={image} alt={title} className="w-full h-full object-cover" />
+        </div>
         <div className="flex w-full grow flex-col items-stretch justify-center gap-2 py-4 sm:px-4">
           <p className="text-[#637588] text-sm font-normal leading-normal">
             {category} • {format(new Date(date), "MMMM d, yyyy • h:mm a")}
@@ -638,36 +645,53 @@ const TrendingArticle = ({ id, image, title, category, date }) => (
 
 const Footer = () => (
   <footer className="flex justify-center border-t border-gray-200">
-    <div className="flex max-w-[960px] flex-1 flex-col">
+    <div className=" max-w-7xl mx-auto flex  flex-1 flex-col">
       <div className="flex flex-col gap-6 px-5 py-10 text-center @container">
         <nav className="flex flex-wrap items-center justify-center gap-6 @[480px]:flex-row @[480px]:justify-around">
-          <a
-            className="text-[#637588] text-base font-normal leading-normal min-w-40"
-            href="#"
-          >
-            About
-          </a>
-          <a
-            className="text-[#637588] text-base font-normal leading-normal min-w-40"
-            href="#"
-          >
-            Contact
-          </a>
-          <a
-            className="text-[#637588] text-base font-normal leading-normal min-w-40"
-            href="#"
-          >
-            Privacy Policy
-          </a>
-          <a
-            className="text-[#637588] text-base font-normal leading-normal min-w-40"
-            href="#"
-          >
-            Terms of Service
-          </a>
+          <div>
+            <h1 className="text-[#111418] text-xl font-bold min-w-40 leading-tight tracking-[-0.015em] sm:text-[1.7rem]">
+              News
+              <span className="text-red-600">Metrics</span>
+            </h1>
+          </div>
+          <div className="flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8">
+            <a
+              className="text-[#637588] text-sm sm:text-base font-normal leading-normal hover:text-[#111418] transition-colors duration-300 px-2 py-1 rounded-md hover:bg-gray-100"
+              href="#"
+            >
+              About
+            </a>
+            <a
+              className="text-[#637588] text-sm sm:text-base font-normal leading-normal hover:text-[#111418] transition-colors duration-300 px-2 py-1 rounded-md hover:bg-gray-100"
+              href="#"
+            >
+              Contact
+            </a>
+            <a
+              className="text-[#637588] text-sm sm:text-base font-normal leading-normal hover:text-[#111418] transition-colors duration-300 px-2 py-1 rounded-md hover:bg-gray-100"
+              href="#"
+            >
+              Privacy Policy
+            </a>
+            <a
+              className="text-[#637588] text-sm sm:text-base font-normal leading-normal hover:text-[#111418] transition-colors duration-300 px-2 py-1 rounded-md hover:bg-gray-100"
+              href="#"
+            >
+              Terms of Service
+            </a>
+          </div>
+
+          <div>
+            <h3
+              className="font-[500] text-base font-normal leading-normal max-w-40"
+              href="#"
+            >
+              Powered by EmDev
+            </h3>
+          </div>
         </nav>
         <p className="text-[#637588] text-base font-normal leading-normal">
-          © {new Date().getFullYear()} News Wave
+          © {new Date().getFullYear()} NewsMetrics
         </p>
       </div>
     </div>
@@ -855,6 +879,7 @@ const Posts = () => {
                     <TrendingArticle key={post.id} {...post} />
                   ))}
                 </div>
+                <Advertisement />
                 <Advertisement />
               </aside>
             </div>
