@@ -556,7 +556,7 @@ const FeaturedArticle = ({
   </Link>
 );
 
-const TrendingArticle = ({ id, image, title, category }) => (
+const TrendingArticle = ({ id, image, title, category, date }) => (
   <Link
     to={`/article/${id}`}
     className="block hover:bg-gray-100 transition-colors duration-200 border-b border-gray-200 last:border-b-0"
@@ -573,6 +573,9 @@ const TrendingArticle = ({ id, image, title, category }) => (
           </p>
           <p className="text-[#637588] text-sm font-normal leading-normal line-clamp-2">
             {category}
+          </p>
+          <p className="text-[#637588] text-xs font-normal leading-normal">
+            {format(new Date(date), "MMM d, yyyy • h:mm a")}
           </p>
         </div>
       </div>
@@ -749,6 +752,15 @@ const Posts = () => {
 
   const totalPages = Math.ceil(sortedPosts.length / postsPerPage);
 
+  const Advertisement = () => (
+    <div className="bg-gray-100 p-4 rounded-lg mt-32">
+      <h2 className="text-lg font-bold mb-2">Advertisement</h2>
+      <div className="bg-gray-300 h-60 flex items-center justify-center text-gray-600">
+        Ad Space
+      </div>
+    </div>
+  );
+
   return (
     <>
       <Helmet>
@@ -808,6 +820,7 @@ const Posts = () => {
                     <TrendingArticle key={post.id} {...post} />
                   ))}
                 </div>
+                <Advertisement />
               </aside>
             </div>
           </div>
