@@ -159,8 +159,9 @@ const Header = ({ onSearch }) => {
                 </defs>
               </svg>
             </div>
-            <h1 className="text-[#111418] text-lg font-bold leading-tight tracking-[-0.015em] sm:text-xl">
-              News Wave
+            <h1 className="text-[#111418] text-xl font-bold leading-tight tracking-[-0.015em] sm:text-[1.7rem]">
+              News
+              <span className="text-red-600">Metrics</span>
             </h1>
           </div>
           <div className="flex gap-2">
@@ -764,7 +765,7 @@ const Posts = () => {
   return (
     <>
       <Helmet>
-        <title>News Wave - Latest News and Featured Articles</title>
+        <title>News Metrics - Latest News and Featured Articles</title>
         <meta
           name="description"
           content="Stay informed with News Wave. Read the latest news, featured articles, and trending stories across technology, food & drink, entertainment, and more."
