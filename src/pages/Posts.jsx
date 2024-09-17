@@ -513,6 +513,40 @@ const HeroCarousel = ({ latestPosts }) => {
     </div>
   );
 };
+const HeroSection = ({ latestPosts }) => {
+  return (
+    <div className="flex flex-col lg:flex-row gap-6 mb-8">
+      <div className="lg:w-2/3">
+        <HeroCarousel latestPosts={latestPosts} />
+      </div>
+      <aside className="lg:w-1/3 bg-gray-100 p-4 rounded-xl">
+        <h2 className="text-xl font-bold mb-4">Trending Topics</h2>
+        <ul className="space-y-2">
+          <li className="bg-white p-3 rounded-lg shadow-sm">
+            <a href="#" className="text-blue-600 hover:underline">
+              COVID-19 Updates
+            </a>
+          </li>
+          <li className="bg-white p-3 rounded-lg shadow-sm">
+            <a href="#" className="text-blue-600 hover:underline">
+              Climate Change
+            </a>
+          </li>
+          <li className="bg-white p-3 rounded-lg shadow-sm">
+            <a href="#" className="text-blue-600 hover:underline">
+              Tech Innovations
+            </a>
+          </li>
+          <li className="bg-white p-3 rounded-lg shadow-sm">
+            <a href="#" className="text-blue-600 hover:underline">
+              Global Economy
+            </a>
+          </li>
+        </ul>
+      </aside>
+    </div>
+  );
+};
 
 const FeaturedArticle = ({
   id,
@@ -793,10 +827,10 @@ const Posts = () => {
           <Header onSearch={handleSearch} />
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-            <HeroCarousel latestPosts={sortedPosts.slice(0, 5)} />
+            <HeroSection latestPosts={sortedPosts.slice(0, 5)} />
 
-            <div className="flex flex-col lg:flex-row gap-6 py-6 border-t border-gray-200 mt-6">
-              <main className="flex-grow lg:border-r lg:border-gray-200 lg:pr-6">
+            <div className="flex flex-col lg:flex-row gap-6">
+              <main className="flex-grow lg:w-2/3">
                 <LatestPosts posts={sortedPosts.slice(0, 3)} />
                 <h2 className="text-[#111418] text-2xl font-bold leading-tight tracking-[-0.015em] mb-4 pb-2 border-b border-gray-200">
                   Featured Articles
@@ -812,7 +846,7 @@ const Posts = () => {
                   onPageChange={paginate}
                 />
               </main>
-              <aside className="w-full lg:w-80 shrink-0">
+              <aside className="lg:w-1/3 space-y-6">
                 <h2 className="text-[#111418] text-xl font-bold leading-tight tracking-[-0.015em] mb-4 pb-2 border-b border-gray-200">
                   Trending Now
                 </h2>
