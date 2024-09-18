@@ -1,12 +1,18 @@
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
+import ArticleStructuredData from "./ArticleStructuredData";
 
-const TrendingArticle = ({ id, image, title, category, date }) => (
-  <Link
-    to={`/article/${id}`}
-    className="block hover:bg-gray-100 transition-colors duration-200 border-b border-gray-200 last:border-b-0"
-  >
-    <div className="flex items-center gap-4 bg-white px-4 min-h-[72px] py-2 justify-between">
+
+  const TrendingArticle = ({ id, image, title, category, date }) => (
+    <>
+      <ArticleStructuredData 
+        article={{id, image, title, category, date}}
+      />
+      <Link
+        to={`/article/${id}`}
+        className="block hover:bg-gray-100 transition-colors duration-200 border-b border-gray-200 last:border-b-0"
+      >
+         <div className="flex items-center gap-4 bg-white px-4 min-h-[72px] py-2 justify-between">
       <div className="flex items-center gap-4">
         <div
           className="bg-center bg-no-repeat aspect-square bg-cover rounded-lg size-14 shrink-0"
@@ -43,7 +49,11 @@ const TrendingArticle = ({ id, image, title, category, date }) => (
         </div>
       </div>
     </div>
-  </Link>
-);
+      </Link>
+    </>
+  );
+  
+     
+    
 
 export default TrendingArticle;

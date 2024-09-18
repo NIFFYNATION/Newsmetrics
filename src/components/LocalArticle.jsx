@@ -2,24 +2,16 @@ import { Link } from "react-router-dom";
 import { format } from "date-fns";
 import ArticleStructuredData from "./ArticleStructuredData";
 
-const FeaturedArticle = ({
-  id,
-  image,
-  category,
-  title,
-  author,
-  description,
-  date,
-}) => (
+const LocalArticle = ({ id, image, title, author, description, date }) => (
   <>
-  <ArticleStructuredData 
-    article={{id, image, title, author, description, date, category: "Business"}}
-  />
-  <Link
-    to={`/article/${id}`}
-    className="block hover:bg-gray-50 transition-colors duration-200 border-b border-gray-200 last:border-b-0"
-  >
-    <div className="p-4 @container">
+    <ArticleStructuredData 
+      article={{id, image, title, author, description, date, category: "Business"}}
+    />
+    <Link
+      to={`/article/${id}`}
+      className="block hover:bg-gray-50 transition-colors duration-200 border-b border-gray-200 last:border-b-0"
+    >
+      <div className="p-4 @container">
       <div className="flex flex-col items-stretch justify-start rounded-xl sm:flex-row sm:items-start">
         <div
           className="w-full h-48 sm:h-full bg-center bg-no-repeat bg-cover rounded-xl sm:w-1/2 lg:w-2/5 overflow-hidden"
@@ -29,7 +21,7 @@ const FeaturedArticle = ({
         </div>
         <div className="flex w-full grow flex-col items-stretch justify-center gap-2 py-4 sm:px-4">
           <p className="text-[#637588] text-sm font-normal leading-normal">
-            {category} • {format(new Date(date), "MMMM d, yyyy • h:mm a")}
+            Local • {format(new Date(date), "MMMM d, yyyy • h:mm a")}
           </p>
           <h3 className="text-[#111418] text-lg font-bold leading-tight tracking-[-0.015em] sm:text-xl lg:text-2xl">
             {title}
@@ -48,10 +40,11 @@ const FeaturedArticle = ({
         </div>
       </div>
     </div>
-   
-  </Link>
-</>
+    </Link>
+  </>
+
     
+  
 );
 
-export default FeaturedArticle;
+export default LocalArticle;

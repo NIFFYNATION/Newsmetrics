@@ -2,15 +2,15 @@ import { Link } from "react-router-dom";
 import { format } from "date-fns";
 import ArticleStructuredData from "./ArticleStructuredData";
 
-const FeaturedArticle = ({
+const PoliticsArticle = ({
   id,
   image,
-  category,
   title,
   author,
   description,
   date,
 }) => (
+
   <>
   <ArticleStructuredData 
     article={{id, image, title, author, description, date, category: "Business"}}
@@ -29,7 +29,7 @@ const FeaturedArticle = ({
         </div>
         <div className="flex w-full grow flex-col items-stretch justify-center gap-2 py-4 sm:px-4">
           <p className="text-[#637588] text-sm font-normal leading-normal">
-            {category} • {format(new Date(date), "MMMM d, yyyy • h:mm a")}
+            Politics • {format(new Date(date), "MMMM d, yyyy • h:mm a")}
           </p>
           <h3 className="text-[#111418] text-lg font-bold leading-tight tracking-[-0.015em] sm:text-xl lg:text-2xl">
             {title}
@@ -41,17 +41,17 @@ const FeaturedArticle = ({
             <p className="text-[#637588] text-base font-normal leading-normal">
               By: {author}
             </p>
-            <button className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 bg-red-600 text-white text-sm font-medium leading-normal mt-2 sm:mt-0">
-              <span className="truncate">Read More</span>
+            <button className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 bg-red-600 text-white text-sm font-medium leading-normal mt-2 sm:mt-0"> <span className="truncate">Read More</span>
             </button>
           </div>
         </div>
       </div>
     </div>
-   
   </Link>
 </>
+  
     
+   
 );
 
-export default FeaturedArticle;
+export default PoliticsArticle;

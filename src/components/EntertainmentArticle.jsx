@@ -2,10 +2,9 @@ import { Link } from "react-router-dom";
 import { format } from "date-fns";
 import ArticleStructuredData from "./ArticleStructuredData";
 
-const FeaturedArticle = ({
+const EntertainmentArticle = ({
   id,
   image,
-  category,
   title,
   author,
   description,
@@ -29,7 +28,7 @@ const FeaturedArticle = ({
         </div>
         <div className="flex w-full grow flex-col items-stretch justify-center gap-2 py-4 sm:px-4">
           <p className="text-[#637588] text-sm font-normal leading-normal">
-            {category} • {format(new Date(date), "MMMM d, yyyy • h:mm a")}
+            Entertainment • {format(new Date(date), "MMMM d, yyyy • h:mm a")}
           </p>
           <h3 className="text-[#111418] text-lg font-bold leading-tight tracking-[-0.015em] sm:text-xl lg:text-2xl">
             {title}
@@ -48,10 +47,10 @@ const FeaturedArticle = ({
         </div>
       </div>
     </div>
-   
   </Link>
 </>
     
+
 );
 
-export default FeaturedArticle;
+export default EntertainmentArticle;

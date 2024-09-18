@@ -1,6 +1,28 @@
+import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
+import TechArticle from "../components/TechArticle";
+import Pagination from "../components/Pagination";
+import { samplePosts } from "../utils/samplePosts";
+import RandomPostsGrid from "../components/RandomPostsGrid";
 
 const Tech = () => {
+  const [techPosts, setTechPosts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 5;
+
+  useEffect(() => {
+    const filteredPosts = samplePosts.filter(post => post.category.toLowerCase() === "tech");
+    setTechPosts(filteredPosts);
+  }, []);
+
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = techPosts.slice(indexOfFirstPost, indexOfLastPost);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  const totalPages = Math.ceil(techPosts.length / postsPerPage);
+
   return (
     <>
       <Helmet>
@@ -9,7 +31,17 @@ const Tech = () => {
       </Helmet>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h1 className="text-3xl font-bold my-8">Tech News</h1>
-        {/* Add content for tech news here */}
+        <div className="space-y-6">
+          {currentPosts.map((post) => (
+            <TechArticle key={post.id} {...post} />
+          ))}
+        </div>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={paginate}
+        />
+        <RandomPostsGrid />
       </div>
     </>
   );
