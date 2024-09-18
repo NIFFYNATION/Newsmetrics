@@ -30,9 +30,7 @@ const Posts = () => {
     setCurrentPage(1);
   }, [searchTerm]);
 
-  const handleSearch = (term) => {
-    setSearchTerm(term);
-  };
+  
 
   const sortedPosts = [...filteredPosts].sort(
     (a, b) => new Date(b.date) - new Date(a.date)
@@ -47,7 +45,10 @@ const Posts = () => {
 
   return (
     <>
+        
+
       <Helmet>
+        
         <title>News Metrics - Latest News and Featured Articles</title>
         <meta
           name="description"
