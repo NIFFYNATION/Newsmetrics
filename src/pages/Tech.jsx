@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import TechArticle from "../components/TechArticle";
 import Pagination from "../components/Pagination";
-import { samplePosts } from "../utils/samplePosts";
+import { samplePosts } from "../utils/sampleposts";
 import RandomPostsGrid from "../components/RandomPostsGrid";
 
 const Tech = () => {
