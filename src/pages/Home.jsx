@@ -7,7 +7,8 @@ import FeaturedArticle from "../components/FeaturedArticle";
 import TrendingArticle from "../components/TrendingArticle";
 import Pagination from "../components/Pagination";
 import Advertisement from "../components/Advertisement";
-import { samplePosts } from "../utils/samplePosts";
+import { samplePosts } from "../utils/sampleposts";
+
 import RandomPostsGrid from "../components/RandomPostsGrid";
 
 const Posts = () => {
@@ -31,8 +32,6 @@ const Posts = () => {
     setCurrentPage(1);
   }, [searchTerm]);
 
-  
-
   const sortedPosts = [...filteredPosts].sort(
     (a, b) => new Date(b.date) - new Date(a.date)
   );
@@ -46,10 +45,7 @@ const Posts = () => {
 
   return (
     <>
-        
-
       <Helmet>
-        
         <title>News Metrics - Latest News and Featured Articles</title>
         <meta
           name="description"
@@ -96,7 +92,7 @@ const Posts = () => {
                 />
               </main>
               <aside className="lg:w-1/3 space-y-6">
-              <Advertisement isHomePage={true} />
+                <Advertisement isHomePage={true} />
 
                 <h2 className="text-[#111418] text-xl font-bold leading-tight tracking-[-0.015em] mb-4 pb-2 border-b border-gray-200">
                   Trending Now
@@ -108,12 +104,11 @@ const Posts = () => {
                 </div>
                 <Advertisement isHomePage={true} />
               </aside>
-              
             </div>
             <div className="w-3/4 mx-auto">
-  <Advertisement isHomePage={false} />
-</div>
-<RandomPostsGrid />
+              <Advertisement isHomePage={false} />
+            </div>
+            <RandomPostsGrid />
           </div>
         </div>
       </div>
