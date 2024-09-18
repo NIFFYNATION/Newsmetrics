@@ -4,7 +4,7 @@ import MainLayout from "./layouts/MainLayout";
 import Home from "./pages/Home";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
-import SinglePost from "./pages/Singlepost";
+import SinglePost from "./pages/SinglePost";
 import Local from "./pages/Local";
 import Entertainment from "./pages/Entertainment";
 import Politics from "./pages/Politics";
