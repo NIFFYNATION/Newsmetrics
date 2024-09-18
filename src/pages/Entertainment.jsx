@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import EntertainmentArticle from "../components/EntertainmentArticle";
 import Pagination from "../components/Pagination";
-import { samplePosts } from "../utils/samplePosts";
+import { samplePosts } from "../utils/sampleposts";
 import Advertisement from "../components/Advertisement";
 import RandomPostsGrid from "../components/RandomPostsGrid";
 

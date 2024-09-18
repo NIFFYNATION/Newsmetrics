@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { samplePosts } from "../utils/samplePosts";
+import { samplePosts } from "../utils/sampleposts";
 
 const RandomPostsGrid = () => {
   const [randomPosts, setRandomPosts] = useState([]);
