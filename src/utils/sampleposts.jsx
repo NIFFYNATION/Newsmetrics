@@ -10,6 +10,10 @@ export const samplePosts = [
       "Artificial Intelligence is rapidly evolving. This article explores the potential impacts and advancements we can expect in the coming years.",
     date: "2023-05-20T10:30:00Z",
     tags: ["AI", "Technology", "Future"],
+    content: [
+      "As the world acknowledges the crucial importance of mental health, workplaces are becoming microcosms of this paradigm shift.",
+      
+    ]
   },
   {
     id: 2,
@@ -22,6 +26,10 @@ export const samplePosts = [
       "Discover how daily meditation can improve your mental health, reduce stress, and increase overall well-being.",
     date: "2023-05-21T14:45:00Z",
     tags: ["Meditation", "Local", "Health", "Wellness"],
+    content: [
+      "As the world acknowledges the crucial importance of mental health, workplaces are becoming microcosms of this paradigm shift.",
+      
+    ]
   },
   {
     id: 3,
@@ -34,6 +42,10 @@ export const samplePosts = [
       "An in-depth look at the current state of climate change, its impacts, and what we can do to mitigate its effects.",
     date: "2023-05-22T09:15:00Z",
     tags: ["Climate Change", "Environment", "Sustainability"],
+    content: [
+      "As the world acknowledges the crucial importance of mental health, workplaces are becoming microcosms of this paradigm shift.",
+      
+    ]
   },
   {
     id: 4,
@@ -46,6 +58,10 @@ export const samplePosts = [
       "How the pandemic has accelerated the shift towards remote work and its implications for the future of business.",
     date: "2023-05-23T16:20:00Z",
     tags: ["Remote Work", "Tech", "Future of Work"],
+    content: [
+      "As the world acknowledges the crucial importance of mental health, workplaces are becoming microcosms of this paradigm shift.",
+      
+    ]
   },
   {
     id: 5,
@@ -58,6 +74,10 @@ export const samplePosts = [
       "A culinary journey through different cultures, exploring unique flavors and cooking techniques from around the globe.",
     date: "2023-05-24T12:00:00Z",
     tags: ["Food", "Travel", "Culture"],
+    content: [
+      "As the world acknowledges the crucial importance of mental health, workplaces are becoming microcosms of this paradigm shift.",
+      
+    ]
   },
   {
     id: 6,
@@ -70,6 +90,10 @@ export const samplePosts = [
       "Exploring how blockchain technology is revolutionizing the financial sector and its potential future applications.",
     date: "2023-05-25T11:30:00Z",
     tags: ["Blockchain", "Finance", "Technology"],
+    content: [
+      "As the world acknowledges the crucial importance of mental health, workplaces are becoming microcosms of this paradigm shift.",
+      
+    ]
   },
   {
     id: 7,
@@ -82,6 +106,10 @@ export const samplePosts = [
       "How companies are incorporating sustainability into their business models and the benefits of eco-friendly practices.",
     date: "2023-05-26T09:45:00Z",
     tags: ["Sustainability", "Business", "Environment"],
+    content: [
+      "As the world acknowledges the crucial importance of mental health, workplaces are becoming microcosms of this paradigm shift.",
+      
+    ]
   },
   {
     id: 8,
@@ -94,6 +122,10 @@ export const samplePosts = [
       "An analysis of the growing cybercrime trends, their impact on individuals and businesses, and how to protect yourself.",
     date: "2023-05-27T14:15:00Z",
     tags: ["Cybercrime", "Security", "Technology"],
+    content: [
+      "As the world acknowledges the crucial importance of mental health, workplaces are becoming microcosms of this paradigm shift.",
+      
+    ]
   },
   {
     id: 10,
@@ -106,6 +138,10 @@ export const samplePosts = [
       "How streaming services are changing the entertainment industry and what it means for traditional media.",
     date: "2023-05-28T10:00:00Z",
     tags: ["Streaming", "Media", "Technology"],
+    content: [
+      "As the world acknowledges the crucial importance of mental health, workplaces are becoming microcosms of this paradigm shift.",
+      
+    ]
   },
   {
     id: 11,
@@ -118,5 +154,9 @@ export const samplePosts = [
       "An exploration of how social media platforms are shaping political discourse and influencing election outcomes.",
     date: "2023-05-29T09:30:00Z",
     tags: ["Social Media", "Elections", "Democracy"],
+    content: [
+      "As the world acknowledges the crucial importance of mental health, workplaces are becoming microcosms of this paradigm shift.",
+      
+    ]
   },
 ];
