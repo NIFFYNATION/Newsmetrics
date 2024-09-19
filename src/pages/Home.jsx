@@ -102,10 +102,12 @@ const Posts = () => {
                     <TrendingArticle key={post.id} {...post} />
                   ))}
                 </div>
-                <Advertisement isHomePage={true} />
+                <div className="hidden sm:block">
+                  <Advertisement isHomePage={true} />
+                </div>
               </aside>
             </div>
-            <div className="w-3/4 mx-auto">
+            <div className="w-full sm:w-3/4 mx-auto">
               <Advertisement isHomePage={false} />
             </div>
             <RandomPostsGrid />
