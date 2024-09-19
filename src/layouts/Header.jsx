@@ -229,7 +229,7 @@ const Header = ({ onSearch }) => {
       <Link
         key={link.to}
         to={link.to}
-        className="block text-[#111418] text-sm font-medium leading-normal hover:border-b-2 hover:border-red-600 pb-1 transition-all duration-200"
+        className="block text-[#111418] text-lg font-medium leading-normal hover:border-b-2 hover:border-red-600 pb-1 transition-all duration-200"
         onClick={() => setIsMenuOpen(false)}
       >
         {link.text}
