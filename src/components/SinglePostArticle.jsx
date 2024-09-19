@@ -49,9 +49,9 @@ const SinglePostArticle = ({
         </div>
       </div>
       
-      <div className="bg-gray-100 px-6 py-4 mt-8">
-        <h2 className="text-2xl font-bold mb-4 text-gray-800">Share this article</h2>
-        <div className="flex space-x-4">
+      <div className="bg-gray-100 border py-4 mt-8 border-b-4 border-b-red-600">
+        <h2 className="text-2xl font-bold mb-4 text-gray-800 ml-4">Share post:</h2>
+        <div className="flex space-x-4 ml-4">
           <FacebookShareButton url={shareUrl} quote={title}>
             <FacebookIcon size={32} round />
           </FacebookShareButton>

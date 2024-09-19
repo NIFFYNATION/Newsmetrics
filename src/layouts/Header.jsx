@@ -73,7 +73,7 @@ const Header = ({ onSearch }) => {
     <>
       <header className="border-b border-solid border-b-[#e5e7e9] px-4 py-3 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <Link to="/">
+          <Link to="/" onClick={() => setIsMenuOpen(false)}>
             <div className="flex items-center gap-4 text-[#111418]">
               <div className="size-8 sm:size-10">
               <svg
@@ -216,53 +216,29 @@ const Header = ({ onSearch }) => {
             </button>
           </div>
           <nav className="flex-1 overflow-y-auto">
-            <div className="px-4 py-6 space-y-4">
-              <Link
-                to="/"
-                className="block text-[#111418] text-sm font-medium leading-normal"
-              >
-                Home
-              </Link>
-              <Link
-                to="/local"
-                className="block text-[#111418] text-sm font-medium leading-normal"
-              >
-                Local
-              </Link>
-              <Link
-                to="/entertainment"
-                className="block text-[#111418] text-sm font-medium leading-normal"
-              >
-                Entertainment
-              </Link>
-              <Link
-                to="/politics"
-                className="block text-[#111418] text-sm font-medium leading-normal"
-              >
-                Politics
-              </Link>
-              <Link
-                to="/crime"
-                className="block text-[#111418] text-sm font-medium leading-normal"
-              >
-                Crime
-              </Link>
-              <Link
-                to="/business"
-                className="block text-[#111418] text-sm font-medium leading-normal"
-              >
-                Business
-              </Link>
-              <Link
-                to="/tech"
-                className="block text-[#111418] text-sm font-medium leading-normal"
-              >
-                Tech
-              </Link>
-            </div>
-          </nav>
+  <div className="px-4 py-6 space-y-4">
+    {[
+      { to: "/", text: "Home" },
+      { to: "/local", text: "Local" },
+      { to: "/entertainment", text: "Entertainment" },
+      { to: "/politics", text: "Politics" },
+      { to: "/crime", text: "Crime" },
+      { to: "/business", text: "Business" },
+      { to: "/tech", text: "Tech" },
+    ].map((link) => (
+      <Link
+        key={link.to}
+        to={link.to}
+        className="block text-[#111418] text-sm font-medium leading-normal hover:border-b-2 hover:border-red-600 pb-1 transition-all duration-200"
+        onClick={() => setIsMenuOpen(false)}
+      >
+        {link.text}
+      </Link>
+    ))}
+  </div>
+</nav>
           <div className="p-4 border-t border-gray-200">
-            <button className="w-full flex justify-center items-center cursor-pointer overflow-hidden rounded-xl h-10 px-4 bg-[#f0f2f4] text-[#111418] text-sm font-bold leading-normal tracking-[0.015em]">
+            <button className="w-full flex justify-center items-center cursor-pointer overflow-hidden rounded-xl h-10 px-4 bg-[#f0f2f4] text-[#111418] text-sm font-bold leading-normal tracking-[0.015em]"  onClick={() => setIsMenuOpen(false)}>
               <span className="truncate">Subscribe</span>
             </button>
           </div>
@@ -279,50 +255,27 @@ const Header = ({ onSearch }) => {
 
       <nav className="hidden md:flex flex-1 justify-center items-center gap-6 mt-4 mb-6 pb-4 border-b border-solid border-b-[#e5e7e9]">
         <div className="flex items-center gap-4 sm:gap-6">
-          <Link
-            to="/"
-            className="text-[#111418] text-lg font-medium leading-normal"
-          >
-            Home
-          </Link>
-          <Link
-            to="/local"
-            className="text-[#111418] text-lg font-medium leading-normal"
-          >
-            Local
-          </Link>
-          <Link
-            to="/entertainment"
-            className="text-[#111418] text-lg font-medium leading-normal"
-          >
-            Entertainment
-          </Link>
-          <Link
-            to="/politics"
-            className="text-[#111418] text-lg font-medium leading-normal"
-          >
-            Politics
-          </Link>
-          <Link
-            to="/crime"
-            className="text-[#111418] text-lg font-medium leading-normal"
-          >
-            Crime
-          </Link>
-          <Link
-            to="/business"
-            className="text-[#111418] text-lg font-medium leading-normal"
-          >
-            Business
-          </Link>
-          <Link
-            to="/tech"
-            className="text-[#111418] text-lg font-medium leading-normal"
-          >
-            Tech
-          </Link>
+          {[
+            { to: "/", text: "Home" },
+            { to: "/local", text: "Local" },
+            { to: "/entertainment", text: "Entertainment" },
+            { to: "/politics", text: "Politics" },
+            { to: "/crime", text: "Crime" },
+            { to: "/business", text: "Business" },
+            { to: "/tech", text: "Tech" },
+          ].map((link) => (
+            <Link
+              key={link.to}
+              to={link.to}
+              className="text-[#111418] text-lg font-medium leading-normal hover:border-b-2 hover:border-red-600 pb-1 transition-all duration-200"
+            >
+              {link.text}
+            </Link>
+          ))}
         </div>
       </nav>
+        
+      
     </>
   );
 };
