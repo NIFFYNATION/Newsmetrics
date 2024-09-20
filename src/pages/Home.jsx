@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 
+import { Link } from "react-router-dom";
 import HeroSection from "../components/HeroSection";
 import LatestPosts from "../components/LatestPosts";
 import FeaturedArticle from "../components/FeaturedArticle";
@@ -10,6 +11,16 @@ import Advertisement from "../components/Advertisement";
 import { samplePosts } from "../utils/sampleposts";
 
 import RandomPostsGrid from "../components/RandomPostsGrid";
+
+const getRecommendedPosts = (posts) => {
+  const recentPosts = posts.slice(0, 2); // Get the 2 most recent posts
+  const randomPosts = posts
+    .filter((post) => !recentPosts.includes(post))
+    .sort(() => 0.5 - Math.random())
+    .slice(0, 2); // Get 2 random posts
+
+  return [...recentPosts, ...randomPosts];
+};
 
 const Posts = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -26,6 +37,10 @@ const Posts = () => {
         (post.tags &&
           post.tags.some((tag) =>
             tag.toLowerCase().includes(searchTerm.toLowerCase())
+          )) ||
+        (post.content &&
+          post.content.some((paragraph) =>
+            paragraph.toLowerCase().includes(searchTerm.toLowerCase())
           ))
     );
     setFilteredPosts(results);
@@ -72,7 +87,7 @@ const Posts = () => {
       >
         <div className="layout-container flex h-full grow flex-col">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-            <HeroSection latestPosts={sortedPosts.slice(0, 5)} />
+          <HeroSection latestPosts={sortedPosts} />
 
             <div className="flex flex-col lg:flex-row gap-6">
               <main className="flex-grow lg:w-2/3">
@@ -92,20 +107,25 @@ const Posts = () => {
                 />
               </main>
               <aside className="lg:w-1/3 space-y-6">
-                <Advertisement isHomePage={true} />
+  <Advertisement isHomePage={true} />
 
-                <h2 className="text-[#111418] text-xl font-bold leading-tight tracking-[-0.015em] mb-4 pb-2 border-b border-gray-200">
-                  Trending Now
-                </h2>
-                <div className="bg-white rounded-xl overflow-hidden border border-gray-200">
-                  {sortedPosts.slice(0, 5).map((post) => (
-                    <TrendingArticle key={post.id} {...post} />
-                  ))}
-                </div>
-                <div className="hidden sm:block">
-                  <Advertisement isHomePage={true} />
-                </div>
-              </aside>
+  <div className="bg-gray-100 p-4 rounded-xl">
+    <h2 className="text-xl font-bold mb-4 text-indigo-700">Recommended for You</h2>
+    <ul className="space-y-2">
+      {getRecommendedPosts(sortedPosts).map((post) => (
+        <li key={post.id} className="bg-white p-3 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200">
+          <Link to={`/article/${post.id}`} className="text-indigo-600 hover:text-indigo-800 transition-colors duration-200">
+            {post.title}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <div className="hidden sm:block">
+    <Advertisement isHomePage={true} />
+  </div>
+</aside>
             </div>
             <div className="w-full sm:w-3/4 mx-auto">
               <Advertisement isHomePage={false} />

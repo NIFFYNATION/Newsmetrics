@@ -70,35 +70,35 @@ const Header = ({ onSearch }) => {
   }, [isSearchOpen]);
 
   return (
-    <>
+    <div className="fixed top-0 left-0 right-0 bg-white z-50">
       <header className="border-b border-solid border-b-[#e5e7e9] px-4 py-3 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <Link to="/" onClick={() => setIsMenuOpen(false)}>
             <div className="flex items-center gap-4 text-[#111418]">
               <div className="size-8 sm:size-10">
-              <svg
-        className="w-full h-full"
-        viewBox="0 0 48 48"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <rect width="48" height="48" rx="12" fill="#111418" />
-        <path
-          d="M14 34V14L24 28L34 14V34"
-          stroke="#FFFFFF"
-          strokeWidth="3"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M14 34H34"
-          stroke="#FF4136"
-          strokeWidth="3"
-          strokeLinecap="round"
-        />
-        <circle cx="24" cy="24" r="16" stroke="#FFFFFF" strokeWidth="1.5" strokeDasharray="2 2" />
-        <circle cx="24" cy="24" r="3" fill="#FF4136" />
-      </svg>
+                <svg
+                  className="w-full h-full"
+                  viewBox="0 0 48 48"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect width="48" height="48" rx="12" fill="#111418" />
+                  <path
+                    d="M14 34V14L24 28L34 14V34"
+                    stroke="#FFFFFF"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M14 34H34"
+                    stroke="#FF4136"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                  />
+                  <circle cx="24" cy="24" r="16" stroke="#FFFFFF" strokeWidth="1.5" strokeDasharray="2 2" />
+                  <circle cx="24" cy="24" r="3" fill="#FF4136" />
+                </svg>
               </div>
 
               <h1 className="text-[#111418] text-xl font-bold leading-tight tracking-[-0.015em] sm:text-[1.7rem]">
@@ -216,29 +216,29 @@ const Header = ({ onSearch }) => {
             </button>
           </div>
           <nav className="flex-1 overflow-y-auto">
-  <div className="px-4 py-6 space-y-4">
-    {[
-      { to: "/", text: "Home" },
-      { to: "/local", text: "Local" },
-      { to: "/entertainment", text: "Entertainment" },
-      { to: "/politics", text: "Politics" },
-      { to: "/crime", text: "Crime" },
-      { to: "/business", text: "Business" },
-      { to: "/tech", text: "Tech" },
-    ].map((link) => (
-      <Link
-        key={link.to}
-        to={link.to}
-        className="block text-[#111418] text-lg font-medium leading-normal hover:border-b-2 hover:border-red-600 pb-1 transition-all duration-200"
-        onClick={() => setIsMenuOpen(false)}
-      >
-        {link.text}
-      </Link>
-    ))}
-  </div>
-</nav>
+            <div className="px-4 py-6 space-y-4">
+              {[
+                { to: "/", text: "Home" },
+                { to: "/local", text: "Local" },
+                { to: "/entertainment", text: "Entertainment" },
+                { to: "/politics", text: "Politics" },
+                { to: "/crime", text: "Crime" },
+                { to: "/business", text: "Business" },
+                { to: "/tech", text: "Tech" },
+              ].map((link) => (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  className="block text-[#111418] text-lg font-medium leading-normal hover:border-b-2 hover:border-red-600 pb-1 transition-all duration-200"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {link.text}
+                </Link>
+              ))}
+            </div>
+          </nav>
           <div className="p-4 border-t border-gray-200">
-            <button className="w-full flex justify-center items-center cursor-pointer overflow-hidden rounded-xl h-10 px-4 bg-[#f0f2f4] text-[#111418] text-sm font-bold leading-normal tracking-[0.015em]"  onClick={() => setIsMenuOpen(false)}>
+            <button className="w-full flex justify-center items-center cursor-pointer overflow-hidden rounded-xl h-10 px-4 bg-[#f0f2f4] text-[#111418] text-sm font-bold leading-normal tracking-[0.015em]" onClick={() => setIsMenuOpen(false)}>
               <span className="truncate">Subscribe</span>
             </button>
           </div>
@@ -253,7 +253,7 @@ const Header = ({ onSearch }) => {
         ></div>
       )}
 
-      <nav className="hidden md:flex flex-1 justify-center items-center gap-6 mt-4 mb-6 pb-4 border-b border-solid border-b-[#e5e7e9]">
+      <nav className="hidden md:flex flex-1 justify-center items-center gap-6 py-4 border-b border-solid border-b-[#e5e7e9]">
         <div className="flex items-center gap-4 sm:gap-6">
           {[
             { to: "/", text: "Home" },
@@ -274,9 +274,8 @@ const Header = ({ onSearch }) => {
           ))}
         </div>
       </nav>
-        
-      
-    </>
+    </div>
   );
 };
+
 export default Header;

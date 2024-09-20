@@ -1,6 +1,7 @@
 import { HelmetProvider } from "react-helmet-async";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
+import Header from "./layouts/Header"; // Updated import statement
 import Home from "./pages/Home";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
@@ -20,25 +21,30 @@ function App() {
   return (
     <HelmetProvider>
       <Router>
-        <MainLayout>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/Home" element={<Home />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/article/:id" element={<SinglePost />} />
-            <Route path="/local" element={<Local />} />
-            <Route path="/entertainment" element={<Entertainment />} />
-            <Route path="/politics" element={<Politics />} />
-            <Route path="/crime" element={<Crime />} />
-            <Route path="/business" element={<Business />} />
-            <Route path="/tech" element={<Tech />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-            <Route path="/terms-of-service" element={<TermsOfService />} />
-          </Routes>
-        </MainLayout>
+        <div className="App">
+          <Header />
+          <div className="pt-[132px]">
+            <MainLayout>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/Home" element={<Home />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/article/:id" element={<SinglePost />} />
+                <Route path="/local" element={<Local />} />
+                <Route path="/entertainment" element={<Entertainment />} />
+                <Route path="/politics" element={<Politics />} />
+                <Route path="/crime" element={<Crime />} />
+                <Route path="/business" element={<Business />} />
+                <Route path="/tech" element={<Tech />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="/terms-of-service" element={<TermsOfService />} />
+              </Routes>
+            </MainLayout>
+          </div>
+        </div>
       </Router>
     </HelmetProvider>
   );
