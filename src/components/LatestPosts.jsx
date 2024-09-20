@@ -30,3 +30,6 @@ const LatestPosts = ({ posts }) => (
   </div>
 );
 export default LatestPosts;
+
+
+

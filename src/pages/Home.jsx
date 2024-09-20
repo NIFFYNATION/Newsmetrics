@@ -103,7 +103,7 @@ const Posts = () => {
 
             <div className="flex flex-col lg:flex-row gap-6">
               <main className="flex-grow lg:w-2/3">
-                <LatestPosts posts={sortedPosts.slice(0, 3)} />
+                <LatestPosts posts={sortedPosts.slice(0, 6)} />
                 <h2 className="text-[#111418] text-2xl font-bold leading-tight tracking-[-0.015em] mb-4 pb-2 border-b border-gray-200">
                   Featured Articles
                 </h2>
