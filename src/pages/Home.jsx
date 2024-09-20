@@ -1,3 +1,4 @@
+import React, { Suspense, lazy } from 'react';
 import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 
@@ -5,12 +6,12 @@ import { Link } from "react-router-dom";
 import HeroSection from "../components/HeroSection";
 import LatestPosts from "../components/LatestPosts";
 import FeaturedArticle from "../components/FeaturedArticle";
-import TrendingArticle from "../components/TrendingArticle";
 import Pagination from "../components/Pagination";
 import Advertisement from "../components/Advertisement";
 import { samplePosts } from "../utils/sampleposts";
 
-import RandomPostsGrid from "../components/RandomPostsGrid";
+const LazyAdvertisement = lazy(() => import('../components/Advertisement'));
+const LazyRandomPostsGrid = lazy(() => import('../components/RandomPostsGrid'));
 
 const getRecommendedPosts = (posts) => {
   const recentPosts = posts.slice(0, 2); // Get the 2 most recent posts
@@ -64,8 +65,19 @@ const Posts = () => {
         <title>News Metrics - Latest News and Featured Articles</title>
         <meta
           name="description"
-          content="Stay informed with News Wave. Read the latest news, featured articles, and trending stories across technology, food & drink, entertainment, and more."
+          content="Stay informed with News Metrics. Read the latest news, featured articles, and trending stories across technology, business, entertainment, politics, and more."
         />
+        <meta name="keywords" content="news, latest news, featured articles, technology, business, entertainment, politics" />
+        <meta property="og:title" content="News Metrics - Latest News and Featured Articles" />
+        <meta property="og:description" content="Stay informed with News Metrics. Read the latest news, featured articles, and trending stories across various categories." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={window.location.href} />
+        <meta property="og:image" content="/path-to-your-logo.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="News Metrics - Latest News and Featured Articles" />
+        <meta name="twitter:description" content="Stay informed with News Metrics. Read the latest news, featured articles, and trending stories across various categories." />
+        <meta name="twitter:image" content="/path-to-your-logo.png" />
+        <link rel="canonical" href={window.location.href} />
         <link
           rel="preconnect"
           href="https://fonts.gstatic.com/"
@@ -107,30 +119,38 @@ const Posts = () => {
                 />
               </main>
               <aside className="lg:w-1/3 space-y-6">
-  <Advertisement isHomePage={true} />
+                <Suspense fallback={<div>Loading advertisement...</div>}>
+                  <LazyAdvertisement isHomePage={true} />
+                </Suspense>
 
-  <div className="bg-gray-100 p-4 rounded-xl">
-    <h2 className="text-xl font-bold mb-4 text-indigo-700">Recommended for You</h2>
-    <ul className="space-y-2">
-      {getRecommendedPosts(sortedPosts).map((post) => (
-        <li key={post.id} className="bg-white p-3 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200">
-          <Link to={`/article/${post.id}`} className="text-indigo-600 hover:text-indigo-800 transition-colors duration-200">
-            {post.title}
-          </Link>
-        </li>
-      ))}
-    </ul>
-  </div>
+                <div className="bg-gray-100 p-4 rounded-xl">
+                  <h2 className="text-xl font-bold mb-4 text-indigo-700">Recommended for You</h2>
+                  <ul className="space-y-2">
+                    {getRecommendedPosts(sortedPosts).map((post) => (
+                      <li key={post.id} className="bg-white p-3 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200">
+                        <Link to={`/article/${post.id}`} className="text-indigo-600 hover:text-indigo-800 transition-colors duration-200">
+                          {post.title}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
 
-  <div className="hidden sm:block">
-    <Advertisement isHomePage={true} />
-  </div>
-</aside>
+                <div className="hidden sm:block">
+                  <Suspense fallback={<div>Loading advertisement...</div>}>
+                    <LazyAdvertisement isHomePage={true} />
+                  </Suspense>
+                </div>
+              </aside>
             </div>
             <div className="w-full sm:w-3/4 mx-auto">
-              <Advertisement isHomePage={false} />
+              <Suspense fallback={<div>Loading advertisement...</div>}>
+                <LazyAdvertisement isHomePage={false} />
+              </Suspense>
             </div>
-            <RandomPostsGrid />
+            <Suspense fallback={<div>Loading more stories...</div>}>
+              <LazyRandomPostsGrid />
+            </Suspense>
           </div>
         </div>
       </div>

@@ -1,9 +1,11 @@
+import React, { Suspense, lazy } from 'react';
 import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import TechArticle from "../components/TechArticle";
 import Pagination from "../components/Pagination";
 import { samplePosts } from "../utils/sampleposts";
-import RandomPostsGrid from "../components/RandomPostsGrid";
+
+const LazyRandomPostsGrid = lazy(() => import('../components/RandomPostsGrid'));
 
 const Tech = () => {
   const [techPosts, setTechPosts] = useState([]);
@@ -41,7 +43,9 @@ const Tech = () => {
           totalPages={totalPages}
           onPageChange={paginate}
         />
-        <RandomPostsGrid />
+        <Suspense fallback={<div>Loading more stories...</div>}>
+          <LazyRandomPostsGrid />
+        </Suspense>
       </div>
     </>
   );

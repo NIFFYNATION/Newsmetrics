@@ -3,7 +3,9 @@ import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import SinglePostArticle from "../components/SinglePostArticle";
 import { samplePosts } from "../utils/sampleposts";
-import RandomPostsGrid from "../components/RandomPostsGrid";
+import React, { Suspense, lazy } from 'react';
+
+const LazyRandomPostsGrid = lazy(() => import('../components/RandomPostsGrid'));
 
 function SinglePost() {
   const { id } = useParams();
@@ -27,7 +29,9 @@ function SinglePost() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
   <SinglePostArticle {...post} />
   <div className="mt-12">
-    <RandomPostsGrid />
+    <Suspense fallback={<div>Loading related posts...</div>}>
+      <LazyRandomPostsGrid />
+    </Suspense>
   </div>
 </div>
     </>

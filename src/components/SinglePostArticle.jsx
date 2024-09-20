@@ -1,5 +1,6 @@
 import { format } from "date-fns";
 import { FacebookShareButton, TwitterShareButton, WhatsappShareButton, FacebookIcon, TwitterIcon, WhatsappIcon } from 'react-share';
+import ArticleStructuredData from "./ArticleStructuredData";
 
 const SinglePostArticle = ({
   id,
@@ -16,8 +17,9 @@ const SinglePostArticle = ({
 
   return (
     <article className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
+      <ArticleStructuredData article={{id, image, title, author, description, date, category}} />
       <div className="relative">
-        <img src={image} alt={title} className="w-full h-64 object-cover" />
+        <img src={image} alt={`${title} - ${category} article by ${author}`} className="w-full h-64 object-cover" />
         <div className="absolute top-0 left-0 bg-red-600 text-white px-4 py-2 rounded-br-lg">
           {category}
         </div>
@@ -54,12 +56,15 @@ const SinglePostArticle = ({
         <div className="flex space-x-4 ml-4">
           <FacebookShareButton url={shareUrl} quote={title}>
             <FacebookIcon size={32} round />
+            <span className="sr-only">Share on Facebook</span>
           </FacebookShareButton>
           <TwitterShareButton url={shareUrl} title={title}>
             <TwitterIcon size={32} round />
+            <span className="sr-only">Share on Twitter</span>
           </TwitterShareButton>
           <WhatsappShareButton url={shareUrl} title={title}>
             <WhatsappIcon size={32} round />
+            <span className="sr-only">Share on WhatsApp</span>
           </WhatsappShareButton>
         </div>
       </div>

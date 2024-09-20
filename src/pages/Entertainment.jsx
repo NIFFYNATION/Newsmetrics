@@ -1,10 +1,12 @@
+import React, { Suspense, lazy } from 'react';
 import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import EntertainmentArticle from "../components/EntertainmentArticle";
 import Pagination from "../components/Pagination";
 import { samplePosts } from "../utils/sampleposts";
-import Advertisement from "../components/Advertisement";
-import RandomPostsGrid from "../components/RandomPostsGrid";
+
+const LazyAdvertisement = lazy(() => import('../components/Advertisement'));
+const LazyRandomPostsGrid = lazy(() => import('../components/RandomPostsGrid'));
 
 const Entertainment = () => {
   const [entertainmentPosts, setEntertainmentPosts] = useState([]);
@@ -36,16 +38,24 @@ const Entertainment = () => {
           {currentPosts.map((post) => (
             <EntertainmentArticle key={post.id} {...post} />
           ))}
-                <div className="w-3/4 mx-auto">
-  <Advertisement isHomePage={false} />
-</div>
+          <div className="w-3/4 mx-auto">
+            <Suspense fallback={<div aria-live="polite">Loading advertisement...</div>}>
+              <LazyAdvertisement isHomePage={false} />
+            </Suspense>
+          </div>
         </div>
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={paginate}
-        />
-        <RandomPostsGrid />
+        <nav aria-label="Entertainment news pagination">
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={paginate}
+          />
+        </nav>
+        <Suspense fallback={<div aria-live="polite">Loading more stories...</div>}>
+          <section aria-label="More stories">
+            <LazyRandomPostsGrid />
+          </section>
+        </Suspense>
       </div>
     </>
   );

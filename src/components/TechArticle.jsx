@@ -41,8 +41,10 @@ const TechArticle = ({
             <p className="text-[#637588] text-base font-normal leading-normal">
               By: {author}
             </p>
-            <button className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 bg-red-600 text-white text-sm font-medium leading-normal mt-2 sm:mt-0">
-
+            <button 
+              className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 bg-red-600 text-white text-sm font-medium leading-normal mt-2 sm:mt-0"
+              aria-label={`Read more about ${title}`}
+            >
               <span className="truncate">Read More</span>
             </button>
           </div>

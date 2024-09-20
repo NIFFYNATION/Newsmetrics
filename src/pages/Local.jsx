@@ -1,10 +1,12 @@
+import React, { Suspense, lazy } from 'react';
 import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import LocalArticle from "../components/LocalArticle";
 import Pagination from "../components/Pagination";
 import { samplePosts } from "../utils/sampleposts";
-import Advertisement from "../components/Advertisement";
-import RandomPostsGrid from "../components/RandomPostsGrid";
+
+const LazyAdvertisement = lazy(() => import('../components/Advertisement'));
+const LazyRandomPostsGrid = lazy(() => import('../components/RandomPostsGrid'));
 
 const Local = () => {
   const [localPosts, setLocalPosts] = useState([]);
@@ -38,16 +40,20 @@ const Local = () => {
           {currentPosts.map((post) => (
             <LocalArticle key={post.id} {...post} />
           ))}
-                <div className="w-3/4 mx-auto">
-  <Advertisement isHomePage={false} />
-</div>
+          <div className="w-3/4 mx-auto">
+            <Suspense fallback={<div>Loading advertisement...</div>}>
+              <LazyAdvertisement isHomePage={false} />
+            </Suspense>
+          </div>
         </div>
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
           onPageChange={paginate}
         />
-        <RandomPostsGrid />
+        <Suspense fallback={<div>Loading more stories...</div>}>
+          <LazyRandomPostsGrid />
+        </Suspense>
       </div>
     </>
   );
