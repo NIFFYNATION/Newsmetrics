@@ -1,32 +1,14 @@
 import React, { Suspense, lazy } from 'react';
-import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import LocalArticle from "../components/LocalArticle";
 import Pagination from "../components/Pagination";
-import { samplePosts } from "../utils/sampleposts";
+import usePaginatedPosts from "../hooks/usePaginatedPosts";
 
 const LazyAdvertisement = lazy(() => import('../components/Advertisement'));
 const LazyRandomPostsGrid = lazy(() => import('../components/RandomPostsGrid'));
 
 const Local = () => {
-  const [localPosts, setLocalPosts] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const postsPerPage = 5;
-
-  useEffect(() => {
-    const filteredPosts = samplePosts.filter(
-      (post) => post.category.toLowerCase() === "local"
-    );
-    setLocalPosts(filteredPosts);
-  }, []);
-
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = localPosts.slice(indexOfFirstPost, indexOfLastPost);
-
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
-  const totalPages = Math.ceil(localPosts.length / postsPerPage);
+  const { currentPosts, currentPage, totalPages, paginate } = usePaginatedPosts("local", 5);
 
   return (
     <>
@@ -38,7 +20,7 @@ const Local = () => {
         <h1 className="text-3xl font-bold my-8">Local News</h1>
         <div className="space-y-6">
           {currentPosts.map((post) => (
-            <LocalArticle key={post.id} {...post} />
+            <LocalArticle key={post.id} {...post} comments={post.comments || []}/>
           ))}
           <div className="w-3/4 mx-auto">
             <Suspense fallback={<div>Loading advertisement...</div>}>

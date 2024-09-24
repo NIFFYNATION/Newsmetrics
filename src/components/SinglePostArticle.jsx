@@ -1,6 +1,7 @@
 import { format } from "date-fns";
 import { FacebookShareButton, TwitterShareButton, WhatsappShareButton, FacebookIcon, TwitterIcon, WhatsappIcon } from 'react-share';
 import ArticleStructuredData from "./ArticleStructuredData";
+import Comments from './Comments';
 
 const SinglePostArticle = ({
   id,
@@ -12,6 +13,7 @@ const SinglePostArticle = ({
   content,
   image,
   category,
+  comments = []
 }) => {
   const shareUrl = `${window.location.origin}/article/${id}`;
 
@@ -68,7 +70,11 @@ const SinglePostArticle = ({
           </WhatsappShareButton>
         </div>
       </div>
+      <div className="mt-8">
+        <Comments postId={id} comments={comments} />
+      </div>
     </article>
+    
   );
 };
 

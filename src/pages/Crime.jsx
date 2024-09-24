@@ -36,7 +36,7 @@ const Crime = () => {
         <h1 className="text-3xl font-bold my-8">Crime News</h1>
         <div className="space-y-6">
           {currentPosts.map((post) => (
-            <CrimeArticle key={post.id} {...post} />
+            <CrimeArticle key={post.id} {...post} comments={post.comments || []}/>
           ))}
           <div className="w-3/4 mx-auto">
             <Advertisement isHomePage={false} />

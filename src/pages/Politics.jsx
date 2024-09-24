@@ -34,7 +34,7 @@ const Politics = () => {
         <h1 className="text-3xl font-bold my-8">Politics News</h1>
         <div className="space-y-6">
           {currentPosts.map((post) => (
-            <PoliticsArticle key={post.id} {...post} />
+            <PoliticsArticle key={post.id} {...post} comments={post.comments || []}/>
           ))}
                 <div className="w-3/4 mx-auto">
   <Advertisement isHomePage={false} />

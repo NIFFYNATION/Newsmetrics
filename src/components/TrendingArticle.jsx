@@ -20,7 +20,16 @@ const TrendingArticle = () => {
     try {
       setIsLoading(true);
       setError(null);
-      const response = await fetch(`/api/trending-articles?page=${currentPage}&limit=${articlesPerPage}`);
+      // This is a placeholder API endpoint. In a real application, you would replace this
+      // with your actual API endpoint for fetching trending articles.
+      // const response = await fetch(`/api/trending-articles?page=${currentPage}&limit=${articlesPerPage}`);
+      
+      // If you're using a different API or data source, you would modify this line accordingly.
+      // For example, if using an external API:
+      const response = await fetch(`https://api.example.com/trending-articles?page=${currentPage}&limit=${articlesPerPage}`);
+      
+      // If you're not using an API and want to use mock data for development:
+      // const response = { ok: true, json: async () => mockTrendingArticles };
       if (!response.ok) {
         throw new Error('Failed to fetch trending articles');
       }

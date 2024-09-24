@@ -36,7 +36,7 @@ const Entertainment = () => {
         <h1 className="text-3xl font-bold my-8">Entertainment News</h1>
         <div className="space-y-6">
           {currentPosts.map((post) => (
-            <EntertainmentArticle key={post.id} {...post} />
+            <EntertainmentArticle key={post.id} {...post} comments={post.comments || []}/>
           ))}
           <div className="w-3/4 mx-auto">
             <Suspense fallback={<div aria-live="polite">Loading advertisement...</div>}>

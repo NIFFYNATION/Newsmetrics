@@ -1,58 +1,51 @@
-import React, { Suspense, lazy } from 'react';
-import { useState, useEffect } from "react";
+import React, { Suspense, lazy } from "react";
 import { Helmet } from "react-helmet-async";
 import BusinessArticle from "../components/BusinessArticle";
 import Pagination from "../components/Pagination";
-import { samplePosts } from "../utils/sampleposts";
+import usePaginatedPosts from "../hooks/usePaginatedPosts";
 
-const LazyAdvertisement = lazy(() => import('../components/Advertisement'));
-const LazyRandomPostsGrid = lazy(() => import('../components/RandomPostsGrid'));
+const LazyAdvertisement = lazy(() => import("../components/Advertisement"));
+const LazyRandomPostsGrid = lazy(() => import("../components/RandomPostsGrid"));
 
 const Business = () => {
-  const [businessPosts, setBusinessPosts] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const postsPerPage = 5;
-
-  useEffect(() => {
-    const filteredPosts = samplePosts.filter(
-      (post) => post.category.toLowerCase() === "business"
-    );
-    setBusinessPosts(filteredPosts);
-  }, []);
-
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = businessPosts.slice(indexOfFirstPost, indexOfLastPost);
-
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
-  const totalPages = Math.ceil(businessPosts.length / postsPerPage);
+  const { currentPosts, currentPage, totalPages, paginate } = usePaginatedPosts(
+    "Business",
+    5
+  );
 
   return (
     <>
       <Helmet>
-        <title>Business News - News Metrics</title>
+        <title>Entertainment News - News Metrics</title>
         <meta name="description" content="Business news from News Metrics" />
       </Helmet>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h1 className="text-3xl font-bold my-8">Business News</h1>
         <div className="space-y-6">
           {currentPosts.map((post) => (
-            <BusinessArticle key={post.id} {...post} />
+            <BusinessArticle key={post.id} {...post} comments={post.comments || []} />
           ))}
           <div className="w-3/4 mx-auto">
-            <Suspense fallback={<div>Loading advertisement...</div>}>
+            <Suspense
+              fallback={<div aria-live="polite">Loading advertisement...</div>}
+            >
               <LazyAdvertisement isHomePage={false} />
             </Suspense>
           </div>
         </div>
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={paginate}
-        />
-        <Suspense fallback={<div>Loading more stories...</div>}>
-          <LazyRandomPostsGrid />
+        <nav aria-label="Business news pagination">
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={paginate}
+          />
+        </nav>
+        <Suspense
+          fallback={<div aria-live="polite">Loading more stories...</div>}
+        >
+          <section aria-label="More stories">
+            <LazyRandomPostsGrid />
+          </section>
         </Suspense>
       </div>
     </>

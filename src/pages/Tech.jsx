@@ -1,29 +1,13 @@
 import React, { Suspense, lazy } from 'react';
-import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import TechArticle from "../components/TechArticle";
 import Pagination from "../components/Pagination";
-import { samplePosts } from "../utils/sampleposts";
+import usePaginatedPosts from "../hooks/usePaginatedPosts";
 
 const LazyRandomPostsGrid = lazy(() => import('../components/RandomPostsGrid'));
 
 const Tech = () => {
-  const [techPosts, setTechPosts] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const postsPerPage = 5;
-
-  useEffect(() => {
-    const filteredPosts = samplePosts.filter(post => post.category.toLowerCase() === "tech");
-    setTechPosts(filteredPosts);
-  }, []);
-
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = techPosts.slice(indexOfFirstPost, indexOfLastPost);
-
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
-  const totalPages = Math.ceil(techPosts.length / postsPerPage);
+  const { currentPosts, currentPage, totalPages, paginate } = usePaginatedPosts("tech", 5);
 
   return (
     <>
@@ -35,7 +19,7 @@ const Tech = () => {
         <h1 className="text-3xl font-bold my-8">Tech News</h1>
         <div className="space-y-6">
           {currentPosts.map((post) => (
-            <TechArticle key={post.id} {...post} />
+            <TechArticle key={post.id} {...post} comments={post.comments || []}/>
           ))}
         </div>
         <Pagination

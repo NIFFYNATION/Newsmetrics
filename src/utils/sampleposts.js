@@ -11,9 +11,23 @@ export const samplePosts = [
     date: "2023-05-20T10:30:00Z",
     tags: ["AI", "Technology", "Future"],
     content: [
-      "As the world acknowledges the crucial importance of mental health, workplaces are becoming microcosms of this paradigm shift.",
-      
-    ]
+      "As the world acknowledges the crucial importance of mental health, workplaces are becoming microcosms of this paradigm shift.",  
+    ],
+    comments: [
+      {
+        id: 1,
+        content: "Great article! Very informative.",
+        author: "John Doe",
+        date: "2023-05-21T15:30:00Z",
+      },
+      {
+        id: 2,
+        content: "I learned a lot from this. Thanks for sharing!",
+        author: "Jane Smith",
+        date: "2023-05-22T10:15:00Z",
+      },
+    ],
+    
   },
   {
     id: 2,
@@ -29,7 +43,21 @@ export const samplePosts = [
     content: [
       "As the world acknowledges the crucial importance of mental health, workplaces are becoming microcosms of this paradigm shift.",
       
-    ]
+    ],
+    comments: [
+      {
+        id: 1,
+        content: "Great article! Very informative.",
+        author: "John Doe",
+        date: "2023-05-21T15:30:00Z",
+      },
+      {
+        id: 2,
+        content: "I learned a lot from this. Thanks for sharing!",
+        author: "Jane Smith",
+        date: "2023-05-22T10:15:00Z",
+      },
+    ],
   },
   {
     id: 3,
@@ -45,7 +73,21 @@ export const samplePosts = [
     content: [
       "As the world acknowledges the crucial importance of mental health, workplaces are becoming microcosms of this paradigm shift.",
       
-    ]
+    ],
+    comments: [
+      {
+        id: 1,
+        content: "Great article! Very informative.",
+        author: "John Doe",
+        date: "2023-05-21T15:30:00Z",
+      },
+      {
+        id: 2,
+        content: "I learned a lot from this. Thanks for sharing!",
+        author: "Jane Smith",
+        date: "2023-05-22T10:15:00Z",
+      },
+    ],
   },
   {
     id: 4,
@@ -61,7 +103,21 @@ export const samplePosts = [
     content: [
       "As the world acknowledges the crucial importance of mental health, workplaces are becoming microcosms of this paradigm shift.",
       
-    ]
+    ],
+    comments: [
+      {
+        id: 1,
+        content: "Great article! Very informative.",
+        author: "John Doe",
+        date: "2023-05-21T15:30:00Z",
+      },
+      {
+        id: 2,
+        content: "I learned a lot from this. Thanks for sharing!",
+        author: "Jane Smith",
+        date: "2023-05-22T10:15:00Z",
+      },
+    ],
   },
   {
     id: 5,
@@ -77,7 +133,21 @@ export const samplePosts = [
     content: [
       "As the world acknowledges the crucial importance of mental health, workplaces are becoming microcosms of this paradigm shift.",
       
-    ]
+    ],
+    comments: [
+      {
+        id: 1,
+        content: "Great article! Very informative.",
+        author: "John Doe",
+        date: "2023-05-21T15:30:00Z",
+      },
+      {
+        id: 2,
+        content: "I learned a lot from this. Thanks for sharing!",
+        author: "Jane Smith",
+        date: "2023-05-22T10:15:00Z",
+      },
+    ],
   },
   {
     id: 6,
@@ -93,7 +163,21 @@ export const samplePosts = [
     content: [
       "As the world acknowledges the crucial importance of mental health, workplaces are becoming microcosms of this paradigm shift.",
       
-    ]
+    ],
+    comments: [
+      {
+        id: 1,
+        content: "Great article! Very informative.",
+        author: "John Doe",
+        date: "2023-05-21T15:30:00Z",
+      },
+      {
+        id: 2,
+        content: "I learned a lot from this. Thanks for sharing!",
+        author: "Jane Smith",
+        date: "2023-05-22T10:15:00Z",
+      },
+    ],
   },
   {
     id: 7,
@@ -109,7 +193,21 @@ export const samplePosts = [
     content: [
       "As the world acknowledges the crucial importance of mental health, workplaces are becoming microcosms of this paradigm shift.",
       
-    ]
+    ],
+    comments: [
+      {
+        id: 1,
+        content: "Great article! Very informative.",
+        author: "John Doe",
+        date: "2023-05-21T15:30:00Z",
+      },
+      {
+        id: 2,
+        content: "I learned a lot from this. Thanks for sharing!",
+        author: "Jane Smith",
+        date: "2023-05-22T10:15:00Z",
+      },
+    ],
   },
   {
     id: 8,
@@ -125,7 +223,21 @@ export const samplePosts = [
     content: [
       "As the world acknowledges the crucial importance of mental health, workplaces are becoming microcosms of this paradigm shift.",
       
-    ]
+    ],
+    comments: [
+      {
+        id: 1,
+        content: "Great article! Very informative.",
+        author: "John Doe",
+        date: "2023-05-21T15:30:00Z",
+      },
+      {
+        id: 2,
+        content: "I learned a lot from this. Thanks for sharing!",
+        author: "Jane Smith",
+        date: "2023-05-22T10:15:00Z",
+      },
+    ],
   },
   {
     id: 10,
@@ -141,7 +253,21 @@ export const samplePosts = [
     content: [
       "As the world acknowledges the crucial importance of mental health, workplaces are becoming microcosms of this paradigm shift.",
       
-    ]
+    ],
+    comments: [
+      {
+        id: 1,
+        content: "Great article! Very informative.",
+        author: "John Doe",
+        date: "2023-05-21T15:30:00Z",
+      },
+      {
+        id: 2,
+        content: "I learned a lot from this. Thanks for sharing!",
+        author: "Jane Smith",
+        date: "2023-05-22T10:15:00Z",
+      },
+    ],
   },
   {
     id: 11,
@@ -157,6 +283,20 @@ export const samplePosts = [
     content: [
       "As the world acknowledges the crucial importance of mental health, workplaces are becoming microcosms of this paradigm shift.",
       
-    ]
+    ],
+    comments: [
+      {
+        id: 1,
+        content: "Great article! Very informative.",
+        author: "John Doe",
+        date: "2023-05-21T15:30:00Z",
+      },
+      {
+        id: 2,
+        content: "I learned a lot from this. Thanks for sharing!",
+        author: "Jane Smith",
+        date: "2023-05-22T10:15:00Z",
+      },
+    ],
   },
 ];

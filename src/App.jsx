@@ -16,10 +16,12 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
+import { CommentsProvider } from "./context/CommentsContext";
 
 function App() {
   return (
     <HelmetProvider>
+      <CommentsProvider>
       <Router>
         <div className="App">
           <Header />
@@ -46,6 +48,7 @@ function App() {
           </div>
         </div>
       </Router>
+      </CommentsProvider>
     </HelmetProvider>
   );
 }
