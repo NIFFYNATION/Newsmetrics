@@ -1,6 +1,6 @@
 import React, { Suspense, lazy } from 'react';
 import { Helmet } from "react-helmet-async";
-import TechArticle from "../components/TechArticle";
+import {TechArticle} from "../components/TechArticle";
 import Pagination from "../components/Pagination";
 import usePaginatedPosts from "../hooks/usePaginatedPosts";
 

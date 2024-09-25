@@ -2,6 +2,7 @@ import { format } from "date-fns";
 import { FacebookShareButton, TwitterShareButton, WhatsappShareButton, FacebookIcon, TwitterIcon, WhatsappIcon } from 'react-share';
 import ArticleStructuredData from "./ArticleStructuredData";
 import Comments from './Comments';
+import { useComments } from '../context/CommentsContext';
 
 const SinglePostArticle = ({
   id,
@@ -15,6 +16,8 @@ const SinglePostArticle = ({
   category,
   comments = []
 }) => {
+  const { getCommentCount } = useComments();
+  const commentCount = getCommentCount(id);
   const shareUrl = `${window.location.origin}/article/${id}`;
 
   return (

@@ -1,7 +1,7 @@
 import React, { Suspense, lazy } from 'react';
 import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
-import EntertainmentArticle from "../components/EntertainmentArticle";
+import { EntertainmentArticle } from "../components/EntertainmentArticle";
 import Pagination from "../components/Pagination";
 import { samplePosts } from "../utils/sampleposts";
 

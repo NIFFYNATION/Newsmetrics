@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { useComments } from '../context/CommentsContext';
 
 const Comments = ({ postId, comments: initialComments }) => {
-  const { comments, addComment } = useComments();
+  const { comments, commentCounts, addComment } = useComments();
   const [newComment, setNewComment] = useState('');
 
   const postComments = comments[postId] || [];
+  const commentCount = commentCounts[postId] || 0;
+
 
   const handleCommentSubmit = (e) => {
     e.preventDefault();
@@ -23,7 +25,7 @@ const Comments = ({ postId, comments: initialComments }) => {
 
   return (
     <div className="mt-8">
-      <h2 className="text-2xl font-bold mb-4">Comments ({postComments.length})</h2>
+      <h2 className="text-2xl font-bold mb-4">Comments ({commentCount})</h2>
       <form onSubmit={handleCommentSubmit} className="mb-4">
         <textarea
           value={newComment}

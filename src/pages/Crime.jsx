@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
-import CrimeArticle from "../components/CrimeArticle";
+import { CrimeArticle } from "../components/CrimeArticle";
 import Pagination from "../components/Pagination";
 import { samplePosts } from "../utils/sampleposts";
 import Advertisement from "../components/Advertisement";
