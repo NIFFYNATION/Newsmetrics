@@ -53,9 +53,6 @@ export const LocalArticle = ({ id, image, title, author, description, date, comm
     </div>
     </Link>
   </>
-
-    
-  
 )};
 
 

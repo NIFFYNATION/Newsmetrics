@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
+import axios from 'axios';
 
 const ContactComp = () => {
   const [formData, setFormData] = useState({
@@ -20,9 +21,8 @@ const ContactComp = () => {
     setIsSubmitting(true);
 
     try {
-      // Simulating API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      console.log("Form data:", formData);
+      const response = await axios.post('/api/contact', formData);
+      console.log("Form data:", response.data);
       setSubmitMessage("Your message has been sent successfully!");
       setFormData({ name: '', email: '', message: '' });
     } catch (error) {

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 export default function Register() {
   const [formData, setFormData] = useState({
@@ -68,38 +69,17 @@ export default function Register() {
       return;
     }
 
-    //     const url = "http://your-api-endpoint/register"; // Replace with your API endpoint
-    //     const options = {
-    //       method: "POST",
-    //       headers: { "Content-Type": "application/json" },
-    //       body: JSON.stringify(formData),
-    //     };
-
-    //     try {
-    //       const response = await fetch(url, options);
-    //       if (!response.ok) {
-    //         throw new Error(`Registration
-    //  failed with status: ${response.status}`);
-    //       }
-
-    //       const data = await response.json();
-    //       console.log("Registration successful:", data);
-    //       setSubmitMessage("Registration successful!");
-    //       setTimeout(() => {
-    //         setSubmitMessage(null);
-    //       }, 3000);
-    //     } catch (error) {
-    //       console.error("Registration error:", error);
-    //       setMatchError("Registration failed. Please try again."); // Or display more specific error messages
-    //     }
-    //   };
-
-    // Form is valid, log data and display success message
-    console.log("Form data:", formData);
-    setSubmitMessage("Registration successful!");
-    setTimeout(() => {
-      setSubmitMessage(null);
-    }, 3000);
+    try {
+      const response = await axios.post('/api/register', formData);
+      console.log("Registration successful:", response.data);
+      setSubmitMessage("Registration successful!");
+      setTimeout(() => {
+        setSubmitMessage(null);
+      }, 3000);
+    } catch (error) {
+      console.error("Registration error:", error);
+      setSubmitMessage("Registration failed. Please try again.");
+    }
   };
 
   return (

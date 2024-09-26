@@ -2,53 +2,32 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
 import ArticleStructuredData from "./ArticleStructuredData";
+import axios from 'axios';
 
 const TrendingArticle = () => {
   const [trendingArticles, setTrendingArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [error, setError] = useState(null);
-  const [currentPage, setCurrentPage] = useState(1);
-  const articlesPerPage = 5;
-
-  const loadMoreArticles = useCallback(() => {
-    setCurrentPage((prevPage) => prevPage + 1);
-    setIsLoadingMore(true);
-  }, []);
 
   const fetchTrendingArticles = useCallback(async () => {
     try {
       setIsLoading(true);
+      const response = await axios.get('/api/trending-articles');
+      setTrendingArticles(Array.isArray(response.data) ? response.data : []);
       setError(null);
-      // This is a placeholder API endpoint. In a real application, you would replace this
-      // with your actual API endpoint for fetching trending articles.
-      // const response = await fetch(`/api/trending-articles?page=${currentPage}&limit=${articlesPerPage}`);
-      
-      // If you're using a different API or data source, you would modify this line accordingly.
-      // For example, if using an external API:
-      const response = await fetch(`https://api.example.com/trending-articles?page=${currentPage}&limit=${articlesPerPage}`);
-      
-      // If you're not using an API and want to use mock data for development:
-      // const response = { ok: true, json: async () => mockTrendingArticles };
-      if (!response.ok) {
-        throw new Error('Failed to fetch trending articles');
-      }
-      const data = await response.json();
-      setTrendingArticles((prevArticles) => [...prevArticles, ...data]);
-    } catch (error) {
-      console.error('Error fetching trending articles:', error);
-      setError('Failed to load trending articles. Please try again later.');
+    } catch (err) {
+      setError('Failed to fetch trending articles');
+      console.error('Error fetching trending articles:', err);
     } finally {
       setIsLoading(false);
-      setIsLoadingMore(false);
     }
-  }, [currentPage, articlesPerPage]);
+  }, []);
 
   useEffect(() => {
     fetchTrendingArticles();
   }, [fetchTrendingArticles]);
 
-  if (isLoading && trendingArticles.length === 0) {
+  if (isLoading) {
     return <div aria-live="polite">Loading trending articles...</div>;
   }
 
@@ -56,7 +35,7 @@ const TrendingArticle = () => {
     return <div aria-live="assertive">Error: {error}</div>;
   }
 
-  if (trendingArticles.length === 0) {
+  if (!Array.isArray(trendingArticles) || trendingArticles.length === 0) {
     return <div>No trending articles available at the moment.</div>;
   }
 
@@ -109,17 +88,6 @@ const TrendingArticle = () => {
           </Link>
         </article>
       ))}
-      {!isLoading && trendingArticles.length > 0 && (
-        <button
-          onClick={loadMoreArticles}
-          className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
-          disabled={isLoadingMore}
-          aria-busy={isLoadingMore}
-        >
-          {isLoadingMore ? 'Loading...' : 'Load More'}
-        </button>
-      )}
-      {isLoadingMore && <div aria-live="polite">Loading more articles...</div>}
     </section>
   );
 };

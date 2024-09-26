@@ -61,7 +61,5 @@ export const PoliticsArticle = ({
   </Link>
 </>
   
-    
-   
 )};
 
