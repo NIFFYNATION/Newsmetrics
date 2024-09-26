@@ -36,7 +36,7 @@ const ContactComp = () => {
   return (
     <div className="bg-white shadow-xl rounded-lg overflow-hidden">
       <div className="flex flex-col md:flex-row">
-        <div className="w-full md:w-1/3 bg-cover bg-center p-6 md:p-8 text-white" style={{backgroundImage: "url('./public/contactimg1.jpg')"}}>
+        <div className="w-full md:w-1/3 bg-cover bg-center p-6 md:p-8 text-white" style={{backgroundImage: "url('/contactimg1.jpg')"}}>
           <div className="bg-black bg-opacity-50 p-4 md:p-6 rounded-lg">
             <h2 className="text-xl md:text-2xl font-bold mb-2 md:mb-4">Contact Information</h2>
             <p className="mb-4 text-sm md:text-base">Fill up the form and we will get back to you within 24 hours.</p>
