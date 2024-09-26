@@ -28,7 +28,7 @@ const About = () => {
               
             ].map((item, index) => (
               <li key={index} className="flex items-start">
-                <FaCheckCircle className="text-blue-500 mt-1 mr-2 flex-shrink-0" />
+                <FaCheckCircle className="text-red-800 mt-1 mr-2 flex-shrink-0" />
                 <span className="text-gray-700">{item}</span>
               </li>
             ))}
