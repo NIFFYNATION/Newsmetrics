@@ -4,7 +4,7 @@ export const samplePosts = [
     image: "https://picsum.photos/seed/post1/800/600",
     category: "Tech",
     title: "The Future of AI",
-    author: "John Doe",
+    author: "Tunde Ogunbiyi",
     authorImage: "https://picsum.photos/seed/author1/100/100",
     description:
       "Artificial Intelligence is rapidly evolving. This article explores the potential impacts and advancements we can expect in the coming years.",
@@ -17,13 +17,13 @@ export const samplePosts = [
       {
         id: 1,
         content: "Great article! Very informative.",
-        author: "John Doe",
+        author: "Bello Olusola",
         date: "2023-05-21T15:30:00Z",
       },
       {
         id: 2,
         content: "I learned a lot from this. Thanks for sharing!",
-        author: "Jane Smith",
+        author: "Kemi Alabi",
         date: "2023-05-22T10:15:00Z",
       },
     ],
@@ -34,7 +34,7 @@ export const samplePosts = [
     image: "https://picsum.photos/seed/post2/800/600",
     category: "Local",
     title: "The Benefits of Meditation",
-    author: "Jane Smith",
+    author: "Bello Olusola",
     authorImage: "https://picsum.photos/seed/author2/100/100",
     description:
       "Discover how daily meditation can improve your mental health, reduce stress, and increase overall well-being.",
@@ -54,7 +54,7 @@ export const samplePosts = [
       {
         id: 2,
         content: "I learned a lot from this. Thanks for sharing!",
-        author: "Jane Smith",
+        author: "Bello Olusola",
         date: "2023-05-22T10:15:00Z",
       },
     ],
@@ -64,7 +64,7 @@ export const samplePosts = [
     image: "https://picsum.photos/seed/post3/800/600",
     category: "Environment",
     title: "Climate Change: A Global Crisis",
-    author: "Emily Brown",
+    author: "Emily Sandra",
     authorImage: "https://picsum.photos/seed/author3/100/100",
     description:
       "An in-depth look at the current state of climate change, its impacts, and what we can do to mitigate its effects.",
@@ -124,7 +124,7 @@ export const samplePosts = [
     image: "https://picsum.photos/seed/post5/800/600",
     category: "Lifestyle",
     title: "Exploring World Cuisines",
-    author: "Sarah Lee",
+    author: "Sarah Osagie",
     authorImage: "https://picsum.photos/seed/author5/100/100",
     description:
       "A culinary journey through different cultures, exploring unique flavors and cooking techniques from around the globe.",
@@ -154,7 +154,7 @@ export const samplePosts = [
     image: "https://picsum.photos/seed/post6/800/600",
     category: "Business",
     title: "The Impact of Blockchain on Finance",
-    author: "Robert Chen",
+    author: "Phillip Fred",
     authorImage: "https://picsum.photos/seed/author6/100/100",
     description:
       "Exploring how blockchain technology is revolutionizing the financial sector and its potential future applications.",
@@ -184,7 +184,7 @@ export const samplePosts = [
     image: "https://picsum.photos/seed/post7/800/600",
     category: "Business",
     title: "Sustainable Business Practices",
-    author: "Emma Watson",
+    author: "Emma Wills",
     authorImage: "https://picsum.photos/seed/author7/100/100",
     description:
       "How companies are incorporating sustainability into their business models and the benefits of eco-friendly practices.",
