@@ -16,6 +16,11 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
+import AdminDashboard from "./pages/AdminDashboard";
+import CreatePost from "./pages/CreatePost";
+import EditPost from "./pages/EditPost";
+// import AdminLogin from "./pages/AdminLogin";
+// import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from './pages/NotFound';
 import { CommentsProvider } from "./context/CommentsContext";
 import axios from 'axios';
@@ -47,6 +52,10 @@ function App() {
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                     <Route path="/terms-of-service" element={<TermsOfService />} />
+                    {/* <Route path="/admin/login" element={<AdminLogin />} /> */}
+<Route path="/admin" element={<AdminDashboard />} />
+<Route path="/admin/create-post" element={<CreatePost />} />
+<Route path="/admin/edit-post/:id" element={<EditPost />} />
                     <Route path="*" element={<NotFound />} />
                   </Routes>
                 </MainLayout>

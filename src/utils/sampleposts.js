@@ -8,7 +8,7 @@ export const samplePosts = [
     authorImage: "https://picsum.photos/seed/author1/100/100",
     description:
       "Artificial Intelligence is rapidly evolving. This article explores the potential impacts and advancements we can expect in the coming years.",
-    date: "2023-05-20T10:30:00Z",
+    date: "2024-09-20T10:30:00Z",
     tags: ["AI", "Technology", "Future"],
     content: [
       "As the world acknowledges the crucial importance of mental health, workplaces are becoming microcosms of this paradigm shift.",  
@@ -18,13 +18,13 @@ export const samplePosts = [
         id: 1,
         content: "Great article! Very informative.",
         author: "Bello Olusola",
-        date: "2023-05-21T15:30:00Z",
+        date: "2024-09-21T15:30:00Z",
       },
       {
         id: 2,
         content: "I learned a lot from this. Thanks for sharing!",
         author: "Kemi Alabi",
-        date: "2023-05-22T10:15:00Z",
+        date: "2024-09-22T10:15:00Z",
       },
     ],
     
@@ -38,7 +38,7 @@ export const samplePosts = [
     authorImage: "https://picsum.photos/seed/author2/100/100",
     description:
       "Discover how daily meditation can improve your mental health, reduce stress, and increase overall well-being.",
-    date: "2023-05-21T14:45:00Z",
+    date: "2024-09-21T14:45:00Z",
     tags: ["Meditation", "Local", "Health", "Wellness"],
     content: [
       "As the world acknowledges the crucial importance of mental health, workplaces are becoming microcosms of this paradigm shift.",
@@ -55,7 +55,7 @@ export const samplePosts = [
         id: 2,
         content: "I learned a lot from this. Thanks for sharing!",
         author: "Bello Olusola",
-        date: "2023-05-22T10:15:00Z",
+        date: "2024-09-22T10:15:00Z",
       },
     ],
   },
@@ -68,7 +68,7 @@ export const samplePosts = [
     authorImage: "https://picsum.photos/seed/author3/100/100",
     description:
       "An in-depth look at the current state of climate change, its impacts, and what we can do to mitigate its effects.",
-    date: "2023-05-22T09:15:00Z",
+    date: "2024-09-22T09:15:00Z",
     tags: ["Climate Change", "Environment", "Sustainability"],
     content: [
       "As the world acknowledges the crucial importance of mental health, workplaces are becoming microcosms of this paradigm shift.",
@@ -79,13 +79,13 @@ export const samplePosts = [
         id: 1,
         content: "Great article! Very informative.",
         author: "John Doe",
-        date: "2023-05-21T15:30:00Z",
+        date: "2024-09-21T15:30:00Z",
       },
       {
         id: 2,
         content: "I learned a lot from this. Thanks for sharing!",
         author: "Jane Smith",
-        date: "2023-05-22T10:15:00Z",
+        date: "2024-09-22T10:15:00Z",
       },
     ],
   },
@@ -98,7 +98,7 @@ export const samplePosts = [
     authorImage: "https://picsum.photos/seed/author4/100/100",
     description:
       "How the pandemic has accelerated the shift towards remote work and its implications for the future of business.",
-    date: "2023-05-23T16:20:00Z",
+    date: "2024-09-23T16:20:00Z",
     tags: ["Remote Work", "Tech", "Future of Work"],
     content: [
       "As the world acknowledges the crucial importance of mental health, workplaces are becoming microcosms of this paradigm shift.",
@@ -109,13 +109,13 @@ export const samplePosts = [
         id: 1,
         content: "Great article! Very informative.",
         author: "John Doe",
-        date: "2023-05-21T15:30:00Z",
+        date: "2024-09-21T15:30:00Z",
       },
       {
         id: 2,
         content: "I learned a lot from this. Thanks for sharing!",
         author: "Jane Smith",
-        date: "2023-05-22T10:15:00Z",
+        date: "2024-09-22T10:15:00Z",
       },
     ],
   },
@@ -128,7 +128,7 @@ export const samplePosts = [
     authorImage: "https://picsum.photos/seed/author5/100/100",
     description:
       "A culinary journey through different cultures, exploring unique flavors and cooking techniques from around the globe.",
-    date: "2023-05-24T12:00:00Z",
+    date: "2024-09-24T12:00:00Z",
     tags: ["Food", "Travel", "Culture"],
     content: [
       "As the world acknowledges the crucial importance of mental health, workplaces are becoming microcosms of this paradigm shift.",
@@ -139,13 +139,13 @@ export const samplePosts = [
         id: 1,
         content: "Great article! Very informative.",
         author: "John Doe",
-        date: "2023-05-21T15:30:00Z",
+        date: "2024-09-21T15:30:00Z",
       },
       {
         id: 2,
         content: "I learned a lot from this. Thanks for sharing!",
         author: "Jane Smith",
-        date: "2023-05-22T10:15:00Z",
+        date: "2024-09-22T10:15:00Z",
       },
     ],
   },
@@ -158,7 +158,7 @@ export const samplePosts = [
     authorImage: "https://picsum.photos/seed/author6/100/100",
     description:
       "Exploring how blockchain technology is revolutionizing the financial sector and its potential future applications.",
-    date: "2023-05-25T11:30:00Z",
+    date: "2024-09-25T11:30:00Z",
     tags: ["Blockchain", "Finance", "Technology"],
     content: [
       "As the world acknowledges the crucial importance of mental health, workplaces are becoming microcosms of this paradigm shift.",
@@ -169,13 +169,13 @@ export const samplePosts = [
         id: 1,
         content: "Great article! Very informative.",
         author: "John Doe",
-        date: "2023-05-21T15:30:00Z",
+        date: "2024-09-21T15:30:00Z",
       },
       {
         id: 2,
         content: "I learned a lot from this. Thanks for sharing!",
         author: "Jane Smith",
-        date: "2023-05-22T10:15:00Z",
+        date: "2024-09-22T10:15:00Z",
       },
     ],
   },
@@ -188,7 +188,7 @@ export const samplePosts = [
     authorImage: "https://picsum.photos/seed/author7/100/100",
     description:
       "How companies are incorporating sustainability into their business models and the benefits of eco-friendly practices.",
-    date: "2023-05-26T09:45:00Z",
+    date: "2024-09-26T09:45:00Z",
     tags: ["Sustainability", "Business", "Environment"],
     content: [
       "As the world acknowledges the crucial importance of mental health, workplaces are becoming microcosms of this paradigm shift.",
@@ -199,13 +199,13 @@ export const samplePosts = [
         id: 1,
         content: "Great article! Very informative.",
         author: "John Doe",
-        date: "2023-05-21T15:30:00Z",
+        date: "2024-09-21T15:30:00Z",
       },
       {
         id: 2,
         content: "I learned a lot from this. Thanks for sharing!",
         author: "Jane Smith",
-        date: "2023-05-22T10:15:00Z",
+        date: "2024-09-22T10:15:00Z",
       },
     ],
   },
@@ -218,7 +218,7 @@ export const samplePosts = [
     authorImage: "https://picsum.photos/seed/author8/100/100",
     description:
       "An analysis of the growing cybercrime trends, their impact on individuals and businesses, and how to protect yourself.",
-    date: "2023-05-27T14:15:00Z",
+    date: "2024-09-27T14:15:00Z",
     tags: ["Cybercrime", "Security", "Technology"],
     content: [
       "As the world acknowledges the crucial importance of mental health, workplaces are becoming microcosms of this paradigm shift.",
@@ -229,13 +229,13 @@ export const samplePosts = [
         id: 1,
         content: "Great article! Very informative.",
         author: "John Doe",
-        date: "2023-05-21T15:30:00Z",
+        date: "2024-09-21T15:30:00Z",
       },
       {
         id: 2,
         content: "I learned a lot from this. Thanks for sharing!",
         author: "Jane Smith",
-        date: "2023-05-22T10:15:00Z",
+        date: "2024-09-22T10:15:00Z",
       },
     ],
   },
@@ -248,7 +248,7 @@ export const samplePosts = [
     authorImage: "https://picsum.photos/seed/author10/100/100",
     description:
       "How streaming services are changing the entertainment industry and what it means for traditional media.",
-    date: "2023-05-28T10:00:00Z",
+    date: "2024-09-28T10:00:00Z",
     tags: ["Streaming", "Media", "Technology"],
     content: [
       "As the world acknowledges the crucial importance of mental health, workplaces are becoming microcosms of this paradigm shift.",
@@ -259,13 +259,13 @@ export const samplePosts = [
         id: 1,
         content: "Great article! Very informative.",
         author: "John Doe",
-        date: "2023-05-21T15:30:00Z",
+        date: "2024-09-21T15:30:00Z",
       },
       {
         id: 2,
         content: "I learned a lot from this. Thanks for sharing!",
         author: "Jane Smith",
-        date: "2023-05-22T10:15:00Z",
+        date: "2024-09-22T10:15:00Z",
       },
     ],
   },
@@ -278,7 +278,7 @@ export const samplePosts = [
     authorImage: "https://picsum.photos/seed/author11/100/100",
     description:
       "An exploration of how social media platforms are shaping political discourse and influencing election outcomes.",
-    date: "2023-05-29T09:30:00Z",
+    date: "2024-09-29T09:30:00Z",
     tags: ["Social Media", "Elections", "Democracy"],
     content: [
       "As the world acknowledges the crucial importance of mental health, workplaces are becoming microcosms of this paradigm shift.",
@@ -289,13 +289,13 @@ export const samplePosts = [
         id: 1,
         content: "Great article! Very informative.",
         author: "John Doe",
-        date: "2023-05-21T15:30:00Z",
+        date: "2024-09-21T15:30:00Z",
       },
       {
         id: 2,
         content: "I learned a lot from this. Thanks for sharing!",
         author: "Jane Smith",
-        date: "2023-05-22T10:15:00Z",
+        date: "2024-09-22T10:15:00Z",
       },
     ],
   },
