@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet-async";
 import {LocalArticle} from "../components/LocalArticle";
 import Pagination from "../components/Pagination";
 import usePaginatedPosts from "../hooks/usePaginatedPosts";
-
+import ScrollUpBar from "../components/ScrollUpBar";
 const LazyAdvertisement = lazy(() => import('../components/Advertisement'));
 const LazyRandomPostsGrid = lazy(() => import('../components/RandomPostsGrid'));
 
@@ -37,6 +37,7 @@ const Local = () => {
           <LazyRandomPostsGrid />
         </Suspense>
       </div>
+      <ScrollUpBar />
     </>
   );
 };

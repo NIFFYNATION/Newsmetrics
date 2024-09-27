@@ -5,6 +5,7 @@ import Pagination from "../components/Pagination";
 import { samplePosts } from "../utils/sampleposts";
 import Advertisement from "../components/Advertisement";
 import RandomPostsGrid from "../components/RandomPostsGrid";
+import ScrollUpBar from "../components/ScrollUpBar";
 
 const Politics = () => {
   const [politicsPosts, setPoliticsPosts] = useState([]);
@@ -47,6 +48,7 @@ const Politics = () => {
         />
         <RandomPostsGrid />
       </div>
+      <ScrollUpBar />
     </>
   );
 };

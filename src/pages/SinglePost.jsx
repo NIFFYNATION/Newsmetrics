@@ -5,7 +5,7 @@ import SinglePostArticle from "../components/SinglePostArticle";
 import Comments from "../components/Comments";
 import { samplePosts } from "../utils/sampleposts";
 import React, { Suspense, lazy } from 'react';
-
+import ScrollUpBar from "../components/ScrollUpBar";
 const LazyRandomPostsGrid = lazy(() => import('../components/RandomPostsGrid'));
 
 function SinglePost() {
@@ -35,6 +35,7 @@ function SinglePost() {
           </Suspense>
         </div>
       </div>
+      <ScrollUpBar />
     </>
   );
 }

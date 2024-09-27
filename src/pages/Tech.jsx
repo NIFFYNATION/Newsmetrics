@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet-async";
 import {TechArticle} from "../components/TechArticle";
 import Pagination from "../components/Pagination";
 import usePaginatedPosts from "../hooks/usePaginatedPosts";
+import ScrollUpBar from "../components/ScrollUpBar";
 
 const LazyRandomPostsGrid = lazy(() => import('../components/RandomPostsGrid'));
 
@@ -31,6 +32,7 @@ const Tech = () => {
           <LazyRandomPostsGrid />
         </Suspense>
       </div>
+      <ScrollUpBar />
     </>
   );
 };

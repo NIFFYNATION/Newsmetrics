@@ -9,7 +9,7 @@ import FeaturedArticle from "../components/FeaturedArticle";
 import Pagination from "../components/Pagination";
 import Advertisement from "../components/Advertisement";
 import { samplePosts } from "../utils/sampleposts";
-
+import ScrollUpBar from "../components/ScrollUpBar";
 const LazyAdvertisement = lazy(() => import('../components/Advertisement'));
 const LazyRandomPostsGrid = lazy(() => import('../components/RandomPostsGrid'));
 
@@ -154,6 +154,7 @@ const Posts = () => {
           </div>
         </div>
       </div>
+      <ScrollUpBar />
     </>
   );
 };

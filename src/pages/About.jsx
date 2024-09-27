@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { FaCheckCircle } from 'react-icons/fa';
-
+import ScrollUpBar from "../components/ScrollUpBar";
 const About = () => {
   return (
     <>
@@ -37,6 +37,7 @@ const About = () => {
         
        
       </div>
+      <ScrollUpBar />
     </>
   );
 };

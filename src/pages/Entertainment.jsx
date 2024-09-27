@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet-async";
 import { EntertainmentArticle } from "../components/EntertainmentArticle";
 import Pagination from "../components/Pagination";
 import { samplePosts } from "../utils/sampleposts";
-
+import ScrollUpBar from "../components/ScrollUpBar";
 const LazyAdvertisement = lazy(() => import('../components/Advertisement'));
 const LazyRandomPostsGrid = lazy(() => import('../components/RandomPostsGrid'));
 
@@ -57,6 +57,7 @@ const Entertainment = () => {
           </section>
         </Suspense>
       </div>
+      <ScrollUpBar />
     </>
   );
 };
