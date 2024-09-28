@@ -14,6 +14,17 @@ const PostForm = ({ isEditing = false }) => {
     image: '',
   });
 
+  const categories = [
+    "Local",
+    "Entertainment",
+    "Politics",
+    "Crime",
+    "Business",
+    "Tech",
+    "Environment",
+    "Lifestyle"
+  ];
+
   useEffect(() => {
     if (isEditing && id) {
       const existingPost = samplePosts.find(p => p.id === parseInt(id));
@@ -51,15 +62,21 @@ const PostForm = ({ isEditing = false }) => {
       </div>
       <div className="mb-4">
         <label htmlFor="category" className="block mb-2">Category</label>
-        <input
-          type="text"
+        <select
           id="category"
           name="category"
           value={post.category}
           onChange={handleChange}
           className="w-full px-3 py-2 border rounded"
           required
-        />
+        >
+          <option value="">Select a category</option>
+          {categories.map((category) => (
+            <option key={category} value={category}>
+              {category}
+            </option>
+          ))}
+        </select>
       </div>
       <div className="mb-4">
         <label htmlFor="author" className="block mb-2">Author</label>
