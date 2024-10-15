@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+.article-content img {
+    max-width: 80%;
+    height: auto;
+    display: block;
+    margin: 1rem auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  @media (min-width: 768px) {
+    .article-content img {
+      max-width: 50%;
+    }
+  }
+
+  .article-content a {
+    color: blue;
+    
+  }

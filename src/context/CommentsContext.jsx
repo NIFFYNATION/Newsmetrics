@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import { createContext, useState, useContext, useEffect } from "react";
 
 const CommentsContext = createContext();
 
@@ -7,8 +7,8 @@ export const CommentsProvider = ({ children }) => {
   const [commentCounts, setCommentCounts] = useState({});
 
   useEffect(() => {
-    const storedComments = localStorage.getItem('comments');
-    const storedCommentCounts = localStorage.getItem('commentCounts');
+    const storedComments = localStorage.getItem("comments");
+    const storedCommentCounts = localStorage.getItem("commentCounts");
     if (storedComments) {
       setComments(JSON.parse(storedComments));
     }
@@ -18,21 +18,21 @@ export const CommentsProvider = ({ children }) => {
   }, []);
 
   const addComment = (postId, comment) => {
-    setComments(prevComments => {
+    setComments((prevComments) => {
       const updatedComments = {
         ...prevComments,
-        [postId]: [...(prevComments[postId] || []), comment]
+        [postId]: [...(prevComments[postId] || []), comment],
       };
-      localStorage.setItem('comments', JSON.stringify(updatedComments));
+      localStorage.setItem("comments", JSON.stringify(updatedComments));
       return updatedComments;
     });
 
-    setCommentCounts(prevCounts => {
+    setCommentCounts((prevCounts) => {
       const updatedCounts = {
         ...prevCounts,
-        [postId]: (prevCounts[postId] || 0) + 1
+        [postId]: (prevCounts[postId] || 0) + 1,
       };
-      localStorage.setItem('commentCounts', JSON.stringify(updatedCounts));
+      localStorage.setItem("commentCounts", JSON.stringify(updatedCounts));
       return updatedCounts;
     });
   };
@@ -42,7 +42,9 @@ export const CommentsProvider = ({ children }) => {
   };
 
   return (
-    <CommentsContext.Provider value={{ comments, commentCounts, addComment, getCommentCount }}>
+    <CommentsContext.Provider
+      value={{ comments, commentCounts, addComment, getCommentCount }}
+    >
       {children}
     </CommentsContext.Provider>
   );

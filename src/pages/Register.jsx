@@ -1,17 +1,21 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth } from "../services/firebase";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { imgStorage } from "../services/firebase";
+import imageCompression from 'browser-image-compression';
 
 export default function Register() {
   const [formData, setFormData] = useState({
-    fullName: "",
+    name: "",
     email: "",
     password: "",
-    confirmPassword: "",
-    phoneNumber: "",
   });
   const [matchError, setMatchError] = useState(null);
   const [submitMessage, setSubmitMessage] = useState(null);
+  const navigate = useNavigate();
+  const [profilePic, setProfilePic] = useState(null);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -30,7 +34,7 @@ export default function Register() {
   const validateForm = () => {
     let isValid = true;
 
-    if (!formData.fullName.trim()) {
+    if (!formData.name.trim()) {
       setMatchError("Please enter your full name.");
       isValid = false;
     } else {
@@ -51,12 +55,12 @@ export default function Register() {
       setMatchError(null); // Clear error if previously set for password
     }
 
-    if (formData.password !== formData.confirmPassword) {
-      setMatchError("Passwords do not match.");
-      isValid = false;
-    } else {
-      setMatchError(null); // Clear error if previously set for password confirmation
-    }
+    // if (formData.password !== formData.confirmPassword) {
+    //   setMatchError("Passwords do not match.");
+    //   isValid = false;
+    // } else {
+    //   setMatchError(null); // Clear error if previously set for password confirmation
+    // }
 
     return isValid;
   };
@@ -65,20 +69,53 @@ export default function Register() {
     e.preventDefault();
 
     if (!validateForm()) {
-      // Form is invalid, display errors and prevent submission
       return;
     }
 
     try {
-      const response = await axios.post('/api/register', formData);
-      console.log("Registration successful:", response.data);
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        formData.email,
+        formData.password
+      );
+
+      let photoURL = '';
+      if (profilePic) {
+        const storageRef = ref(imgStorage, `profile_pictures/${userCredential.user.uid}`);
+        await uploadBytes(storageRef, profilePic);
+        photoURL = await getDownloadURL(storageRef);
+      }
+
+      await updateProfile(userCredential.user, { 
+        displayName: formData.name,
+        photoURL: photoURL
+      });
+
+      console.log("Registration successful:", userCredential.user);
       setSubmitMessage("Registration successful!");
       setTimeout(() => {
         setSubmitMessage(null);
+        navigate("/admin");
       }, 3000);
     } catch (error) {
       console.error("Registration error:", error);
-      setSubmitMessage("Registration failed. Please try again.");
+      setMatchError("Registration failed. " + error.message);
+    }
+  };
+
+  const handleProfilePicChange = async (e) => {
+    if (e.target.files[0]) {
+      try {
+        const options = {
+          maxSizeMB: 1,
+          maxWidthOrHeight: 1920,
+          useWebWorker: true
+        };
+        const compressedFile = await imageCompression(e.target.files[0], options);
+        setProfilePic(compressedFile);
+      } catch (error) {
+        console.error("Error compressing profile picture:", error);
+      }
     }
   };
 
@@ -103,13 +140,14 @@ export default function Register() {
                 htmlFor="name"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
-                Enter your full name
+                Full name
               </label>
               <div className="mt-2">
                 <input
+                  placeholder="Full name"
                   id="name"
-                  name="fullName"
-                  value={formData.fullName}
+                  name="name"
+                  value={formData.name}
                   onChange={handleChange}
                   type="text"
                   required
@@ -129,32 +167,12 @@ export default function Register() {
                 <input
                   id="email"
                   name="email"
+                  placeholder="Email"
                   value={formData.email}
                   onChange={handleChange}
                   type="email"
                   required
                   autoComplete="email"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div>
-            <div>
-              <label
-                htmlFor="Phone"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Phone Number
-              </label>
-              <div className="mt-2">
-                <input
-                  id="phoneNumber"
-                  name="phoneNumber"
-                  value={formData.phoneNumber}
-                  onChange={handleChange}
-                  type="tel"
-                  required
-                  placeholder="+234"
-                  autoComplete="phoneNumber"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -171,6 +189,7 @@ export default function Register() {
               </div>
               <div className="mt-2">
                 <input
+                  placeholder="Password"
                   maxLength={12}
                   minLength={6}
                   name="password"
@@ -183,7 +202,7 @@ export default function Register() {
                 />
               </div>
             </div>
-            <div>
+            {/* <div>
               <div className="flex items-center justify-between">
                 <label
                   htmlFor="password"
@@ -194,6 +213,7 @@ export default function Register() {
               </div>
               <div className="mt-2">
                 <input
+                  placeholder="Confirm Password"
                   maxLength={12}
                   minLength={6}
                   name="confirmPassword"
@@ -204,12 +224,25 @@ export default function Register() {
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
+            </div> */}
+
+            <div>
+              <label htmlFor="profilePic" className="block text-sm font-medium leading-6 text-gray-900">
+                Profile Picture
+              </label>
+              <input
+                type="file"
+                id="profilePic"
+                accept="image/*"
+                onChange={handleProfilePicChange}
+                className="mt-2 block w-full text-sm text-gray-900 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+              />
             </div>
 
             <div>
               <button
                 type="submit"
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="flex w-full justify-center rounded-md bg-red-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Sign up
               </button>
@@ -223,8 +256,8 @@ export default function Register() {
           <p className="mt-10 text-center text-sm text-gray-500">
             You have account already?
             <Link
-              to="/login"
-              className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+              to="/adminlogin"
+              className="font-semibold leading-6 text-red-600 hover:text-red-500"
             >
               Sign In
             </Link>

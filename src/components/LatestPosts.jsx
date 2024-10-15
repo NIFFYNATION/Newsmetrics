@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { format } from "date-fns";
+import { format, isValid, formatDistanceToNow } from "date-fns";
 
 const LatestPosts = ({ posts }) => (
   <div className="mb-12 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-lg shadow-lg overflow-hidden border border-gray-200">
@@ -19,9 +19,14 @@ const LatestPosts = ({ posts }) => (
               <h3 className="text-lg font-semibold text-gray-800 mb-2 group-hover:text-indigo-600 transition-colors duration-300">
                 {post.title}
               </h3>
-              <p className="text-sm text-gray-600">
-                {format(new Date(post.date), "MMMM d, yyyy")}
-              </p>
+              <time 
+                dateTime={post.date instanceof Date && !isNaN(post.date) ? post.date.toISOString() : ''}
+                className="text-sm text-gray-600"
+              >
+                {post.date instanceof Date && !isNaN(post.date)
+                  ? `${format(post.date, "MMM d, yyyy • h:mm a")} • ${formatDistanceToNow(post.date)} ago`
+                  : "No date"}
+              </time>
             </div>
           </div>
         </Link>
@@ -29,7 +34,5 @@ const LatestPosts = ({ posts }) => (
     </div>
   </div>
 );
+
 export default LatestPosts;
-
-
-

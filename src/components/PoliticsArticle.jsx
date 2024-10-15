@@ -18,7 +18,7 @@ export const PoliticsArticle = ({
   return(
   <>
   <ArticleStructuredData 
-    article={{id, image, title, author, description, date, category: "Business"}}
+    article={{id, image, title, author, description, date, category: "Politics"}}
   />
   <Link
     to={`/article/${id}`}

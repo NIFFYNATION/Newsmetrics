@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { format } from "date-fns";
+import { format, isValid } from "date-fns";
 import ArticleStructuredData from "./ArticleStructuredData";
 import { useComments } from '../context/CommentsContext';
 
@@ -24,9 +24,11 @@ const FeaturedArticle = ({ id, title, author, date, description, image, category
               <img src={image} alt={title} className="w-full h-full object-cover" />
             </div>
             <div className="flex w-full grow flex-col items-stretch justify-center gap-2 py-4 sm:px-4">
-              <p className="text-[#637588] text-sm font-normal leading-normal">
-                Featured • {format(new Date(date), "MMMM d, yyyy • h:mm a")}
-              </p>
+            <p className="text-[#637588] text-sm font-normal leading-normal">
+  Featured • {date && isValid(new Date(date))
+    ? format(new Date(date), "MMMM d, yyyy • h:mm a")
+    : "No date available"}
+</p>
               <h3 className="text-[#111418] text-lg font-bold leading-tight tracking-[-0.015em] sm:text-xl lg:text-2xl">
                 {title}
               </h3>

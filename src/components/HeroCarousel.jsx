@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { format } from "date-fns";
+import { format, isValid, formatDistanceToNow } from "date-fns";
 
 const HeroCarousel = ({ latestPosts }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -64,9 +64,14 @@ const HeroCarousel = ({ latestPosts }) => {
                         <p className="font-semibold text-sm sm:text-base">
                           {post.author}
                         </p>
-                        <p className="text-xs sm:text-sm opacity-75">
-                          {format(new Date(post.date), "MMM d, yyyy • h:mm a")}
-                        </p>
+                        <time 
+                          dateTime={isValid(new Date(post.date)) ? new Date(post.date).toISOString() : ''}
+                          className="text-xs sm:text-sm opacity-75"
+                        >
+                          {isValid(new Date(post.date)) 
+                            ? `${format(new Date(post.date), "MMM d, yyyy • h:mm a")} • ${formatDistanceToNow(new Date(post.date))} ago`
+                            : "No date"}
+                        </time>
                       </div>
                     </div>
                     <Link

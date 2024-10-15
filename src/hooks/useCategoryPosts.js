@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { collection, query, where, getDocs, orderBy } from 'firebase/firestore';
 import { db } from '../services/firebase';
 
-const usePaginatedPosts = (category, postsPerPage) => {
+const useCategoryPosts = (category, postsPerPage = 5) => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -25,7 +25,6 @@ const usePaginatedPosts = (category, postsPerPage) => {
           date: doc.data().date?.toDate() || new Date()
         }));
         setPosts(fetchedPosts);
-        setError(null);
       } catch (err) {
         console.error('Error fetching posts:', err);
         setError('Failed to load posts. Please try again later.');
@@ -47,4 +46,4 @@ const usePaginatedPosts = (category, postsPerPage) => {
   return { currentPosts, currentPage, totalPages, paginate, loading, error };
 };
 
-export default usePaginatedPosts;
+export default useCategoryPosts;

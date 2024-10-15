@@ -18,7 +18,7 @@ export const TechArticle = ({
   return(
   <>
   <ArticleStructuredData 
-    article={{id, image, title, author, description, date, category: "Business"}}
+    article={{id, image, title, author, description, date, category: "Tech"}}
   />
   <Link
     to={`/article/${id}`}
@@ -34,7 +34,7 @@ export const TechArticle = ({
         </div>
         <div className="flex w-full grow flex-col items-stretch justify-center gap-2 py-4 sm:px-4">
           <p className="text-[#637588] text-sm font-normal leading-normal">
-            Tech • {format(new Date(date), "MMMM d, yyyy • h:mm a")}
+          Tech • {format(date, "MMMM d, yyyy • h:mm a")}
           </p>
           <h3 className="text-[#111418] text-lg font-bold leading-tight tracking-[-0.015em] sm:text-xl lg:text-2xl">
             {title}

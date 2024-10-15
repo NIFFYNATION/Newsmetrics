@@ -1,19 +1,47 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { samplePosts } from "../utils/sampleposts";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../services/firebase";
+import { format, isValid } from "date-fns";
+import LoadingSpinner from './LoadingSpinner';
 
 const RandomPostsGrid = () => {
   const [randomPosts, setRandomPosts] = useState([]);
   const [visiblePosts, setVisiblePosts] = useState(4);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const shuffled = [...samplePosts].sort(() => 0.5 - Math.random());
-    setRandomPosts(shuffled);
+    const fetchPosts = async () => {
+      try {
+        const postsCollection = collection(db, "posts");
+        const snapshot = await getDocs(postsCollection);
+        const fetchedPosts = snapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data(),
+          date: doc.data().date ? new Date(doc.data().date) : new Date()
+        }));
+        const shuffled = fetchedPosts.sort(() => 0.5 - Math.random());
+        setRandomPosts(shuffled);
+      } catch (err) {
+        console.error("Error fetching posts:", err);
+        setError("Failed to load posts. Please try again later.");
+      }
+    };
+
+    fetchPosts();
   }, []);
 
   const loadMore = () => {
     setVisiblePosts((prevVisible) => Math.min(prevVisible + 4, randomPosts.length));
   };
+
+  if (error) {
+    return <div className="text-red-500">{error}</div>;
+  }
+  
+  if (randomPosts.length === 0) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-12">
@@ -23,18 +51,24 @@ const RandomPostsGrid = () => {
           <div key={post.id} className="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105">
             <img src={post.image} alt={post.title} className="w-full h-48 object-cover" />
             <div className="p-6">
-            <h3 className="text-xl font-semibold mb-2 line-clamp-2 hover:text-red-600">{post.title}</h3>
-<p className="text-sm text-gray-600 mb-2">{post.category}</p>
-<p className="text-gray-700 mb-4 line-clamp-3">{post.description}</p>
-<Link
-  to={`/article/${post.id}`}
-  className="inline-flex items-center text-red-600 hover:text-red-800 transition duration-300"
->
-                Read More
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                </svg>
-              </Link>
+              <h3 className="text-xl font-semibold mb-2 line-clamp-2 hover:text-red-600">{post.title}</h3>
+              <p className="text-sm text-gray-600 mb-2">{post.category}</p>
+              <p className="text-gray-700 mb-4 line-clamp-3">{post.description}</p>
+              <div className="flex justify-between items-center">
+                <Link
+                  to={`/article/${post.id}`}
+                  className="inline-flex items-center text-red-600 hover:text-red-800 transition duration-300"
+                >
+                  Read More
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                  </svg>
+                </Link>
+                <p className="text-sm text-gray-500">
+                  {post.date && isValid(new Date(post.date))
+}
+                </p>
+              </div>
             </div>
           </div>
         ))}

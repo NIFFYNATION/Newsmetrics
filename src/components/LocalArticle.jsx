@@ -10,7 +10,7 @@ export const LocalArticle = ({ id, image, title, author, description, date, comm
   <>
   
     <ArticleStructuredData 
-      article={{id, image, title, author, description, date, category: "Business"}}
+      article={{id, image, title, author, description, date, category: "Local"}}
     />
     <Link
       to={`/article/${id}`}
@@ -26,7 +26,9 @@ export const LocalArticle = ({ id, image, title, author, description, date, comm
         </div>
         <div className="flex w-full grow flex-col items-stretch justify-center gap-2 py-4 sm:px-4">
           <p className="text-[#637588] text-sm font-normal leading-normal">
-            Local • {format(new Date(date), "MMMM d, yyyy • h:mm a")}
+            Local • {format(date, "MMMM d, yyyy • h:mm a")}
+
+
           </p>
           <h3 className="text-[#111418] text-lg font-bold leading-tight tracking-[-0.015em] sm:text-xl lg:text-2xl">
             {title}

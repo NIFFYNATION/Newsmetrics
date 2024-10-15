@@ -1,56 +1,114 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-// import useAuth from '../hooks/useAuth';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import useAuth from "../hooks/useAuth";
 
-const AdminLogin = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+export default function AdminLogin() {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
+  const [error, setError] = useState("");
   const navigate = useNavigate();
   const { login } = useAuth();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (login(username, password)) {
-      navigate('/admin');
-    } else {
-      setError('Invalid credentials');
+    setError("");
+    const auth = getAuth();
+    try {
+      await signInWithEmailAndPassword(auth, formData.email, formData.password);
+      navigate("/admin");
+    } catch (error) {
+      setError("Login failed. Please check your email and password.");
+      console.error("Login error:", error);
     }
   };
 
   return (
-    <div className="max-w-md mx-auto mt-8">
-      <h1 className="text-2xl font-bold mb-4">Admin Login</h1>
-      {error && <p className="text-red-500 mb-4">{error}</p>}
-      <form onSubmit={handleSubmit}>
-        <div className="mb-4">
-          <label htmlFor="username" className="block mb-2">Username</label>
-          <input
-            type="text"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            className="w-full px-3 py-2 border rounded"
-            required
-          />
+    <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+      <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+        <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+          Admin Login
+        </h2>
+
+        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+          <form className=" space-y-6" onSubmit={handleSubmit} method="POST">
+            <div>
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Email address
+              </label>
+              <div className="mt-2">
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  required
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  placeholder="Email address"
+                  value={formData.email}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+
+            <div>
+              <div className="flex items-center justify-between">
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
+                  Password
+                </label>
+              </div>
+              <div className="mt-2">
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  required
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  placeholder="Password"
+                  maxLength={12}
+                  minLength={6}
+                  value={formData.password}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+
+            <div>
+              <button
+                type="submit"
+                className="flex w-full justify-center rounded-md bg-red-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                Login
+              </button>
+            </div>
+            {error && (
+              <p className="mt-2 text-center text-sm text-red-600">{error}</p>
+            )}
+          </form>
         </div>
-        <div className="mb-4">
-          <label htmlFor="password" className="block mb-2">Password</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-3 py-2 border rounded"
-            required
-          />
-        </div>
-        <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-          Login
-        </button>
-      </form>
+        <p className="mt-2 text-center text-sm text-gray-600">
+          Don't have an account?{" "}
+          <Link
+            to="/register"
+            className="font-medium text-red-600 hover:text-red-500"
+          >
+            Sign Up
+          </Link>
+        </p>
+      </div>
     </div>
   );
-};
+}
+// export default AdminLogin;
 
-export default AdminLogin;

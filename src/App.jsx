@@ -21,12 +21,15 @@ import CreatePost from "./pages/CreatePost";
 import EditPost from "./pages/EditPost";
 // import AdminLogin from "./pages/AdminLogin";
 // import ProtectedRoute from "./components/ProtectedRoute";
-import NotFound from './pages/NotFound';
+import NotFound from "./pages/NotFound";
 import { CommentsProvider } from "./context/CommentsContext";
-import axios from 'axios';
-import ErrorBoundary from './components/ErrorBoundary';
+import axios from "axios";
+import ErrorBoundary from "./components/ErrorBoundary";
+import AdminLogin from "./pages/AdminLogin";
+
 
 function App() {
+  
   return (
     <HelmetProvider>
       <CommentsProvider>
@@ -40,7 +43,7 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/Home" element={<Home />} />
                     <Route path="/register" element={<Register />} />
-                    <Route path="/login" element={<Login />} />
+                    <Route path="/adminlogin" element={<AdminLogin />} />
                     <Route path="/article/:id" element={<SinglePost />} />
                     <Route path="/local" element={<Local />} />
                     <Route path="/entertainment" element={<Entertainment />} />
@@ -51,11 +54,14 @@ function App() {
                     <Route path="/about" element={<About />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-                    <Route path="/terms-of-service" element={<TermsOfService />} />
+                    <Route
+                      path="/terms-of-service"
+                      element={<TermsOfService />}
+                    />
                     {/* <Route path="/admin/login" element={<AdminLogin />} /> */}
-<Route path="/admin" element={<AdminDashboard />} />
-<Route path="/admin/create-post" element={<CreatePost />} />
-<Route path="/admin/edit-post/:id" element={<EditPost />} />
+                    <Route path="/admin" element={<AdminDashboard />} />
+                    <Route path="/admin/create-post" element={<CreatePost />} />
+                    <Route path="/admin/edit-post/:id" element={<EditPost />} />
                     <Route path="*" element={<NotFound />} />
                   </Routes>
                 </MainLayout>

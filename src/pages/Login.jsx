@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { loginUser } from "../services/auth";
+// import { loginUser } from "../services/auth";
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -42,31 +44,26 @@ export default function Login() {
       return;
     }
 
-    const url = "http://your-api-endpoint/login"; // Replace with your API endpoint
-    const options = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    };
-
     try {
-      const response = await fetch(url, options);
-      if (!response.ok) {
-        throw new Error(`Login 
- failed with status: ${response.status}`);
-      }
+      const response = await loginUser(formData);
 
-      const data = await response.json();
-      console.log("Login successful:", data);
-
+      // const response = await loginUser(formData);
+      // if (!response.ok) {
+      //       throw new Error(`Login
+      //  failed with status: ${response.status}`);
+      //     }
+      //     console.log("Login successful:", data);
       // Handle successful login (e.g., store token, redirect)
-      setSubmitMessage("Login successful!");
-      setTimeout(() => {
-        setSubmitMessage(null);
-        // Handle redirection or other post-login actions here
-      }, 3000);
+      // setSubmitMessage("Login successful!");
+      // setTimeout(() => {
+      //   setSubmitMessage(null);
+      //   // Handle redirection or other post-login actions here
+      // }, 3000);
+      console.log(response);
     } catch (error) {
-      console.error("Login error:", error);
+      console.log(error);
+
+      // console.error("Login error:", error);
       setMatchError("Login failed. Please check your email and password."); // Or display more specific error messages based on API response
     }
   };
@@ -95,6 +92,7 @@ export default function Login() {
               </label>
               <div className="mt-2">
                 <input
+                  placeholder="Email"
                   id="email"
                   name="email"
                   value={formData.email}
@@ -118,6 +116,7 @@ export default function Login() {
               </div>
               <div className="mt-2">
                 <input
+                  placeholder="Password"
                   maxLength={12}
                   minLength={6}
                   name="password"
@@ -134,7 +133,7 @@ export default function Login() {
             <div>
               <button
                 type="submit"
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="flex w-full justify-center rounded-md bg-red-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Sign In
               </button>
@@ -150,7 +149,7 @@ export default function Login() {
             You don't have an account yet?
             <Link
               to="/register"
-              className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+              className="font-semibold leading-6 text-red-600 hover:text-red-500"
             >
               Sign Up
             </Link>

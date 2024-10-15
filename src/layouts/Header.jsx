@@ -1,44 +1,29 @@
 import { useState, useRef, useCallback, useMemo, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../services/firebase";
 
 const Header = ({ onSearch }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [allArticles, setAllArticles] = useState([]);
   const searchRef = useRef(null);
 
-  // Mock data for search results
-  const allArticles = useMemo(
-    () => [
-      {
-        id: 1,
-        title: "The 2022 NFL Draft: Who's Going Where?",
-        category: "Sports",
-      },
-      {
-        id: 2,
-        title: "Why the Metaverse is the Future",
-        category: "Technology",
-      },
-      {
-        id: 3,
-        title: "How to Make the Perfect Margarita",
-        category: "Food & Drink",
-      },
-      {
-        id: 4,
-        title: "The Top 5 Must-See Movies of 2022",
-        category: "Entertainment",
-      },
-      {
-        id: 5,
-        title: "The Future of Work: What's Next?",
-        category: "Business",
-      },
-      // Add more articles as needed
-    ],
-    []
-  );
+  useEffect(() => {
+    const fetchArticles = async () => {
+      const articlesCollection = collection(db, 'posts');
+      const snapshot = await getDocs(articlesCollection);
+      const fetchedArticles = snapshot.docs.map(doc => ({
+        id: doc.id,
+        title: doc.data().title,
+        category: doc.data().category,
+      }));
+      setAllArticles(fetchedArticles);
+    };
+
+    fetchArticles();
+  }, []);
 
   const searchResults = useMemo(() => {
     if (searchQuery.length === 0) return [];
@@ -96,7 +81,14 @@ const Header = ({ onSearch }) => {
                     strokeWidth="3"
                     strokeLinecap="round"
                   />
-                  <circle cx="24" cy="24" r="16" stroke="#FFFFFF" strokeWidth="1.5" strokeDasharray="2 2" />
+                  <circle
+                    cx="24"
+                    cy="24"
+                    r="16"
+                    stroke="#FFFFFF"
+                    strokeWidth="1.5"
+                    strokeDasharray="2 2"
+                  />
                   <circle cx="24" cy="24" r="3" fill="#FF4136" />
                 </svg>
               </div>
@@ -108,20 +100,20 @@ const Header = ({ onSearch }) => {
             </div>
           </Link>
           <div className="flex gap-2">
-            <button className="hidden sm:flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#f0f2f4] text-[#111418] text-sm font-bold leading-normal tracking-[0.015em]">
-              <span className="truncate">Subscribe</span>
-            </button>
-            <button className="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 bg-[#f0f2f4] text-[#111418] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                fill="currentColor"
-                viewBox="0 0 256 256"
-              >
-                <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24ZM74.08,197.5a64,64,0,0,1,107.84,0,87.83,87.83,0,0,1-107.84,0ZM96,120a32,32,0,1,1,32,32A32,32,0,0,1,96,120Zm97.76,66.41a79.66,79.66,0,0,0-36.06-28.75,48,48,0,1,0-59.4,0,79.66,79.66,0,0,0-36.06,28.75,88,88,0,1,1,131.52,0Z"></path>
-              </svg>
-            </button>
+            <Link to="/">
+              <button className="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 bg-[#f0f2f4] text-[#111418] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  fill="currentColor"
+                  viewBox="0 0 256 256"
+                >
+                  <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24ZM74.08,197.5a64,64,0,0,1,107.84,0,87.83,87.83,0,0,1-107.84,0ZM96,120a32,32,0,1,1,32,32A32,32,0,0,1,96,120Zm97.76,66.41a79.66,79.66,0,0,0-36.06-28.75,48,48,0,1,0-59.4,0,79.66,79.66,0,0,0-36.06,28.75,88,88,0,1,1,131.52,0Z"></path>
+                </svg>
+              </button>
+            </Link>
+
             <div className="relative" ref={searchRef}>
               <button
                 className="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 bg-[#f0f2f4] text-[#111418] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5"
@@ -237,11 +229,6 @@ const Header = ({ onSearch }) => {
               ))}
             </div>
           </nav>
-          <div className="p-4 border-t border-gray-200">
-            <button className="w-full flex justify-center items-center cursor-pointer overflow-hidden rounded-xl h-10 px-4 bg-[#f0f2f4] text-[#111418] text-sm font-bold leading-normal tracking-[0.015em]" onClick={() => setIsMenuOpen(false)}>
-              <span className="truncate">Subscribe</span>
-            </button>
-          </div>
         </div>
       </div>
 

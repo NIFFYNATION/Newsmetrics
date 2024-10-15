@@ -10,7 +10,7 @@ export const CrimeArticle = ({ id, image, title, author, description, date, comm
   return (
   <>
     <ArticleStructuredData 
-      article={{id, image, title, author, description, date, category: "Business"}}
+      article={{id, image, title, author, description, date, category: "Crime"}}
     />
     <Link
       to={`/article/${id}`}
