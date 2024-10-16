@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import useAuth from "../hooks/useAuth";
+import { useAuth } from "../context/index";
 
 export default function AdminLogin() {
   const [formData, setFormData] = useState({
@@ -14,14 +13,19 @@ export default function AdminLogin() {
   };
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { loginUser, userLoggedIn } = useAuth();
+
+  useEffect(() => {
+    if (userLoggedIn) {
+      navigate('/admin');
+    }
+  }, [userLoggedIn, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-    const auth = getAuth();
     try {
-      await signInWithEmailAndPassword(auth, formData.email, formData.password);
+      await loginUser(formData.email, formData.password);
       navigate("/admin");
     } catch (error) {
       setError("Login failed. Please check your email and password.");
@@ -110,5 +114,3 @@ export default function AdminLogin() {
     </div>
   );
 }
-// export default AdminLogin;
-

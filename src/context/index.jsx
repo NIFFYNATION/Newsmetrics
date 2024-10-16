@@ -1,5 +1,5 @@
 import { auth } from "../services/firebase";
-import { initializeAuth, onAuthStateChanged } from "firebase";
+import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 
 const AuthContext = React.createContext();
@@ -26,8 +26,16 @@ export function AuthProvider({ children }) {
     }
   }
 
-  function loginUser(email, password) {
-    return auth.signInWithEmailAndPassword(email, password);
+  async function loginUser(email, password) {
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      setUser(userCredential.user);
+      setUserLoggedIn(true);
+      return userCredential.user;
+    } catch (error) {
+      console.error("Login error:", error);
+      throw error;
+    }
   }
 
   function logoutUser() {

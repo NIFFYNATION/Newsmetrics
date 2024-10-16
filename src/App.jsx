@@ -20,57 +20,83 @@ import AdminDashboard from "./pages/AdminDashboard";
 import CreatePost from "./pages/CreatePost";
 import EditPost from "./pages/EditPost";
 // import AdminLogin from "./pages/AdminLogin";
-// import ProtectedRoute from "./components/ProtectedRoute";
+
 import NotFound from "./pages/NotFound";
 import { CommentsProvider } from "./context/CommentsContext";
 import axios from "axios";
 import ErrorBoundary from "./components/ErrorBoundary";
 import AdminLogin from "./pages/AdminLogin";
+import ProtectedRoute from "./components/ProtectedRoute";
 
+
+import { AuthProvider } from "./context/index";
 
 function App() {
-  
   return (
-    <HelmetProvider>
-      <CommentsProvider>
-        <ErrorBoundary>
-          <Router>
-            <div className="App">
-              <Header />
-              <div className="pt-[132px]">
-                <MainLayout>
-                  <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/Home" element={<Home />} />
-                    <Route path="/register" element={<Register />} />
-                    <Route path="/adminlogin" element={<AdminLogin />} />
-                    <Route path="/article/:id" element={<SinglePost />} />
-                    <Route path="/local" element={<Local />} />
-                    <Route path="/entertainment" element={<Entertainment />} />
-                    <Route path="/politics" element={<Politics />} />
-                    <Route path="/crime" element={<Crime />} />
-                    <Route path="/business" element={<Business />} />
-                    <Route path="/tech" element={<Tech />} />
-                    <Route path="/about" element={<About />} />
-                    <Route path="/contact" element={<Contact />} />
-                    <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-                    <Route
-                      path="/terms-of-service"
-                      element={<TermsOfService />}
-                    />
-                    {/* <Route path="/admin/login" element={<AdminLogin />} /> */}
-                    <Route path="/admin" element={<AdminDashboard />} />
-                    <Route path="/admin/create-post" element={<CreatePost />} />
-                    <Route path="/admin/edit-post/:id" element={<EditPost />} />
-                    <Route path="*" element={<NotFound />} />
-                  </Routes>
-                </MainLayout>
+    <AuthProvider>
+      <HelmetProvider>
+        <CommentsProvider>
+          <ErrorBoundary>
+            <Router>
+              <div className="App">
+                <Header />
+                <div className="pt-[132px]">
+                  <MainLayout>
+                    <Routes>
+                      <Route path="/" element={<Home />} />
+                      <Route path="/Home" element={<Home />} />
+                      <Route path="/register" element={<Register />} />
+                      <Route path="/adminlogin" element={<AdminLogin />} />
+                      <Route path="/article/:id" element={<SinglePost />} />
+                      <Route path="/local" element={<Local />} />
+                      <Route path="/entertainment" element={<Entertainment />} />
+                      <Route path="/politics" element={<Politics />} />
+                      <Route path="/crime" element={<Crime />} />
+                      <Route path="/business" element={<Business />} />
+                      <Route path="/tech" element={<Tech />} />
+                      <Route path="/about" element={<About />} />
+                      <Route path="/contact" element={<Contact />} />
+                      <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                      <Route
+                        path="/terms-of-service"
+                        element={<TermsOfService />}
+                      />
+                      {/* <Route path="/admin/login" element={<AdminLogin />} /> */}
+
+                      <Route 
+                        path="/admin" 
+                        element={
+                          <ProtectedRoute>
+                            <AdminDashboard />
+                          </ProtectedRoute>
+                        } 
+                      />
+                      <Route 
+                        path="/admin/create-post" 
+                        element={
+                          <ProtectedRoute>
+                            <CreatePost />
+                          </ProtectedRoute>
+                        } 
+                      />
+                      <Route 
+                        path="/admin/edit-post/:id" 
+                        element={
+                          <ProtectedRoute>
+                            <EditPost />
+                          </ProtectedRoute>
+                        } 
+                      />
+                      <Route path="*" element={<NotFound />} />
+                    </Routes>
+                  </MainLayout>
+                </div>
               </div>
-            </div>
-          </Router>
-        </ErrorBoundary>
-      </CommentsProvider>
-    </HelmetProvider>
+            </Router>
+          </ErrorBoundary>
+        </CommentsProvider>
+      </HelmetProvider>
+    </AuthProvider>
   );
 }
 

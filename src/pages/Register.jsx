@@ -5,17 +5,19 @@ import { auth } from "../services/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { imgStorage } from "../services/firebase";
 import imageCompression from 'browser-image-compression';
+import { useAuth } from '../context/index';
 
 export default function Register() {
   const [formData, setFormData] = useState({
-    name: "",
+    username: "",
     email: "",
     password: "",
+    profilePicture: null,
   });
-  const [matchError, setMatchError] = useState(null);
-  const [submitMessage, setSubmitMessage] = useState(null);
+  const [error, setError] = useState("");
+  const [matchError, setMatchError] = useState("");
   const navigate = useNavigate();
-  const [profilePic, setProfilePic] = useState(null);
+  const { loginUser } = useAuth();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -34,39 +36,25 @@ export default function Register() {
   const validateForm = () => {
     let isValid = true;
 
-    if (!formData.name.trim()) {
-      setMatchError("Please enter your full name.");
+    if (!formData.username.trim()) {
+      setError("Please enter your full name.");
+      isValid = false;
+    } else if (!formData.email.trim() || !/\S+@\S+\.\S+/.test(formData.email)) {
+      setError("Please enter a valid email address.");
+      isValid = false;
+    } else if (!formData.password.trim()) {
+      setError("Please enter a password.");
       isValid = false;
     } else {
-      setMatchError(null); // Clear error if previously set for full name
+      setError(null);
     }
-
-    if (!formData.email.trim() || !/\S+@\S+\.\S+/.test(formData.email)) {
-      setMatchError("Please enter a valid email address.");
-      isValid = false;
-    } else {
-      setMatchError(null); // Clear error if previously set for email
-    }
-
-    if (!formData.password.trim()) {
-      setMatchError("Please enter a password.");
-      isValid = false;
-    } else {
-      setMatchError(null); // Clear error if previously set for password
-    }
-
-    // if (formData.password !== formData.confirmPassword) {
-    //   setMatchError("Passwords do not match.");
-    //   isValid = false;
-    // } else {
-    //   setMatchError(null); // Clear error if previously set for password confirmation
-    // }
 
     return isValid;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
 
     if (!validateForm()) {
       return;
@@ -79,27 +67,30 @@ export default function Register() {
         formData.password
       );
 
-      let photoURL = '';
-      if (profilePic) {
-        const storageRef = ref(imgStorage, `profile_pictures/${userCredential.user.uid}`);
-        await uploadBytes(storageRef, profilePic);
-        photoURL = await getDownloadURL(storageRef);
+      const user = userCredential.user;
+
+      if (formData.profilePicture) {
+        const storageRef = ref(imgStorage, `profile_pictures/${user.uid}`);
+        await uploadBytes(storageRef, formData.profilePicture);
+        const photoURL = await getDownloadURL(storageRef);
+        await updateProfile(user, {
+          displayName: formData.username,
+          photoURL: photoURL,
+        });
+      } else {
+        await updateProfile(user, {
+          displayName: formData.username,
+        });
       }
 
-      await updateProfile(userCredential.user, { 
-        displayName: formData.name,
-        photoURL: photoURL
-      });
+      // Log in the user after successful registration
+      await loginUser(formData.email, formData.password);
 
-      console.log("Registration successful:", userCredential.user);
-      setSubmitMessage("Registration successful!");
-      setTimeout(() => {
-        setSubmitMessage(null);
-        navigate("/admin");
-      }, 3000);
+      // Redirect to admin page
+      navigate("/admin");
     } catch (error) {
       console.error("Registration error:", error);
-      setMatchError("Registration failed. " + error.message);
+      setError(error.message);
     }
   };
 
@@ -112,7 +103,7 @@ export default function Register() {
           useWebWorker: true
         };
         const compressedFile = await imageCompression(e.target.files[0], options);
-        setProfilePic(compressedFile);
+        setFormData(prevData => ({ ...prevData, profilePicture: compressedFile }));
       } catch (error) {
         console.error("Error compressing profile picture:", error);
       }
@@ -137,7 +128,7 @@ export default function Register() {
           >
             <div>
               <label
-                htmlFor="name"
+                htmlFor="username"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
                 Full name
@@ -145,9 +136,9 @@ export default function Register() {
               <div className="mt-2">
                 <input
                   placeholder="Full name"
-                  id="name"
-                  name="name"
-                  value={formData.name}
+                  id="username"
+                  name="username"
+                  value={formData.username}
                   onChange={handleChange}
                   type="text"
                   required
@@ -247,10 +238,7 @@ export default function Register() {
                 Sign up
               </button>
             </div>
-            {matchError && <p style={{ color: "red" }}>{matchError}</p>}
-            {submitMessage && (
-              <p className="text-center text-green-500">{submitMessage}</p>
-            )}
+            {error && <p className="mt-2 text-center text-sm text-red-600">{error}</p>}
           </form>
 
           <p className="mt-10 text-center text-sm text-gray-500">
