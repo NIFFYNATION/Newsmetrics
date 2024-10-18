@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import SinglePostArticle from "../components/SinglePostArticle";
 import { doc, getDoc } from "firebase/firestore";
@@ -7,13 +7,15 @@ import { db } from "../services/firebase";
 import React, { Suspense, lazy } from 'react';
 import ScrollUpBar from "../components/ScrollUpBar";
 import LoadingSpinner from "../components/LoadingSpinner";
+import { slugify } from '../utils/slugify';
 
 
 
 const LazyRandomPostsGrid = lazy(() => import('../components/RandomPostsGrid'));
 
 function SinglePost() {
-  const { id } = useParams();
+  const { id, slug } = useParams();
+  const navigate = useNavigate();
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -25,6 +27,13 @@ function SinglePost() {
         const postDoc = await getDoc(doc(db, "posts", id));
         if (postDoc.exists()) {
           const postData = postDoc.data();
+          const correctSlug = slugify(postData.title);
+          
+          if (slug !== correctSlug) {
+            navigate(`/article/${id}/${correctSlug}`, { replace: true });
+            return;
+          }
+
           setPost({
             id: postDoc.id,
             ...postData,
@@ -42,7 +51,7 @@ function SinglePost() {
     };
 
     fetchPost();
-  }, [id]);
+  }, [id, slug, navigate]);
 
   if (loading) {
     return (
@@ -66,7 +75,7 @@ function SinglePost() {
         <title>{post.title} - News Metrics</title>
         <meta name="description" content={post.description} />
       </Helmet>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <SinglePostArticle {...post} comments={post.comments || []} />
         <div className="mt-12">
 
@@ -76,7 +85,7 @@ function SinglePost() {
   <LazyRandomPostsGrid />
 </Suspense>
         </div>
-      </div>
+      </main>
       <ScrollUpBar />
     </>
   );

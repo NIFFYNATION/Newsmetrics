@@ -30,6 +30,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 
 
 import { AuthProvider } from "./context/index";
+import GoogleAnalytics from './components/GoogleAnalytics';
 
 function App() {
   return (
@@ -47,7 +48,7 @@ function App() {
                       <Route path="/Home" element={<Home />} />
                       <Route path="/register" element={<Register />} />
                       <Route path="/adminlogin" element={<AdminLogin />} />
-                      <Route path="/article/:id" element={<SinglePost />} />
+                      <Route path="/article/:id/:slug" element={<SinglePost />} />
                       <Route path="/local" element={<Local />} />
                       <Route path="/entertainment" element={<Entertainment />} />
                       <Route path="/politics" element={<Politics />} />
@@ -95,6 +96,8 @@ function App() {
             </Router>
           </ErrorBoundary>
         </CommentsProvider>
+      {/* Replace "G-XXXXXXXXXX" with your actual Google Analytics measurement ID */}
+      <GoogleAnalytics measurementId="G-XXXXXXXXXX" />
       </HelmetProvider>
     </AuthProvider>
   );

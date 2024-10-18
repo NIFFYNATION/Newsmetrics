@@ -13,6 +13,7 @@ import Advertisement from "../components/Advertisement";
 import ScrollUpBar from "../components/ScrollUpBar";
 import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import { db } from "../services/firebase";
+import { slugify } from '../utils/slugify';
 const LazyAdvertisement = lazy(() => import("../components/Advertisement"));
 const LazyRandomPostsGrid = lazy(() => import("../components/RandomPostsGrid"));
 
@@ -93,53 +94,54 @@ const Posts = () => {
         <meta property="og:url" content={window.location.href} />
       </Helmet>
       <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 flex flex-col">
-        <div className="layout-container flex h-full grow flex-col">
+        <main className="layout-container flex h-full grow flex-col">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
             <HeroSection latestPosts={sortedPosts.slice(0, 10)} />
-
             <div className="flex flex-col lg:flex-row gap-6">
-              <main className="flex-grow lg:w-2/3">
+              <section className="flex-grow lg:w-2/3" aria-label="Featured Articles">
                 <LatestPosts posts={sortedPosts.slice(0, 6)} />
                 <h2 className="text-[#111418] text-2xl font-bold leading-tight tracking-[-0.015em] mb-4 pb-2 border-b border-gray-200">
                   Featured Articles
                 </h2>
-                <div className="space-y-6">
+                <ul className="space-y-6">
                   {currentPosts.map((post) => (
-                    <FeaturedArticle key={post.id} {...post} />
+                    <li key={post.id}>
+                      <FeaturedArticle {...post} />
+                    </li>
                   ))}
-                </div>
-                <Pagination
-                  currentPage={currentPage}
-                  totalPages={totalPages}
-                  onPageChange={paginate}
-                />
-              </main>
-              <aside className="lg:w-1/3 space-y-6">
+                </ul>
+                <nav aria-label="Pagination">
+                  <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    onPageChange={paginate}
+                  />
+                </nav>
+              </section>
+              <aside className="lg:w-1/3 space-y-6" aria-label="Sidebar">
                 <Suspense fallback={<LoadingSpinner />}>
                   <LazyAdvertisement isHomePage={true} />
                 </Suspense>
-
-                <div className="bg-gray-100 p-4 rounded-xl">
-                  <h2 className="text-xl font-bold mb-4 text-indigo-700">
+                <section className="bg-gray-100 p-4 rounded-xl" aria-labelledby="recommended-heading">
+                  <h2 id="recommended-heading" className="text-xl font-bold mb-4 text-indigo-700">
                     Recommended for You
                   </h2>
                   <ul className="space-y-2">
-                    {getRecommendedPosts(sortedPosts).map((post) => (
-                      <li
-                        key={post.id}
-                        className="bg-white p-3 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200"
-                      >
-                        <Link
-                          to={`/article/${post.id}`}
-                          className="text-indigo-600 hover:text-indigo-800 transition-colors duration-200"
-                        >
-                          {post.title}
-                        </Link>
-                      </li>
-                    ))}
+                    {getRecommendedPosts(sortedPosts).map((post) => {
+                      const slug = slugify(post.title);
+                      return (
+                        <li key={post.id} className="bg-white p-3 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200">
+                          <Link
+                            to={`/article/${post.id}/${slug}`}
+                            className="text-indigo-600 hover:text-indigo-800 transition-colors duration-200"
+                          >
+                            {post.title}
+                          </Link>
+                        </li>
+                      );
+                    })}
                   </ul>
-                </div>
-
+                </section>
                 <div className="hidden sm:block">
                   <Suspense fallback={<LoadingSpinner />}>
                     <LazyAdvertisement isHomePage={true} />
@@ -148,7 +150,7 @@ const Posts = () => {
               </aside>
             </div>
           </div>
-        </div>
+        </main>
       </div>
     </>
   );

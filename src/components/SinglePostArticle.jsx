@@ -3,6 +3,8 @@ import { FacebookShareButton, TwitterShareButton, WhatsappShareButton, FacebookI
 import ArticleStructuredData from "./ArticleStructuredData";
 import Comments from './Comments';
 import { useComments } from '../context/CommentsContext';
+import { slugify } from '../utils/slugify';
+
 
 const SinglePostArticle = ({
   id,
@@ -18,7 +20,7 @@ const SinglePostArticle = ({
 }) => {
   const { getCommentCount } = useComments();
   const commentCount = getCommentCount(id);
-  const shareUrl = `${window.location.origin}/article/${id}`;
+  const shareUrl = `${window.location.origin}/article/${id}/${slugify(title)}`; 
 
   return (
     <article className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">

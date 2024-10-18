@@ -5,6 +5,7 @@ import ArticleStructuredData from "./ArticleStructuredData";
 import LoadingSpinner from './LoadingSpinner';
 import { collection, getDocs, query, orderBy, limit } from "firebase/firestore";
 import { db } from "../services/firebase";
+import { slugify } from '../utils/slugify';
 
 
 const TrendingArticle = ({ article }) => {
@@ -12,11 +13,13 @@ const TrendingArticle = ({ article }) => {
     return <LoadingSpinner />;
   }
 
+  const slug = slugify(article.title);
+
   return (
     <article className="trending-article">
       <ArticleStructuredData article={article} />
       <Link
-        to={`/article/${article.id}`}
+        to={`/article/${article.id}/${slug}`}
         className="block hover:bg-gray-100 transition-colors duration-200 border-b border-gray-200 last:border-b-0"
       >
         <div className="flex items-center gap-4 bg-white px-4 min-h-[72px] py-2 justify-between">

@@ -1,6 +1,7 @@
 import { useState, useCallback, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { format, isValid, formatDistanceToNow } from "date-fns";
+import { slugify } from '../utils/slugify';
 
 const HeroCarousel = ({ latestPosts }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -39,7 +40,8 @@ const HeroCarousel = ({ latestPosts }) => {
               <img
                 src={post.image}
                 alt={post.title}
-                className="absolute inset-0 w-full h-full object-cover"
+                className="absolute inset-0 w-full h-full object-cover" 
+                loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
               <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 md:p-8 text-white">
@@ -58,7 +60,8 @@ const HeroCarousel = ({ latestPosts }) => {
                       <img
                         src={post.authorImage}
                         alt={post.author}
-                        className="w-8 h-8 sm:w-10 sm:h-10 rounded-full mr-2 sm:mr-4"
+                        className="w-8 h-8 sm:w-10 sm:h-10 rounded-full mr-2 sm:mr-4" 
+                        loading="lazy"
                       />
                       <div>
                         <p className="font-semibold text-sm sm:text-base">
@@ -75,7 +78,8 @@ const HeroCarousel = ({ latestPosts }) => {
                       </div>
                     </div>
                     <Link
-                      to={`/article/${post.id}`}
+                       to={`/article/${post.id}/${slugify(post.title)}`}
+
                       className="px-4 py-2 sm:px-6 sm:py-3 bg-white text-blue-600 text-sm sm:text-base font-semibold rounded-full hover:bg-blue-100 transition duration-300"
                     >
                       Read More

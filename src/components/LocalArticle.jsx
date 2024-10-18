@@ -2,18 +2,20 @@ import { Link } from "react-router-dom";
 import { format } from "date-fns";
 import ArticleStructuredData from "./ArticleStructuredData";
 import { useComments } from "../context/CommentsContext";
+import { slugify } from '../utils/slugify';
 
-export const LocalArticle = ({ id, image, title, author, description, date, comments = [] }) => {
+export const LocalArticle = ({ id, image, title, author, description, date, comments = [], relatedArticles = [] }) => {
   const { getCommentCount } = useComments();
   const commentCount = getCommentCount(id);
+  const slug = slugify(title);
   return(
-  <>
+  <article>
   
     <ArticleStructuredData 
       article={{id, image, title, author, description, date, category: "Local"}}
     />
     <Link
-      to={`/article/${id}`}
+      to={`/article/${id}/${slug}`}
       className="block hover:bg-gray-50 transition-colors duration-200 border-b border-gray-200 last:border-b-0"
     >
       <div className="p-4 @container">
@@ -22,11 +24,11 @@ export const LocalArticle = ({ id, image, title, author, description, date, comm
           className="w-full h-48 sm:h-full bg-center bg-no-repeat bg-cover rounded-xl sm:w-1/2 lg:w-2/5 overflow-hidden"
           style={{ backgroundImage: `url("${image}")` }}
         >
-          <img src={image} alt={title} className="w-full h-full object-cover" />
+          <img src={image} alt={`Local article: ${title}`}  className="w-full h-full object-cover" loading="lazy"  />
         </div>
         <div className="flex w-full grow flex-col items-stretch justify-center gap-2 py-4 sm:px-4">
           <p className="text-[#637588] text-sm font-normal leading-normal">
-            Local • {format(date, "MMMM d, yyyy • h:mm a")}
+            <Link to="/local" className="text-red-600 hover:underline">Local</Link> • {format(date, "MMMM d, yyyy • h:mm a")}
 
 
           </p>
@@ -54,7 +56,24 @@ export const LocalArticle = ({ id, image, title, author, description, date, comm
       </div>
     </div>
     </Link>
-  </>
+    {relatedArticles.length > 0 && (
+      <div className="mt-4">
+        <h4 className="text-sm font-semibold mb-2">Related Articles:</h4>
+        <ul className="list-disc list-inside">
+          {relatedArticles.map((article) => (
+            <li key={article.id}>
+              <Link
+                to={`/article/${article.id}/${slugify(article.title)}`}
+                className="text-blue-600 hover:underline"
+              >
+                {article.title}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+  </article>
 )};
 
 
