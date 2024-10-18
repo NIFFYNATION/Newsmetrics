@@ -2,18 +2,23 @@ import { Link } from "react-router-dom";
 import { format } from "date-fns";
 import ArticleStructuredData from "./ArticleStructuredData";
 import { useComments } from '../context/CommentsContext';
+import { slugify } from '../utils/slugify';
+
 
 export const CrimeArticle = ({ id, image, title, author, description, date, comments = [], relatedArticles = [] }) => {
   const { getCommentCount } = useComments();
   const commentCount = getCommentCount(id);
+  const slug = slugify(title);
+
 
   return (
-  <article>
+  <>
     <ArticleStructuredData 
       article={{id, image, title, author, description, date, category: "Crime"}}
     />
     <Link
-      to={`/article/${id}`}
+                  to={`/article/${id}/${slug}`}
+
       className="block hover:bg-gray-50 transition-colors duration-200 border-b border-gray-200 last:border-b-0"
     >
       <div className="p-4 @container">
@@ -70,7 +75,7 @@ export const CrimeArticle = ({ id, image, title, author, description, date, comm
         </ul>
       </div>
     )}
-  </article>
+  </>
 
 
     

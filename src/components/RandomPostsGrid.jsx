@@ -4,11 +4,13 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "../services/firebase";
 import { format, isValid } from "date-fns";
 import LoadingSpinner from './LoadingSpinner';
+import { slugify } from '../utils/slugify';
 
 const RandomPostsGrid = () => {
   const [randomPosts, setRandomPosts] = useState([]);
   const [visiblePosts, setVisiblePosts] = useState(4);
   const [error, setError] = useState(null);
+
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -56,7 +58,7 @@ const RandomPostsGrid = () => {
               <p className="text-gray-700 mb-4 line-clamp-3">{post.description}</p>
               <div className="flex justify-between items-center">
                 <Link
-                  to={`/article/${post.id}`}
+                  to={`/article/${post.id}/${slugify(post.title)}`}
                   className="inline-flex items-center text-red-600 hover:text-red-800 transition duration-300"
                 >
                   Read More
