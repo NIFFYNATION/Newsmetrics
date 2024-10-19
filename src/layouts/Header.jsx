@@ -2,6 +2,7 @@ import { useState, useRef, useCallback, useMemo, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../services/firebase";
+import { slugify } from "../utils/slugify";
 
 const Header = ({ onSearch }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -146,7 +147,7 @@ const Header = ({ onSearch }) => {
                           key={result.id}
                           className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
                         >
-                          <Link to={`/article/${result.id}`} className="block">
+                          <Link to={`/article/${result.id}/${slugify(result.title)}`} className="block">
                             <p className="text-sm font-medium text-gray-900">
                               {result.title}
                             </p>

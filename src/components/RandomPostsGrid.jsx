@@ -67,8 +67,7 @@ const RandomPostsGrid = () => {
                   </svg>
                 </Link>
                 <p className="text-sm text-gray-500">
-                  {post.date && isValid(new Date(post.date))
-}
+                  {post.date && isValid(new Date(post.date))}
                 </p>
               </div>
             </div>

@@ -26,6 +26,9 @@ const PostForm = ({ isEditing = false }) => {
     description: "",
     content: "",
     image: "",
+    metaTitle: "",
+    metaDescription: "",
+    keywords: "",
     date: null,
   });
 
@@ -116,11 +119,16 @@ const PostForm = ({ isEditing = false }) => {
 
       const currentUser = auth.currentUser;
       const postData = {
-        ...post,
+        title: post.title,
+        category: post.category,
+        author: post.author,
+        description: post.description,
+        content: post.content,
         image: imageUrl,
-        authorImage: currentUser ? currentUser.photoURL : '',
-        content: processedContent,
-        date: isEditing ? post.date : serverTimestamp(),
+        date: serverTimestamp(),
+        metaTitle: post.metaTitle || post.title,
+        metaDescription: post.metaDescription || post.description,
+        keywords: post.keywords.split(',').map(keyword => keyword.trim()),
       };
 
       if (isEditing && id) {
@@ -320,6 +328,44 @@ const PostForm = ({ isEditing = false }) => {
             className="mt-2 max-w-full h-auto"
           />
         )}
+      </div>
+      <div className="mb-4">
+        <label htmlFor="metaTitle" className="block mb-2">
+          Meta Title
+        </label>
+        <input
+          type="text"
+          id="metaTitle"
+          name="metaTitle"
+          value={post.metaTitle}
+          onChange={handleChange}
+          className="w-full px-3 py-2 border rounded"
+        />
+      </div>
+      <div className="mb-4">
+        <label htmlFor="metaDescription" className="block mb-2">
+          Meta Description
+        </label>
+        <textarea
+          id="metaDescription"
+          name="metaDescription"
+          value={post.metaDescription}
+          onChange={handleChange}
+          className="w-full px-3 py-2 border rounded"
+        ></textarea>
+      </div>
+      <div className="mb-4">
+        <label htmlFor="keywords" className="block mb-2">
+          Keywords (comma-separated)
+        </label>
+        <input
+          type="text"
+          id="keywords"
+          name="keywords"
+          value={post.keywords}
+          onChange={handleChange}
+          className="w-full px-3 py-2 border rounded"
+        />
       </div>
       <button
         type="submit"

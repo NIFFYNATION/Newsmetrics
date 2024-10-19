@@ -6,27 +6,29 @@ const ArticleStructuredData = ({ article }) => (
       {JSON.stringify({
         "@context": "https://schema.org",
         "@type": "NewsArticle",
-        headline: article.title,
+        headline: article.metaTitle || article.title,
         datePublished: article.date,
-        // dateModified: article.date, // Add this if you have a last modified date
+        dateModified: article.lastModified || article.date,
         author: {
           "@type": "Person",
           name: article.author,
         },
-        description: article.description,
+        description: article.metaDescription || article.description,
         image: article.image,
+        articleBody: article.content,
         publisher: {
           "@type": "Organization",
           name: "News Metrics",
           logo: {
             "@type": "ImageObject",
-            url: "https://www.newsmetrics.com/logo.png" // Replace with your actual logo URL
+            url: "https://www.newsmetrics.com/logo.png"
           }
         },
         mainEntityOfPage: {
           "@type": "WebPage",
-          "@id": `https://www.newsmetrics.com/article/${article.id}` // Replace with your actual URL structure
-        }
+          "@id": `https://www.newsmetrics.com/article/${article.id}`
+        },
+        keywords: article.keywords ? article.keywords.join(', ') : '',
       })}
     </script>
   </Helmet>
