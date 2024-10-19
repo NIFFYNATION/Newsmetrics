@@ -18,13 +18,19 @@ const SinglePostArticle = ({
   category,
   comments = []
 }) => {
+ 
+  // Convert Firestore Timestamp to JavaScript Date
+  const jsDate = date && date.toDate ? date.toDate() : new Date(date);
+ 
+
   const { getCommentCount } = useComments();
   const commentCount = getCommentCount(id);
   const shareUrl = `${window.location.origin}/article/${id}/${slugify(title)}`; 
 
   return (
     <article className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
-      <ArticleStructuredData article={{id, image, title, author, description, date, category}} />
+      <ArticleStructuredData article={{id, image, title, author, description, jsDate, category}} />
+      <link rel="canonical" href={`${window.location.origin}/article/${id}/${slugify(title)}`} />
       <div className="relative">
         <img src={image} alt={`${title} - ${category} article by ${author}`} className="w-full h-[auto] aspect-contain" />
         <div className="absolute top-0 left-0 bg-red-600 text-white px-4 py-2 rounded-br-lg">
@@ -44,8 +50,8 @@ const SinglePostArticle = ({
           <div>
             <p className="font-semibold text-gray-800">{author}</p>
             <p className="text-sm text-gray-600">
-              {isValid(date) 
-                ? format(date, "MMMM d, yyyy • h:mm a")
+              {isValid(jsDate)
+                ? format(jsDate, "MMMM d, yyyy • h:mm a")
                 : "No date available"}
             </p>
           </div>

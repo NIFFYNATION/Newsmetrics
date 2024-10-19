@@ -12,7 +12,7 @@ const LatestPosts = ({ posts }) => (
         const slug = slugify(post.title);
         return (
           <Link key={post.id} to={`/article/${post.id}/${slug}`} className="block group">
-            <div className="bg-white rounded-lg overflow-hidden shadow-md transition-transform duration-300 transform group-hover:scale-105 border border-gray-200">
+            <div className="bg-white rounded-lg overflow-hidden h-full shadow-md transition-transform duration-300 transform group-hover:scale-105 border border-gray-200">
               <img
                 src={post.image}
                 alt={post.title}

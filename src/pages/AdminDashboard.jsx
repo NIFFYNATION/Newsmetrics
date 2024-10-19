@@ -23,7 +23,8 @@ const AdminDashboard = () => {
       const fetchedPosts = snapshot.docs.map(doc => ({
         id: doc.id,
         ...doc.data(),
-        date: doc.data().date?.toDate() || new Date()
+        date: doc.data().date?.toDate() || new Date(),
+        authorImage: doc.data().authorImage || ''
       }));
       const sortedPosts = fetchedPosts.sort((a, b) => b.date - a.date);
       setPosts(sortedPosts);
