@@ -14,10 +14,15 @@ const LazyAdvertisement = lazy(() => import("../components/Advertisement"));
 const LazyRandomPostsGrid = lazy(() => import("../components/RandomPostsGrid"));
 
 const Tech = () => {
-  const { currentPosts, currentPage, totalPages, paginate } = usePaginatedPosts(
-    "Tech",
-    5
-  );
+  const { posts, currentPage, totalPages, paginate, loading, error } = usePaginatedPosts("Tech", 5);
+
+  if (loading) {
+    return <LoadingSpinner />;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   return (
     <>
@@ -46,15 +51,19 @@ const Tech = () => {
         <ErrorBoundary>
           <Suspense fallback={<LoadingSpinner />}>
             <div className="space-y-6">
-              {currentPosts.map((post) => (
-                <Suspense key={post.id} fallback={<ArticleSkeletonLoader />}>
-                  <TechArticle 
+              {posts && posts.length > 0 ? (
+                posts.map((post) => (
+                  <Suspense key={post.id} fallback={<ArticleSkeletonLoader />}>
+                    <TechArticle 
                     {...post} 
                     comments={post.comments || []} 
                     relatedArticles={post.relatedArticles || []}
                   />
-                </Suspense>
-              ))}
+                  </Suspense>
+                ))
+              ) : (
+                <p>No posts available.</p>
+              )}
             </div>
             <Suspense fallback={<div className="w-3/4 mx-auto h-32 bg-gray-200 rounded animate-pulse"></div>}>
               <div className="w-3/4 mx-auto">

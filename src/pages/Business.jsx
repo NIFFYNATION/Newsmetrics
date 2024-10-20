@@ -13,10 +13,15 @@ const LazyAdvertisement = lazy(() => import("../components/Advertisement"));
 const LazyRandomPostsGrid = lazy(() => import("../components/RandomPostsGrid"));
 
 const Business = () => {
-  const { currentPosts, currentPage, totalPages, paginate } = usePaginatedPosts(
-    "Business",
-    5
-  );
+  const { posts, currentPage, totalPages, paginate, loading, error } = usePaginatedPosts("Business", 5);
+
+  if (loading) {
+    return <LoadingSpinner />;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   return (
     <>
@@ -46,7 +51,8 @@ const Business = () => {
           <Suspense fallback={<LoadingSpinner />}>
             <section aria-label="Business articles">
               <ul className="space-y-6">
-                {currentPosts.map((post) => (
+                {posts && posts.length > 0 ? (
+                posts.map((post) => (
                   <li key={post.id}>
                     <Suspense key={post.id} fallback={<ArticleSkeletonLoader />}>
                     <BusinessArticle 
@@ -56,7 +62,10 @@ const Business = () => {
                     />
                   </Suspense>
                   </li>
-                ))}
+                  ))
+              ) : (
+                <p>No posts available.</p>
+              )}
               </ul>
               <div className="w-3/4 mx-auto my-6">
                 <Suspense fallback={<div className="w-3/4 mx-auto h-32 bg-gray-200 rounded animate-pulse"></div>}>

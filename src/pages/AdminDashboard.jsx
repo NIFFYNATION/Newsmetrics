@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Helmet } from "react-helmet-async";
 import { Link, useNavigate } from "react-router-dom";
-import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
+import { collection, query, getDocs, orderBy, limit, deleteDoc, doc } from "firebase/firestore";
 import { db } from "../services/firebase";
 import Pagination from '../components/Pagination';
 import { format, isValid } from 'date-fns';
@@ -19,29 +19,31 @@ const AdminDashboard = () => {
     const fetchPosts = async () => {
       setIsLoading(true);
       const postsCollection = collection(db, "posts");
-      const snapshot = await getDocs(postsCollection);
+      const q = query(postsCollection, orderBy("date", "desc"), limit(50));
+      const snapshot = await getDocs(q);
       const fetchedPosts = snapshot.docs.map(doc => ({
         id: doc.id,
-        ...doc.data(),
+        title: doc.data().title,
+        category: doc.data().category,
+        author: doc.data().author,
         date: doc.data().date?.toDate() || new Date(),
         authorImage: doc.data().authorImage || ''
       }));
-      const sortedPosts = fetchedPosts.sort((a, b) => b.date - a.date);
-      setPosts(sortedPosts);
+      setPosts(fetchedPosts);
       setIsLoading(false);
     };
-
+  
     fetchPosts();
   }, []);
 
-  const handleDeletePost = async (id) => {
+  const handleDeletePost = useCallback(async (id) => {
     try {
       await deleteDoc(doc(db, "posts", id));
-      setPosts(posts.filter(post => post.id !== id));
+      setPosts(prevPosts => prevPosts.filter(post => post.id !== id));
     } catch (error) {
       console.error("Error deleting post:", error);
     }
-  };
+  }, []);
 
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;

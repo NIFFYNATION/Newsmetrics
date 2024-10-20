@@ -6,9 +6,9 @@ import LoadingSpinner from './LoadingSpinner';
 import { collection, getDocs, query, orderBy, limit } from "firebase/firestore";
 import { db } from "../services/firebase";
 import { slugify } from '../utils/slugify';
+import React from 'react';
 
-
-const TrendingArticle = ({ article }) => {
+const TrendingArticle = React.memo(({ article }) => {
   if (!article) {
     return <LoadingSpinner />;
   }
@@ -29,6 +29,8 @@ const TrendingArticle = ({ article }) => {
               alt={`Thumbnail for ${article.title}`}
               className="bg-center bg-no-repeat aspect-square bg-cover rounded-lg size-16 shrink-0"
               loading="lazy"
+              width="64"
+              height="64"
             />
             <div className="flex flex-col justify-center">
               <h2 className="text-[#111418] text-base font-medium leading-normal line-clamp-1">
@@ -49,6 +51,6 @@ const TrendingArticle = ({ article }) => {
       </Link>
     </article>
   );
-};
+});
 
 export default TrendingArticle;

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, query, orderBy, startAt, limit } from "firebase/firestore";
 import { db } from "../services/firebase";
 import { format, isValid } from "date-fns";
 import LoadingSpinner from './LoadingSpinner';
@@ -11,27 +11,28 @@ const RandomPostsGrid = () => {
   const [visiblePosts, setVisiblePosts] = useState(4);
   const [error, setError] = useState(null);
 
-
   useEffect(() => {
-    const fetchPosts = async () => {
+    const fetchRandomPosts = async () => {
       try {
         const postsCollection = collection(db, "posts");
-        const snapshot = await getDocs(postsCollection);
+        const totalCount = (await getDocs(postsCollection)).size;
+        const randomIndex = Math.floor(Math.random() * (totalCount - visiblePosts));
+        const q = query(postsCollection, orderBy("date"), startAt(randomIndex), limit(visiblePosts));
+        const snapshot = await getDocs(q);
         const fetchedPosts = snapshot.docs.map(doc => ({
           id: doc.id,
           ...doc.data(),
           date: doc.data().date ? new Date(doc.data().date) : new Date()
         }));
-        const shuffled = fetchedPosts.sort(() => 0.5 - Math.random());
-        setRandomPosts(shuffled);
+        setRandomPosts(fetchedPosts);
       } catch (err) {
         console.error("Error fetching posts:", err);
         setError("Failed to load posts. Please try again later.");
       }
     };
-
-    fetchPosts();
-  }, []);
+  
+    fetchRandomPosts();
+  }, [visiblePosts]);
 
   const loadMore = () => {
     setVisiblePosts((prevVisible) => Math.min(prevVisible + 4, randomPosts.length));
