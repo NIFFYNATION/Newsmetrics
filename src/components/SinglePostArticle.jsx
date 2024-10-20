@@ -25,12 +25,12 @@ const SinglePostArticle = ({
 
   const { getCommentCount } = useComments();
   const commentCount = getCommentCount(id);
-  const shareUrl = `${window.location.origin}/article/${id}/${slugify(title)}`; 
+  const shareUrl = `${window.location.origin}/article/${slugify(title)}`;
 
   return (
     <article className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
-      <ArticleStructuredData article={{id, image, title, author, description, jsDate, category}} />
-      <link rel="canonical" href={`${window.location.origin}/article/${id}/${slugify(title)}`} />
+      <ArticleStructuredData article={{id, image, title, author, jsDate, category}} />
+      <link rel="canonical" href={`${window.location.origin}/article/${slugify(title)}`} />
       <div className="relative">
         <img src={image} alt={`${title} - ${category} article by ${author}`} className="w-full h-[auto] aspect-contain" />
         <div className="absolute top-0 left-0 bg-red-600 text-white px-4 py-2 rounded-br-lg">
@@ -58,7 +58,7 @@ const SinglePostArticle = ({
         </div>
         
         <div className="prose max-w-none">
-          <p className="text-xl mb-6 text-gray-700 leading-relaxed">{description}</p>
+          {/* <p className="text-xl mb-6 text-gray-700 leading-relaxed">{description}</p> */}
           <div 
             className="text-gray-800 leading-relaxed article-content"
             dangerouslySetInnerHTML={{ __html: content }} 

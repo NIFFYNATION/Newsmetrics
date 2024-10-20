@@ -8,20 +8,20 @@ import React, { Suspense, lazy } from 'react';
 import ScrollUpBar from "../components/ScrollUpBar";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { slugify } from '../utils/slugify';
-import { getPostById } from '../services/firebase';
+import { getPostBySlug } from '../services/firebase';
 import ArticleStructuredData from '../components/ArticleStructuredData';
 
 const LazyRandomPostsGrid = lazy(() => import('../components/RandomPostsGrid'));
 
 function SinglePost() {
-  const { id } = useParams();
+  const { slug } = useParams();
   const [post, setPost] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const postData = await getPostById(id);
+        const postData = await getPostBySlug(slug);
         setPost(postData);
       } catch (err) {
         setError("Failed to load the article. Please try again later.");
@@ -29,7 +29,7 @@ function SinglePost() {
     };
 
     fetchPost();
-  }, [id]);
+  }, [slug]);
 
   if (error) {
     return <div className="text-red-600">{error}</div>;

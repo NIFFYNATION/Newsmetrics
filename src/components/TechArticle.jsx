@@ -24,7 +24,7 @@ export const TechArticle = ({
     article={{id, image, title, author, description, date, category: "Tech"}}
   />
   <Link
-    to={`/article/${id}/${slug}`}
+   to={`/article/${slug}`}
     className="block hover:bg-gray-50 transition-colors duration-200 border-b border-gray-200 last:border-b-0"
   >
     <div className="p-4 @container">

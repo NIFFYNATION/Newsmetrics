@@ -48,7 +48,7 @@ function App() {
                       <Route path="/Home" element={<Home />} />
                       <Route path="/register" element={<Register />} />
                       <Route path="/adminlogin" element={<AdminLogin />} />
-                      <Route path="/article/:id/:slug" element={<SinglePost />} />
+                      <Route path="/article/:slug" element={<SinglePost />} />
                       <Route path="/local" element={<Local />} />
                       <Route path="/entertainment" element={<Entertainment />} />
                       <Route path="/politics" element={<Politics />} />

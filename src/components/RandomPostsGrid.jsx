@@ -58,7 +58,7 @@ const RandomPostsGrid = () => {
               <p className="text-gray-700 mb-4 line-clamp-3">{post.description}</p>
               <div className="flex justify-between items-center">
                 <Link
-                  to={`/article/${post.id}/${slugify(post.title)}`}
+                 to={`/article/${slugify(post.title)}`}
                   className="inline-flex items-center text-red-600 hover:text-red-800 transition duration-300"
                 >
                   Read More

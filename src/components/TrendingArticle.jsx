@@ -19,7 +19,7 @@ const TrendingArticle = ({ article }) => {
     <article className="trending-article">
       <ArticleStructuredData article={article} />
       <Link
-        to={`/article/${article.id}/${slug}`}
+        to={`/article/${slug}`}
         className="block hover:bg-gray-100 transition-colors duration-200 border-b border-gray-200 last:border-b-0"
       >
         <div className="flex items-center gap-4 bg-white px-4 min-h-[72px] py-2 justify-between">

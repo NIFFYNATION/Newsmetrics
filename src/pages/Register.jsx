@@ -100,7 +100,8 @@ export default function Register() {
         const options = {
           maxSizeMB: 1,
           maxWidthOrHeight: 1920,
-          useWebWorker: true
+          useWebWorker: true,
+          fileType: 'image/webp' // Convert to WebP format
         };
         const compressedFile = await imageCompression(e.target.files[0], options);
         setFormData(prevData => ({ ...prevData, profilePicture: compressedFile }));

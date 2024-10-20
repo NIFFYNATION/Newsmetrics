@@ -33,7 +33,7 @@ export const BusinessArticle = ({
       }}
     />
     <Link
-            to={`/article/${id}/${slug}`}
+            to={`/article/${slug}`}
 
       className="block hover:bg-gray-50 transition-colors duration-200 border-b border-gray-200 last:border-b-0"
     >

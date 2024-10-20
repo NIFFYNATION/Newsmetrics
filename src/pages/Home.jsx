@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from "react";
+import React, { Suspense, lazy, useMemo } from "react";
 import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 
@@ -56,15 +56,21 @@ const Posts = () => {
     fetchPosts();
   }, []);
 
-  const filteredPosts =
-    selectedCategory === "All"
+  const filteredPosts = useMemo(() => {
+    return selectedCategory === "All"
       ? posts
       : posts.filter((post) => post.category === selectedCategory);
+  }, [selectedCategory, posts]);
 
-  const sortedPosts = [...filteredPosts].sort((a, b) => b.date - a.date);
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = sortedPosts.slice(indexOfFirstPost, indexOfLastPost);
+  const sortedPosts = useMemo(() => {
+    return [...filteredPosts].sort((a, b) => b.date - a.date);
+  }, [filteredPosts]);
+
+  const currentPosts = useMemo(() => {
+    const indexOfLastPost = currentPage * postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    return sortedPosts.slice(indexOfFirstPost, indexOfLastPost);
+  }, [currentPage, postsPerPage, sortedPosts]);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -132,7 +138,7 @@ const Posts = () => {
                       return (
                         <li key={post.id} className="bg-white p-3 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200">
                           <Link
-                            to={`/article/${post.id}/${slug}`}
+                           to={`/article/${slug}`}
                             className="text-indigo-600 hover:text-indigo-800 transition-colors duration-200"
                           >
                             {post.title}

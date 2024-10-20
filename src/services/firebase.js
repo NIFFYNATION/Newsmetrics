@@ -5,6 +5,7 @@ import { getStorage } from "firebase/storage";
 import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
+import { collection, query, where, getDocs } from "firebase/firestore";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -29,14 +30,17 @@ const imgStorage = getStorage(app);
 const analytics = getAnalytics(app);
 const auth = getAuth(app);
 
-export const getPostById = async (id) => {
+export const getPostBySlug = async (slug) => {
   try {
-    const docRef = doc(db, "posts", id);
-    const docSnap = await getDoc(docRef);
-    if (docSnap.exists()) {
+    const postsCollectionRef = collection(db, "posts");
+    const q = query(postsCollectionRef, where("slug", "==", slug));
+    const querySnapshot = await getDocs(q);
+
+    if (!querySnapshot.empty) {
+      const docSnap = querySnapshot.docs[0];
       const postData = docSnap.data();
-      return { 
-        id: docSnap.id, 
+      return {
+        id: docSnap.id,
         ...postData,
         metaTitle: postData.metaTitle || postData.title,
         metaDescription: postData.metaDescription || postData.description,
@@ -46,7 +50,7 @@ export const getPostById = async (id) => {
       return null;
     }
   } catch (error) {
-    console.error("Error fetching post:", error);
+    console.error("Error fetching post by slug:", error);
     throw error;
   }
 };

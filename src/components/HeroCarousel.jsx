@@ -78,7 +78,7 @@ const HeroCarousel = ({ latestPosts }) => {
                       </div>
                     </div>
                     <Link
-                       to={`/article/${post.id}/${slugify(post.title)}`}
+                       to={`/article/${slugify(post.title)}`}
 
                       className="px-4 py-2 sm:px-6 sm:py-3 bg-white text-blue-600 text-sm sm:text-base font-semibold rounded-full hover:bg-blue-100 transition duration-300"
                     >

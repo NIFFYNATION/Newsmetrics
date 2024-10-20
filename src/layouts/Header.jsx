@@ -147,7 +147,7 @@ const Header = ({ onSearch }) => {
                           key={result.id}
                           className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
                         >
-                          <Link to={`/article/${result.id}/${slugify(result.title)}`} className="block">
+                          <Link to={`/article/${slugify(result.title)}`} className="block">
                             <p className="text-sm font-medium text-gray-900">
                               {result.title}
                             </p>

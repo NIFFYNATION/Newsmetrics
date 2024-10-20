@@ -13,6 +13,7 @@ import {
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { db, imgStorage, auth } from "../services/firebase";
 import imageCompression from 'browser-image-compression';
+import { slugify } from '../utils/slugify';
 
 const PostForm = ({ isEditing = false }) => {
   const { id } = useParams();
@@ -91,12 +92,13 @@ const PostForm = ({ isEditing = false }) => {
     const options = {
       maxSizeMB: 1,
       maxWidthOrHeight: 1920,
-      useWebWorker: true
+      useWebWorker: true,
+      fileType: 'image/webp' // Convert to WebP format
     };
     
     try {
       const compressedFile = await imageCompression(file, options);
-      const storageRef = ref(imgStorage, `${folder}/${Date.now()}_${file.name}`);
+      const storageRef = ref(imgStorage, `${folder}/${Date.now()}_${file.name.split('.')[0]}.webp`);
       await uploadBytes(storageRef, compressedFile);
       const downloadURL = await getDownloadURL(storageRef);
       return downloadURL;
@@ -126,11 +128,11 @@ const PostForm = ({ isEditing = false }) => {
         description: post.description,
         content: post.content,
         image: imageUrl,
-        // date: serverTimestamp(),
         date: isEditing ? post.date : serverTimestamp(),
         metaTitle: post.metaTitle || post.title,
         metaDescription: post.metaDescription || post.description,
-        keywords: post.keywords.split(',').map(keyword => keyword.trim()),
+        keywords: Array.isArray(post.keywords) ? post.keywords : (typeof post.keywords === 'string' ? post.keywords.split(',').map(keyword => keyword.trim()) : []),
+        slug: slugify(post.title)
       };
 
       if (isEditing && id) {
