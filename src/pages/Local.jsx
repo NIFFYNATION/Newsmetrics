@@ -2,6 +2,7 @@ import React, { Suspense, lazy } from 'react';
 import { Helmet } from "react-helmet-async";
 import { LocalArticle } from "../components/LocalArticle";
 import Pagination from "../components/Pagination";
+import { usePostsQuery } from "../hooks/usePostsQuery";
 import usePaginatedPosts from "../hooks/usePaginatedPosts";
 import ScrollUpBar from "../components/ScrollUpBar";
 import LoadingSpinner from '../components/LoadingSpinner';
@@ -15,9 +16,13 @@ const LazyAdvertisement = lazy(() => import('../components/Advertisement'));
 const LazyRandomPostsGrid = lazy(() => import('../components/RandomPostsGrid'));
 
 const Local = () => {
-  const { posts, currentPage, totalPages, paginate, loading, error } = usePaginatedPosts("Local", 5);
+  const { data: posts, isLoading, error } = usePostsQuery('Local', 5);
+  const parsedPosts = posts?.map(post => ({
+    ...post,
+    date: post.date ? new Date(post.date.seconds * 1000) : null
+  }));
 
-  if (loading) {
+  if (isLoading) {
     return <LoadingSpinner />;
   }
 
@@ -52,8 +57,8 @@ const Local = () => {
         <ErrorBoundary>
           <Suspense fallback={<LoadingSpinner />}>
             <div className="space-y-6">
-              {posts && posts.length > 0 ? (
-                posts.map((post) => (
+              {parsedPosts && parsedPosts.length > 0 ? (
+                parsedPosts.map((post) => (
                   <Suspense key={post.id} fallback={<ArticleSkeletonLoader />}>
                     <LocalArticle 
                       {...post} 
@@ -73,9 +78,9 @@ const Local = () => {
             </Suspense> 
             <nav aria-label="Local news pagination">
               <Pagination
-                currentPage={currentPage}
-                totalPages={totalPages}
-                onPageChange={paginate}
+                currentPage={1}
+                totalPages={1}
+                onPageChange={() => {}}
               />
             </nav>
             <Suspense fallback={<div className="h-64 bg-gray-200 rounded animate-pulse"></div>}>

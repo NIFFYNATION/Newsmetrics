@@ -2,6 +2,7 @@ import React, { Suspense, lazy } from "react";
 import { Helmet } from "react-helmet-async";
 import { PoliticsArticle } from "../components/PoliticsArticle";
 import Pagination from "../components/Pagination";
+import { usePostsQuery } from "../hooks/usePostsQuery";
 import usePaginatedPosts from "../hooks/usePaginatedPosts";
 import ScrollUpBar from "../components/ScrollUpBar";
 import LoadingSpinner from '../components/LoadingSpinner';
@@ -15,7 +16,11 @@ const LazyAdvertisement = lazy(() => import("../components/Advertisement"));
 const LazyRandomPostsGrid = lazy(() => import("../components/RandomPostsGrid"));
 
 const Politics = () => {
-  const { posts, currentPage, totalPages, paginate, loading, error } = usePaginatedPosts("Politics", 5);
+  const { data: posts, isLoading, error } = usePostsQuery('Politics', 5);
+  const parsedPosts = posts?.map(post => ({
+    ...post,
+    date: post.date ? new Date(post.date.seconds * 1000) : null
+  }));
 
   return (
     <>
@@ -44,8 +49,8 @@ const Politics = () => {
         <ErrorBoundary>
           <Suspense fallback={<LoadingSpinner />}>
             <div className="space-y-6">
-              {posts && posts.length > 0 ? (
-                posts.map((post) => (
+              {parsedPosts && parsedPosts.length > 0 ? (
+                parsedPosts.map((post) => (
                   <Suspense key={post.id} fallback={<ArticleSkeletonLoader />}>
                     <PoliticsArticle 
                       {...post} 
@@ -65,9 +70,9 @@ const Politics = () => {
             </div>
             <nav aria-label="Politics news pagination">
               <Pagination
-                currentPage={currentPage}
-                totalPages={totalPages}
-                onPageChange={paginate}
+                currentPage={1}
+                totalPages={1}
+                onPageChange={() => {}}
               />
             </nav>
             

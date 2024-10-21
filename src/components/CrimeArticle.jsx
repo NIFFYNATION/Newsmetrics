@@ -31,7 +31,11 @@ export const CrimeArticle = ({ id, image, title, author, description, date, comm
         </div>
         <div className="flex w-full grow flex-col items-stretch justify-center gap-2 py-4 sm:px-4">
           <p className="text-[#637588] text-sm font-normal leading-normal">
-            <Link to="/crime" className="text-red-600 hover:underline">Crime</Link> • {format(new Date(date), "MMMM d, yyyy • h:mm a")}
+            <Link to="/crime" className="text-red-600 hover:underline">Crime</Link> • {date ? (
+              date instanceof Date && !isNaN(date.getTime()) 
+                ? format(date, "MMMM d, yyyy • h:mm a")
+                : `Invalid date: ${date.toString()}`
+            ) : 'Date unavailable'}
           </p>
           <h3 className="text-[#111418] text-lg font-bold leading-tight tracking-[-0.015em] sm:text-xl lg:text-2xl">
             {title}

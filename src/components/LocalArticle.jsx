@@ -28,7 +28,11 @@ export const LocalArticle = ({ id, image, title, author, description, date, comm
         </div>
         <div className="flex w-full grow flex-col items-stretch justify-center gap-2 py-4 sm:px-4">
           <p className="text-[#637588] text-sm font-normal leading-normal">
-            <Link to="/local" className="text-red-600 hover:underline">Local</Link> • {format(date, "MMMM d, yyyy • h:mm a")}
+            <Link to="/local" className="text-red-600 hover:underline">Local</Link> • {date ? (
+              date instanceof Date && !isNaN(date.getTime()) 
+                ? format(date, "MMMM d, yyyy • h:mm a")
+                : `Invalid date: ${date.toString()}`
+            ) : 'Date unavailable'}
 
 
           </p>

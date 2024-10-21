@@ -2,6 +2,7 @@ import React, { Suspense, lazy } from "react";
 import { Helmet } from "react-helmet-async";
 import { BusinessArticle } from "../components/BusinessArticle";
 import Pagination from "../components/Pagination";
+import { usePostsQuery } from "../hooks/usePostsQuery";
 import usePaginatedPosts from "../hooks/usePaginatedPosts";
 import ScrollUpBar from "../components/ScrollUpBar";
 import LoadingSpinner from '../components/LoadingSpinner';
@@ -13,9 +14,13 @@ const LazyAdvertisement = lazy(() => import("../components/Advertisement"));
 const LazyRandomPostsGrid = lazy(() => import("../components/RandomPostsGrid"));
 
 const Business = () => {
-  const { posts, currentPage, totalPages, paginate, loading, error } = usePaginatedPosts("Business", 5);
+  const { data: posts, isLoading, error } = usePostsQuery('Business', 5);
+  const parsedPosts = posts?.map(post => ({
+    ...post,
+    date: post.date ? new Date(post.date.seconds * 1000) : null
+  }));
 
-  if (loading) {
+  if (isLoading) {
     return <LoadingSpinner />;
   }
 
@@ -51,8 +56,8 @@ const Business = () => {
           <Suspense fallback={<LoadingSpinner />}>
             <section aria-label="Business articles">
               <ul className="space-y-6">
-                {posts && posts.length > 0 ? (
-                posts.map((post) => (
+                {parsedPosts && parsedPosts.length > 0 ? (
+                parsedPosts.map((post) => (
                   <li key={post.id}>
                     <Suspense key={post.id} fallback={<ArticleSkeletonLoader />}>
                     <BusinessArticle 
@@ -77,9 +82,9 @@ const Business = () => {
             </section>
             <nav aria-label="Business news pagination">
               <Pagination
-                currentPage={currentPage}
-                totalPages={totalPages}
-                onPageChange={paginate}
+                currentPage={1}
+                totalPages={1}
+                onPageChange={() => {}}
               />
             </nav>
             <section aria-label="Random posts">

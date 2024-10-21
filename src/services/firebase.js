@@ -6,6 +6,7 @@ import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { collection, query, where, getDocs } from "firebase/firestore";
+import { orderBy, limit } from "firebase/firestore";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -53,6 +54,18 @@ export const getPostBySlug = async (slug) => {
     console.error("Error fetching post by slug:", error);
     throw error;
   }
+};
+
+export const fetchPosts = async (category, postLimit) => {
+  const postsRef = collection(db, 'posts');
+  const q = query(
+    postsRef,
+    where('category', '==', category),
+    orderBy('date', 'desc'),
+    limit(postLimit)
+  );
+  const querySnapshot = await getDocs(q);
+  return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 };
 
 export { db, app, analytics, auth, imgStorage };

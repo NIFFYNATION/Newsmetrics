@@ -2,7 +2,7 @@ import React, { Suspense, lazy } from 'react';
 import { Helmet } from "react-helmet-async";
 import { TechArticle } from "../components/TechArticle";
 import Pagination from "../components/Pagination";
-import usePaginatedPosts from "../hooks/usePaginatedPosts";
+import { usePostsQuery } from '../hooks/usePostsQuery';
 import ScrollUpBar from "../components/ScrollUpBar";
 import LoadingSpinner from '../components/LoadingSpinner';
 import ErrorBoundary from '../components/ErrorBoundary';
@@ -14,14 +14,18 @@ const LazyAdvertisement = lazy(() => import("../components/Advertisement"));
 const LazyRandomPostsGrid = lazy(() => import("../components/RandomPostsGrid"));
 
 const Tech = () => {
-  const { posts, currentPage, totalPages, paginate, loading, error } = usePaginatedPosts("Tech", 5);
+  const { data: posts, isLoading, error } = usePostsQuery('Tech', 5);
+  const parsedPosts = posts?.map(post => ({
+    ...post,
+    date: post.date ? new Date(post.date.seconds * 1000) : null
+  }));
 
-  if (loading) {
+  if (isLoading) {
     return <LoadingSpinner />;
   }
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return <div>Error: {error.message}</div>;
   }
 
   return (
@@ -51,8 +55,8 @@ const Tech = () => {
         <ErrorBoundary>
           <Suspense fallback={<LoadingSpinner />}>
             <div className="space-y-6">
-              {posts && posts.length > 0 ? (
-                posts.map((post) => (
+              {parsedPosts && parsedPosts.length > 0 ? (
+                parsedPosts.map((post) => (
                   <Suspense key={post.id} fallback={<ArticleSkeletonLoader />}>
                     <TechArticle 
                     {...post} 
@@ -72,9 +76,9 @@ const Tech = () => {
             </Suspense>
             <nav aria-label="Tech news pagination">
               <Pagination
-                currentPage={currentPage}
-                totalPages={totalPages}
-                onPageChange={paginate}
+                currentPage={1}
+                totalPages={1}
+                onPageChange={() => {}}
               />
             </nav>
             <Suspense fallback={<div className="h-64 bg-gray-200 rounded animate-pulse"></div>}>

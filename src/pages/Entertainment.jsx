@@ -2,7 +2,7 @@ import React, { Suspense, lazy } from "react";
 import { Helmet } from "react-helmet-async";
 import { EntertainmentArticle } from "../components/EntertainmentArticle";
 import Pagination from "../components/Pagination";
-import usePaginatedPosts from "../hooks/usePaginatedPosts";
+import {usePostsQuery} from "../hooks/usePostsQuery";
 import ScrollUpBar from "../components/ScrollUpBar";
 import LoadingSpinner from '../components/LoadingSpinner';
 import ErrorBoundary from '../components/ErrorBoundary';
@@ -13,13 +13,13 @@ const LazyAdvertisement = lazy(() => import("../components/Advertisement"));
 const LazyRandomPostsGrid = lazy(() => import("../components/RandomPostsGrid"));
 
 const Entertainment = () => {
-  // const { currentPosts, currentPage, totalPages, paginate } = usePaginatedPosts(
-  //   "Entertainment",
-  //   5
-  // );
-  const { posts, currentPage, totalPages, paginate, loading, error } = usePaginatedPosts("Entertainment", 5);
+  const { data: posts, isLoading, error } = usePostsQuery('Entertainment', 5);
+  const parsedPosts = posts?.map(post => ({
+    ...post,
+    date: post.date ? new Date(post.date.seconds * 1000) : null
+  }));
 
-  if (loading) {
+  if (isLoading) {
     return <LoadingSpinner />;
   }
 
@@ -31,7 +31,7 @@ const Entertainment = () => {
       <Helmet>
         <title>Entertainment News - News Metrics</title>
         <meta name="description" content="Latest entertainment news from News Metrics" />
-        <link rel="canonical" href="https://newsmetrics.com/entertainment" />
+        <link rel="canonical" href="https://newsmetrics.ng/entertainment" />
       </Helmet>
       <JsonLd
         item={{
@@ -39,7 +39,7 @@ const Entertainment = () => {
           "@type": "CollectionPage",
           "name": "Entertainment News - News Metrics",
           "description": "Latest entertainment news from News Metrics",
-          "url": "https://newsmetrics.com/entertainment"
+          "url": "https://newsmetrics.ng/entertainment"
         }}
       />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -53,8 +53,8 @@ const Entertainment = () => {
         <ErrorBoundary>
           <Suspense fallback={<LoadingSpinner />}>
             <div className="space-y-6">
-            {posts && posts.length > 0 ? (
-                posts.map((post) => (
+            {parsedPosts && parsedPosts.length > 0 ? (
+                parsedPosts.map((post) => (
                   <Suspense key={post.id} fallback={<ArticleSkeletonLoader />}>
                     <EntertainmentArticle 
                       {...post} 
@@ -72,9 +72,9 @@ const Entertainment = () => {
             </div>
             <nav aria-label="Entertainment news pagination">
               <Pagination
-                currentPage={currentPage}
-                totalPages={totalPages}
-                onPageChange={paginate}
+                currentPage={1}
+                totalPages={1}
+                onPageChange={() => {}}
               />
             </nav>
             <Suspense fallback={<div className="h-64 bg-gray-200 rounded animate-pulse"></div>}>
