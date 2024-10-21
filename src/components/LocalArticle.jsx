@@ -48,9 +48,9 @@ export const LocalArticle = ({ id, image, title, author, description, date, comm
                 </svg>
                 <span className="text-gray-600">{commentCount} comments</span>
               </div>
-            <button className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 bg-red-600 text-white text-sm font-medium leading-normal mt-2 sm:mt-0">
+            <Link to={`/article/${slugify(title)}`} className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 bg-red-600 text-white text-sm font-medium leading-normal mt-2 sm:mt-0">
               <span className="truncate">Read More</span>
-            </button>
+            </Link>
           </div>
         </div>
       </div>

@@ -31,6 +31,15 @@ import ProtectedRoute from "./components/ProtectedRoute";
 
 import { AuthProvider } from "./context/index";
 import GoogleAnalytics from './components/GoogleAnalytics';
+import { lazy, Suspense } from 'react';
+import LoadingSpinner from './components/LoadingSpinner';
+
+const LazyTech = lazy(() => import('./pages/Tech'));
+const LazyBusiness = lazy(() => import('./pages/Business'));
+const LazyLocal = lazy(() => import('./pages/Local'));
+const LazyEntertainment = lazy(() => import('./pages/Entertainment'));
+const LazyPolitics = lazy(() => import('./pages/Politics'));
+const LazyCrime = lazy(() => import('./pages/Crime'));
 
 function App() {
   return (
@@ -49,12 +58,12 @@ function App() {
                       <Route path="/register" element={<Register />} />
                       <Route path="/adminlogin" element={<AdminLogin />} />
                       <Route path="/article/:slug" element={<SinglePost />} />
-                      <Route path="/local" element={<Local />} />
-                      <Route path="/entertainment" element={<Entertainment />} />
-                      <Route path="/politics" element={<Politics />} />
-                      <Route path="/crime" element={<Crime />} />
-                      <Route path="/business" element={<Business />} />
-                      <Route path="/tech" element={<Tech />} />
+                      <Route path="/local" element={<Suspense fallback={<LoadingSpinner />}><LazyLocal /></Suspense>} />
+                      <Route path="/entertainment" element={<Suspense fallback={<LoadingSpinner />}><LazyEntertainment /></Suspense>} />
+                      <Route path="/politics" element={<Suspense fallback={<LoadingSpinner />}><LazyPolitics /></Suspense>} />
+                      <Route path="/crime" element={<Suspense fallback={<LoadingSpinner />}><LazyCrime /></Suspense>} />
+                      <Route path="/business" element={<Suspense fallback={<LoadingSpinner />}><LazyBusiness /></Suspense>} />
+                      <Route path="/tech" element={<Suspense fallback={<LoadingSpinner />}><LazyTech /></Suspense>} />
                       <Route path="/about" element={<About />} />
                       <Route path="/contact" element={<Contact />} />
                       <Route path="/privacy-policy" element={<PrivacyPolicy />} />
@@ -97,7 +106,7 @@ function App() {
           </ErrorBoundary>
         </CommentsProvider>
       {/* Replace "G-XXXXXXXXXX" with your actual Google Analytics measurement ID */}
-      <GoogleAnalytics measurementId="G-XXXXXXXXXX" />
+      <GoogleAnalytics measurementId="G-9W6S8HBQBB" />
       </HelmetProvider>
     </AuthProvider>
   );

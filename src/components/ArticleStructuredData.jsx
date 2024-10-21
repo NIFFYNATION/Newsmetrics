@@ -21,12 +21,12 @@ const ArticleStructuredData = ({ article }) => (
           name: "News Metrics",
           logo: {
             "@type": "ImageObject",
-            url: "https://www.newsmetrics.com/logo.png"
+            url: "https://www.newsmetrics.ng/logo.png"
           }
         },
         mainEntityOfPage: {
           "@type": "WebPage",
-          "@id": `https://www.newsmetrics.com/article/${article.id}`
+          "@id": `https://www.newsmetrics.ng/article/${article.id}`
         },
         keywords: article.keywords ? article.keywords.join(', ') : '',
       })}

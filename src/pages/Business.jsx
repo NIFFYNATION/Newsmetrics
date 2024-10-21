@@ -28,7 +28,7 @@ const Business = () => {
       <Helmet>
         <title>Business News - News Metrics</title>
         <meta name="description" content="Latest business news from News Metrics" />
-        <link rel="canonical" href="https://newsmetrics.com/business" />
+        <link rel="canonical" href="https://newsmetrics.ng/business" />
       </Helmet>
       <JsonLd
         item={{
@@ -36,7 +36,7 @@ const Business = () => {
           "@type": "CollectionPage",
           "name": "Business News - News Metrics",
           "description": "Latest business news from News Metrics",
-          "url": "https://newsmetrics.com/business"
+          "url": "https://newsmetrics.ng/business"
         }}
       />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

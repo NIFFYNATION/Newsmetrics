@@ -30,7 +30,7 @@ const Local = () => {
       <Helmet>
         <title>Local News - News Metrics</title>
         <meta name="description" content="Local news from News Metrics" />
-        <link rel="canonical" href="https://newsmetrics.com/local" />
+        <link rel="canonical" href="https://newsmetrics.ng/local" />
       </Helmet>
       <JsonLd
         item={{
@@ -38,7 +38,7 @@ const Local = () => {
           "@type": "CollectionPage",
           "name": "Local News - News Metrics",
           "description": "Local news from News Metrics",
-          "url": "https://newsmetrics.com/local"
+          "url": "https://newsmetrics.ng/local"
         }}
       />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

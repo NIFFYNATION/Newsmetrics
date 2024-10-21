@@ -56,7 +56,7 @@ function SinglePost() {
         <meta property="og:title" content={`${post.metaTitle || post.title} - News Metrics`} />
         <meta property="og:description" content={post.metaDescription || metaDescription} />
         <meta property="og:type" content="article" />
-        <meta property="og:url" content={`https://newsmetrics.com/article/${post.id}`} />
+        <meta property="og:url" content={`https://newsmetrics.ng/article/${post.id}`} />
         {post.image && <meta property="og:image" content={post.image} />}
         <meta name="keywords" content={post.keywords ? post.keywords.join(', ') : ''} />
       </Helmet>

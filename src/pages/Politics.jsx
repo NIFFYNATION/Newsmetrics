@@ -22,7 +22,7 @@ const Politics = () => {
       <Helmet>
         <title>Politics News - News Metrics</title>
         <meta name="description" content="Latest politics news from News Metrics" />
-        <link rel="canonical" href="https://newsmetrics.com/politics" />
+        <link rel="canonical" href="https://newsmetrics.ng/politics" />
       </Helmet>
       <JsonLd
         item={{
@@ -30,7 +30,7 @@ const Politics = () => {
           "@type": "CollectionPage",
           "name": "Politics News - News Metrics",
           "description": "Latest politics news from News Metrics",
-          "url": "https://newsmetrics.com/politics"
+          "url": "https://newsmetrics.ng/politics"
         }}
       />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
