@@ -34,7 +34,7 @@ const Local = () => {
     <>
       <Helmet>
         <title>Local News - News Metrics</title>
-        <meta name="description" content="Local news from News Metrics" />
+        <meta name="description" content="Latest local news from News Metrics" />
         <link rel="canonical" href="https://newsmetrics.ng/local" />
       </Helmet>
       <JsonLd
@@ -42,7 +42,7 @@ const Local = () => {
           "@context": "https://schema.org",
           "@type": "CollectionPage",
           "name": "Local News - News Metrics",
-          "description": "Local news from News Metrics",
+          "description": "Latest local news from News Metrics",
           "url": "https://newsmetrics.ng/local"
         }}
       />
@@ -56,26 +56,32 @@ const Local = () => {
         />
         <ErrorBoundary>
           <Suspense fallback={<LoadingSpinner />}>
-            <div className="space-y-6">
-              {parsedPosts && parsedPosts.length > 0 ? (
-                parsedPosts.map((post) => (
-                  <Suspense key={post.id} fallback={<ArticleSkeletonLoader />}>
-                    <LocalArticle 
-                      {...post} 
-                      comments={post.comments || []} 
-                      relatedArticles={post.relatedArticles || []}
-                    />
-                  </Suspense>
-                ))
-              ) : (
-                <p>No posts available.</p>
-              )}
-            </div>
-            <Suspense fallback={<div className="w-3/4 mx-auto h-32 bg-gray-200 rounded animate-pulse"></div>}>
-              <div className="w-3/4 mx-auto">
-                <LazyAdvertisement isHomePage={false} />
+            <section aria-label="Local articles">
+              <ul className="space-y-6">
+                {parsedPosts && parsedPosts.length > 0 ? (
+                  parsedPosts.map((post) => (
+                    <li key={post.id}>
+                      <Suspense fallback={<ArticleSkeletonLoader />}>
+                        <LocalArticle 
+                          {...post} 
+                          comments={post.comments || []} 
+                          relatedArticles={post.relatedArticles || []}
+                        />
+                      </Suspense>
+                    </li>
+                  ))
+                ) : (
+                  <p>No posts available.</p>
+                )}
+              </ul>
+              <div className="w-3/4 mx-auto my-6">
+                <Suspense fallback={<div className="w-3/4 mx-auto h-32 bg-gray-200 rounded animate-pulse"></div>}>
+                  <div className="w-3/4 mx-auto">
+                    <LazyAdvertisement isHomePage={false} />
+                  </div>
+                </Suspense>
               </div>
-            </Suspense> 
+            </section>
             <nav aria-label="Local news pagination">
               <Pagination
                 currentPage={1}
@@ -83,9 +89,11 @@ const Local = () => {
                 onPageChange={() => {}}
               />
             </nav>
-            <Suspense fallback={<div className="h-64 bg-gray-200 rounded animate-pulse"></div>}>
-              <LazyRandomPostsGrid />
-            </Suspense>
+            <section aria-label="Random posts">
+              <Suspense fallback={<div className="h-64 bg-gray-200 rounded animate-pulse"></div>}>
+                <LazyRandomPostsGrid />
+              </Suspense>
+            </section>
           </Suspense>
         </ErrorBoundary>
       </main>
