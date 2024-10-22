@@ -1,34 +1,31 @@
 import React, { useState } from 'react';
-import { useComments } from '../context/CommentsContext';
+import { useFirebaseComments } from '../hooks/useFirebaseComments';
 import Pagination from './Pagination';
+import LoadingSpinner from './LoadingSpinner';
+import { format } from 'date-fns';
 
-const Comments = ({ postId, comments: initialComments }) => {
-  const { comments, commentCounts, addComment } = useComments();
+const Comments = ({ postId }) => {
+  const { comments, loading, addComment } = useFirebaseComments(postId);
   const [newComment, setNewComment] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const commentsPerPage = 5;
 
-  const postComments = comments[postId] || [];
-  const commentCount = commentCounts[postId] || 0;
-
   const indexOfLastComment = currentPage * commentsPerPage;
   const indexOfFirstComment = indexOfLastComment - commentsPerPage;
-  const currentComments = postComments.slice(indexOfFirstComment, indexOfLastComment);
+  const currentComments = comments.slice(indexOfFirstComment, indexOfLastComment);
 
-  const totalPages = Math.ceil(postComments.length / commentsPerPage);
+  const totalPages = Math.ceil(comments.length / commentsPerPage);
 
   const handleCommentSubmit = (e) => {
     e.preventDefault();
     if (newComment.trim()) {
       const comment = {
-        id: Date.now(),
         content: newComment,
-        author: 'Anonymous', // Replace with user authentication later
-        date: new Date().toISOString(),
+        author: 'User', // Replace with user authentication later
       };
-      addComment(postId, comment);
+      addComment(comment);
       setNewComment('');
-      setCurrentPage(1); // Reset to first page when new comment is added
+      setCurrentPage(1);
     }
   };
 
@@ -36,12 +33,15 @@ const Comments = ({ postId, comments: initialComments }) => {
     setCurrentPage(pageNumber);
   };
 
+  if (loading) {
+    return <LoadingSpinner />;
+  }
+
   return (
     <div className="mt-8 pb-8">
-      <h2 className="text-2xl px-4 font-bold mb-4">Comments ({commentCount})</h2>
+      <h2 className="text-2xl px-4 font-bold mb-4">Comments ({comments.length})</h2>
       <form onSubmit={handleCommentSubmit} className="mb-4">
         <textarea
-        
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}
           className="w-full p-2 border rounded"
@@ -60,7 +60,11 @@ const Comments = ({ postId, comments: initialComments }) => {
           <div key={comment.id} className="bg-gray-100 p-4 rounded">
             <p className="mb-2">{comment.content}</p>
             <p className="text-sm text-gray-600">
-              By {comment.author} on {new Date(comment.date).toLocaleString()}
+              By {comment.author} on {comment.date instanceof Date 
+                ? format(comment.date, "MMMM d, yyyy • h:mm a")
+                : comment.date && comment.date.toDate 
+                  ? format(comment.date.toDate(), "MMMM d, yyyy • h:mm a")
+                  : "Date unavailable"}
             </p>
           </div>
         ))}

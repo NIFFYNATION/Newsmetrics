@@ -23,7 +23,6 @@ import EditPost from "./pages/EditPost";
 
 import NotFound from "./pages/NotFound";
 import { CommentsProvider } from "./context/CommentsContext";
-import axios from "axios";
 import ErrorBoundary from "./components/ErrorBoundary";
 import AdminLogin from "./pages/AdminLogin";
 import ProtectedRoute from "./components/ProtectedRoute";

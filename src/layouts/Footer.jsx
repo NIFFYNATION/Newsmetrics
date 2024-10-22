@@ -33,7 +33,7 @@ const Footer = () => (
               Privacy Policy
             </Link>
             <Link
-              to="/terms-of-service"
+              to="#"
               className="text-[#637588] text-sm sm:text-base font-normal leading-normal hover:text-[#111418] transition-colors duration-300 px-2 py-1 rounded-md hover:bg-gray-100"
             >
               Terms of Service

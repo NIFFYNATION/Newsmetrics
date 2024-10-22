@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
-import axios from 'axios';
 
 const ContactComp = () => {
   const [formData, setFormData] = useState({
@@ -21,8 +20,18 @@ const ContactComp = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await axios.post('/api/contact', formData);
-      console.log("Form data:", response.data);
+      const response = await fetch('https://formspree.io/f/xzzbzvya', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
       setSubmitMessage("Your message has been sent successfully!");
       setFormData({ name: '', email: '', message: '' });
     } catch (error) {
