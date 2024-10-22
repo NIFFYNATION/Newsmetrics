@@ -4,7 +4,6 @@ import { getAnalytics } from "firebase/analytics";
 import { getStorage } from "firebase/storage";
 import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
-import { doc, getDoc } from "firebase/firestore";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { orderBy, limit } from "firebase/firestore";
 
@@ -14,13 +13,13 @@ import { orderBy, limit } from "firebase/firestore";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: "AIzaSyBma-dm-g7-ciBBJVjTSTKbHSWNSrd5T_A",
-    authDomain: "newsmetrics-3173e.firebaseapp.com",
-    projectId: "newsmetrics-3173e",
-    storageBucket: "newsmetrics-3173e.appspot.com",
-    messagingSenderId: "565730784856",
-    appId: "1:565730784856:web:fe2af5a7e29163da23fc2d",
-    measurementId: "G-9W6S8HBQBB"
+  apiKey: "AIzaSyBma-dm-g7-ciBBJVjTSTKbHSWNSrd5T_A",
+  authDomain: "newsmetrics-3173e.firebaseapp.com",
+  projectId: "newsmetrics-3173e",
+  storageBucket: "newsmetrics-3173e.appspot.com",
+  messagingSenderId: "565730784856",
+  appId: "1:565730784856:web:fe2af5a7e29163da23fc2d",
+  measurementId: "G-9W6S8HBQBB"
 };
 
 // Initialize Firebase
