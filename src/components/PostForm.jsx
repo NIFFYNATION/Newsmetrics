@@ -12,8 +12,8 @@ import {
 } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { db, imgStorage, auth } from "../services/firebase";
-import imageCompression from 'browser-image-compression';
-import { slugify } from '../utils/slugify';
+import imageCompression from "browser-image-compression";
+import { slugify } from "../utils/slugify";
 
 const PostForm = ({ isEditing = false }) => {
   const { id } = useParams();
@@ -77,7 +77,7 @@ const PostForm = ({ isEditing = false }) => {
         const options = {
           maxSizeMB: 1,
           maxWidthOrHeight: 1920,
-          useWebWorker: true
+          useWebWorker: true,
         };
         const compressedFile = await imageCompression(file, options);
         setImageFile(compressedFile);
@@ -88,17 +88,20 @@ const PostForm = ({ isEditing = false }) => {
     }
   };
 
-  const uploadImage = async (file, folder = 'post_images') => {
+  const uploadImage = async (file, folder = "post_images") => {
     const options = {
       maxSizeMB: 1,
       maxWidthOrHeight: 1920,
       useWebWorker: true,
-      fileType: 'image/webp' // Convert to WebP format
+      fileType: "image/webp", // Convert to WebP format
     };
-    
+
     try {
       const compressedFile = await imageCompression(file, options);
-      const storageRef = ref(imgStorage, `${folder}/${Date.now()}_${file.name.split('.')[0]}.webp`);
+      const storageRef = ref(
+        imgStorage,
+        `${folder}/${Date.now()}_${file.name.split(".")[0]}.webp`
+      );
       await uploadBytes(storageRef, compressedFile);
       const downloadURL = await getDownloadURL(storageRef);
       return downloadURL;
@@ -124,15 +127,19 @@ const PostForm = ({ isEditing = false }) => {
         title: post.title,
         category: post.category,
         author: post.author,
-        authorImage: currentUser.photoURL || '',
+        authorImage: currentUser.photoURL || "",
         description: post.description,
         content: post.content,
         image: imageUrl,
         date: isEditing ? post.date : serverTimestamp(),
         metaTitle: post.metaTitle || post.title,
         metaDescription: post.metaDescription || post.description,
-        keywords: Array.isArray(post.keywords) ? post.keywords : (typeof post.keywords === 'string' ? post.keywords.split(',').map(keyword => keyword.trim()) : []),
-        slug: slugify(post.title)
+        keywords: Array.isArray(post.keywords)
+          ? post.keywords
+          : typeof post.keywords === "string"
+          ? post.keywords.split(",").map((keyword) => keyword.trim())
+          : [],
+        slug: slugify(post.title),
       };
 
       if (isEditing && id) {
@@ -160,16 +167,16 @@ const PostForm = ({ isEditing = false }) => {
           const options = {
             maxSizeMB: 1,
             maxWidthOrHeight: 1920,
-            useWebWorker: true
+            useWebWorker: true,
           };
           const compressedFile = await imageCompression(file, options);
           const imageUrl = await uploadImage(compressedFile);
           const quill = quillRef.current.getEditor();
           const range = quill.getSelection(true);
           quill.insertEmbed(range.index, "image", imageUrl);
-          quill.formatText(range.index, 1, { 
-            'class': 'article-content',
-            'alt': file.name 
+          quill.formatText(range.index, 1, {
+            class: "article-content",
+            alt: file.name,
           });
         } catch (error) {
           console.error("Error uploading image:", error);
@@ -182,12 +189,12 @@ const PostForm = ({ isEditing = false }) => {
     const quill = quillRef.current.getEditor();
     const range = quill.getSelection();
     if (range) {
-      const value = prompt('Enter the URL');
+      const value = prompt("Enter the URL");
       if (value) {
-        quill.format('link', value);
-        quill.formatText(range.index, range.length, 'color', 'blue');
+        quill.format("link", value);
+        quill.formatText(range.index, range.length, "color", "blue");
       } else {
-        quill.format('link', false);
+        quill.format("link", false);
       }
     }
   }, []);
@@ -221,14 +228,14 @@ const PostForm = ({ isEditing = false }) => {
 
   const processContent = async (content) => {
     const parser = new DOMParser();
-    const doc = parser.parseFromString(content, 'text/html');
-    const images = doc.querySelectorAll('img');
+    const doc = parser.parseFromString(content, "text/html");
+    const images = doc.querySelectorAll("img");
 
     for (let img of images) {
-      if (img.src.startsWith('blob:') || img.src.startsWith('data:')) {
+      if (img.src.startsWith("blob:") || img.src.startsWith("data:")) {
         const response = await fetch(img.src);
         const blob = await response.blob();
-        const file = new File([blob], 'image.jpg', { type: blob.type });
+        const file = new File([blob], "image.jpg", { type: blob.type });
         const newSrc = await uploadImage(file);
         img.src = newSrc;
       }
