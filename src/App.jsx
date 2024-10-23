@@ -33,6 +33,7 @@ const LazyLocal = lazy(() => import("./pages/Local"));
 const LazyEntertainment = lazy(() => import("./pages/Entertainment"));
 const LazyPolitics = lazy(() => import("./pages/Politics"));
 const LazyCrime = lazy(() => import("./pages/Crime"));
+const LazyAdvertisement = lazy(() => import("./components/Advertisement"));
 
 function App() {
   const queryClient = new QueryClient();

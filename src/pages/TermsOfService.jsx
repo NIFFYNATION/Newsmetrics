@@ -1,5 +1,8 @@
 import { Helmet } from "react-helmet-async";
+import { lazy, Suspense } from "react";
 import Advertisement from "../components/Advertisement";
+
+const LazyAdvertisement = lazy(() => import("../components/Advertisement"));
 
 const TermsOfService = () => {
   return (
@@ -12,8 +15,10 @@ const TermsOfService = () => {
         <h1 className="text-3xl font-bold my-8">Terms of Service</h1>
         {/* Add content for the Terms of Service page here */}
         <div className="w-3/4 mx-auto">
-  <Advertisement isHomePage={false} />
-</div>
+          <Suspense fallback={<div>Loading...</div>}>
+            <LazyAdvertisement isHomePage={false} />
+          </Suspense>
+        </div>
       </div>
     </>
   );

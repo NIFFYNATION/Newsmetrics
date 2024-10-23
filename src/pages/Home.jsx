@@ -8,7 +8,6 @@ import LatestPosts from "../components/LatestPosts";
 import FeaturedArticle from "../components/FeaturedArticle";
 import Pagination from "../components/Pagination";
 import LoadingSpinner from "../components/LoadingSpinner";
-import Advertisement from "../components/Advertisement";
 // import { samplePosts } from "../utils/sampleposts";
 import ScrollUpBar from "../components/ScrollUpBar";
 import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
