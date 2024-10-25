@@ -65,7 +65,7 @@ function SinglePost() {
           content={post.metaDescription || metaDescription}
         />
         <meta property="og:type" content="article" />
-        <meta property="og:image" content={post.image} />
+        <meta property="og:image" content={getImageUrl(post.image)} />
         <meta
           property="og:url"
           content={`https://newsmetrics.ng/article/${post.id}`}

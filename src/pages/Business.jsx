@@ -3,21 +3,21 @@ import { Helmet } from "react-helmet-async";
 import { BusinessArticle } from "../components/BusinessArticle";
 import Pagination from "../components/Pagination";
 import { usePostsQuery } from "../hooks/usePostsQuery";
-import LoadingSpinner from '../components/LoadingSpinner';
-import ErrorBoundary from '../components/ErrorBoundary';
-import Breadcrumb from '../components/Breadcrumb';
-import ArticleSkeletonLoader from '../components/ArticleSkeletonLoader';
-import { JsonLd } from 'react-schemaorg';
+import LoadingSpinner from "../components/LoadingSpinner";
+import ErrorBoundary from "../components/ErrorBoundary";
+import Breadcrumb from "../components/Breadcrumb";
+import ArticleSkeletonLoader from "../components/ArticleSkeletonLoader";
+import { JsonLd } from "react-schemaorg";
 
 const LazyAdvertisement = lazy(() => import("../components/Advertisement"));
 const LazyRandomPostsGrid = lazy(() => import("../components/RandomPostsGrid"));
 
 const Business = () => {
-  const { data: posts, isLoading, error } = usePostsQuery('Business', 5);
+  const { data: posts, isLoading, error } = usePostsQuery("Business", 5);
 
-  const parsedPosts = posts?.map(post => ({
+  const parsedPosts = posts?.map((post) => ({
     ...post,
-    date: post.date ? new Date(post.date.seconds * 1000) : null
+    date: post.date ? new Date(post.date.seconds * 1000) : null,
   }));
 
   if (isLoading) {
@@ -32,30 +32,36 @@ const Business = () => {
     <>
       <Helmet>
         <title>Business News - News Metrics</title>
-        <meta name="description" content="Latest business news from News Metrics" />
+        <meta
+          name="description"
+          content="Latest business news from News Metrics"
+        />
         <link rel="canonical" href="https://newsmetrics.ng/business" />
         <meta property="og:title" content="Business News - News Metrics" />
-        <meta property="og:description" content="Latest business news from News Metrics" />
+        <meta
+          property="og:description"
+          content="Latest business news from News Metrics"
+        />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://newsmetrics.ng/business" />
-        <meta property="og:image" content="https://newsmetrics.ng/business-news-image.jpg" />
+        <meta
+          property="og:image"
+          content="https://firebasestorage.googleapis.com/v0/b/newsmetrics-3173e.appspot.com/o/post_images%2F1729721939974_Bola-Tinubu.webp?alt=media&token=bf9b6f68-1c69-41c2-b19d-dcd5366f7d12"
+        />
       </Helmet>
       <JsonLd
         item={{
           "@context": "https://schema.org",
           "@type": "CollectionPage",
-          "name": "Business News - News Metrics",
-          "description": "Latest business news from News Metrics",
-          "url": "https://newsmetrics.ng/business"
+          name: "Business News - News Metrics",
+          description: "Latest business news from News Metrics",
+          url: "https://newsmetrics.ng/business",
         }}
       />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h1 className="text-3xl font-bold my-8 ">Business News</h1>
         <Breadcrumb
-          items={[
-            { label: 'Home', link: '/' },
-            { label: 'Business News' },
-          ]}
+          items={[{ label: "Home", link: "/" }, { label: "Business News" }]}
         />
         <ErrorBoundary>
           <Suspense fallback={<LoadingSpinner />}>
@@ -65,9 +71,9 @@ const Business = () => {
                   parsedPosts.map((post) => (
                     <li key={post.id}>
                       <Suspense fallback={<ArticleSkeletonLoader />}>
-                        <BusinessArticle 
-                          {...post} 
-                          comments={post.comments || []} 
+                        <BusinessArticle
+                          {...post}
+                          comments={post.comments || []}
                           relatedArticles={post.relatedArticles || []}
                         />
                       </Suspense>
@@ -78,7 +84,11 @@ const Business = () => {
                 )}
               </ul>
               <div className="w-3/4 mx-auto my-6">
-                <Suspense fallback={<div className="w-3/4 mx-auto h-32 bg-gray-200 rounded animate-pulse"></div>}>
+                <Suspense
+                  fallback={
+                    <div className="w-3/4 mx-auto h-32 bg-gray-200 rounded animate-pulse"></div>
+                  }
+                >
                   <div className="w-3/4 mx-auto">
                     <LazyAdvertisement isHomePage={false} />
                   </div>
@@ -93,7 +103,11 @@ const Business = () => {
               />
             </nav>
             <section aria-label="Random posts">
-              <Suspense fallback={<div className="h-64 bg-gray-200 rounded animate-pulse"></div>}>
+              <Suspense
+                fallback={
+                  <div className="h-64 bg-gray-200 rounded animate-pulse"></div>
+                }
+              >
                 <LazyRandomPostsGrid />
               </Suspense>
             </section>
