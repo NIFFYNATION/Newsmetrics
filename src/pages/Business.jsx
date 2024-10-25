@@ -46,7 +46,7 @@ const Business = () => {
         <meta property="og:url" content="https://newsmetrics.ng/business" />
         <meta
           property="og:image"
-          content="https://firebasestorage.googleapis.com/v0/b/newsmetrics-3173e.appspot.com/o/post_images%2F1729721939974_Bola-Tinubu.webp?alt=media&token=bf9b6f68-1c69-41c2-b19d-dcd5366f7d12"
+          content="https://ogcdn.net/e4b8c678-7bd5-445d-ba03-bfaad510c686/v4/newsmetrics.ng/NewsMetrics/https%3A%2F%2Fopengraph.b-cdn.net%2Fproduction%2Fimages%2F56188dc2-e3c3-4ce5-a8b1-1323953e37b9.jpg%3Ftoken%3DhOY-wLL-tV2Wb6eqlpzb3hUOqYMZbXQ3az2flBDqaSs%26height%3D800%26width%3D1200%26expires%3D33251249770/og.png"
         />
       </Helmet>
       <JsonLd
