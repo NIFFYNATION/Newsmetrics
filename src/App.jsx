@@ -116,7 +116,7 @@ function App() {
                         {/* <Route path="/admin/login" element={<AdminLogin />} /> */}
 
                         <Route
-                          path="/admin"
+                          path="/boss"
                           element={
                             <ProtectedRoute>
                               <AdminDashboard />
@@ -124,7 +124,7 @@ function App() {
                           }
                         />
                         <Route
-                          path="/admin/create-post"
+                          path="/boss/create-post"
                           element={
                             <ProtectedRoute>
                               <CreatePost />
@@ -132,7 +132,7 @@ function App() {
                           }
                         />
                         <Route
-                          path="/admin/edit-post/:id"
+                          path="/boss/edit-post/:id"
                           element={
                             <ProtectedRoute>
                               <EditPost />

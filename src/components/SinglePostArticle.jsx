@@ -20,7 +20,7 @@ const SinglePostArticle = ({
 }) => {
  
   // Convert Firestore Timestamp to JavaScript Date
-  const jsDate = date && date.toDate ? date.toDate() : new Date(date);
+    const jsDate = date && date.toDate ? date.toDate() : new Date(date);
  
 
   const { getCommentCount } = useComments();

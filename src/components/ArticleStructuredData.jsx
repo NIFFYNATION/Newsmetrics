@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet-async";
 
+
 const ArticleStructuredData = ({ article }) => (
   <Helmet>
     <script type="application/ld+json">

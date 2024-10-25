@@ -36,6 +36,11 @@ const Local = () => {
         <title>Local News - News Metrics</title>
         <meta name="description" content="Latest local news from News Metrics" />
         <link rel="canonical" href="https://newsmetrics.ng/local" />
+        <meta property="og:title" content="Local News - News Metrics" />
+        <meta property="og:description" content="Latest local news from News Metrics" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://newsmetrics.ng/local" />
+        <meta property="og:image" content="https://newsmetrics.ng/local-news-image.jpg" />
       </Helmet>
       <JsonLd
         item={{

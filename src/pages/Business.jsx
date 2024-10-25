@@ -34,6 +34,11 @@ const Business = () => {
         <title>Business News - News Metrics</title>
         <meta name="description" content="Latest business news from News Metrics" />
         <link rel="canonical" href="https://newsmetrics.ng/business" />
+        <meta property="og:title" content="Business News - News Metrics" />
+        <meta property="og:description" content="Latest business news from News Metrics" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://newsmetrics.ng/business" />
+        <meta property="og:image" content="https://newsmetrics.ng/business-news-image.jpg" />
       </Helmet>
       <JsonLd
         item={{

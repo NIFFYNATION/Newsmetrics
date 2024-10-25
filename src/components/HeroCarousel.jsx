@@ -38,6 +38,8 @@ const HeroCarousel = ({ latestPosts }) => {
           <div key={post.id} className="w-full flex-shrink-0">
             <div className="relative h-[400px] sm:h-[500px] md:h-[600px]">
               <img
+                height="auto"
+                width="auto"
                 src={post.image}
                 alt={post.title}
                 className="absolute inset-0 w-full h-full object-cover" 

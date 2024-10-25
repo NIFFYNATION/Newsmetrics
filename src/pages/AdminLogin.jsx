@@ -17,7 +17,13 @@ export default function AdminLogin() {
 
   useEffect(() => {
     if (userLoggedIn) {
-      navigate('/admin');
+      navigate('/boss');
+    } else {
+      const loggedOutDueToInactivity = localStorage.getItem('loggedOutDueToInactivity');
+      if (loggedOutDueToInactivity === 'true') {
+        
+        localStorage.removeItem('loggedOutDueToInactivity');
+      }
     }
   }, [userLoggedIn, navigate]);
 
@@ -26,7 +32,7 @@ export default function AdminLogin() {
     setError("");
     try {
       await loginUser(formData.email, formData.password);
-      navigate("/admin");
+      navigate("/boss");
     } catch (error) {
       setError("Login failed. Please check your email and password.");
       console.error("Login error:", error);

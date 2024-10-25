@@ -43,7 +43,7 @@ const PostForm = ({ isEditing = false }) => {
     "Business",
     "Tech",
     "Environment",
-    "Lifestyle",
+
   ];
 
   useEffect(() => {
@@ -55,7 +55,10 @@ const PostForm = ({ isEditing = false }) => {
           .find((doc) => doc.id === id)
           ?.data();
         if (existingPost) {
-          setPost(existingPost);
+          setPost((prevPost) => ({
+            ...prevPost,
+            ...existingPost,
+          }));
         }
       };
       fetchPost();
@@ -148,7 +151,7 @@ const PostForm = ({ isEditing = false }) => {
       } else {
         await addDoc(postsCollectionRef, postData);
       }
-      navigate("/admin");
+      navigate("/boss");
     } catch (error) {
       console.error("Error saving post:", error);
     }

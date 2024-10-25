@@ -33,6 +33,11 @@ const Entertainment = () => {
         <title>Entertainment News - News Metrics</title>
         <meta name="description" content="Latest entertainment news from News Metrics" />
         <link rel="canonical" href="https://newsmetrics.ng/entertainment" />
+        <meta property="og:title" content="Entertainment News - News Metrics" />
+        <meta property="og:description" content="Latest entertainment news from News Metrics" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://newsmetrics.ng/entertainment" />
+        <meta property="og:image" content="https://newsmetrics.ng/entertainment-news-image.jpg" />
       </Helmet>
       <JsonLd
         item={{

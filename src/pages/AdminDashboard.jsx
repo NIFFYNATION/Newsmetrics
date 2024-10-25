@@ -69,7 +69,7 @@ const AdminDashboard = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex flex-col sm:flex-row justify-between items-center mb-8">
           <h1 className="text-3xl font-bold mb-4 sm:mb-0">Admin Dashboard</h1>
-          <Link to="/admin/create-post" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 my-4 md:my-0 rounded transition duration-300 ease-in-out transform hover:scale-105">
+          <Link to="/boss/create-post" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 my-4 md:my-0 rounded transition duration-300 ease-in-out transform hover:scale-105">
             Create New Post
           </Link>
           <button
@@ -125,7 +125,7 @@ const AdminDashboard = () => {
                         </p>
                       </td>
                       <td className="px-5 py-5 border-b border-gray-200 text-sm">
-                        <Link to={`/admin/edit-post/${post.id}`} className="text-blue-500 hover:text-blue-700 mr-4">Edit</Link>
+                        <Link to={`/boss/edit-post/${post.id}`} className="text-blue-500 hover:text-blue-700 mr-4">Edit</Link>
                         <button onClick={() => handleDeletePost(post.id)} className="text-red-500 hover:text-red-700">Delete</button>
                       </td>
                     </tr>

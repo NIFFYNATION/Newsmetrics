@@ -34,6 +34,11 @@ const Tech = () => {
         <title>Tech News - News Metrics</title>
         <meta name="description" content="Latest technology news from News Metrics" />
         <link rel="canonical" href="https://newsmetrics.ng/tech" />
+        <meta property="og:title" content="Tech News - News Metrics" />
+        <meta property="og:description" content="Latest technology news from News Metrics" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://newsmetrics.ng/tech" />
+        <meta property="og:image" content="https://newsmetrics.ng/tech-news-image.jpg" />
       </Helmet>
       <JsonLd
         item={{

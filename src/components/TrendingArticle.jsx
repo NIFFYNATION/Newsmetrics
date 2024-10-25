@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import { format, isValid } from "date-fns";
 import ArticleStructuredData from "./ArticleStructuredData";
 import LoadingSpinner from './LoadingSpinner';
-import { collection, getDocs, query, orderBy, limit } from "firebase/firestore";
-import { db } from "../services/firebase";
 import { slugify } from '../utils/slugify';
 import React from 'react';
 
@@ -27,7 +25,7 @@ const TrendingArticle = React.memo(({ article }) => {
             <img
               src={article.image}
               alt={`Thumbnail for ${article.title}`}
-              className="bg-center bg-no-repeat aspect-square bg-cover rounded-lg size-16 shrink-0"
+              className="bg-center bg-no-repeat aspect-square bg-contain h-16 w-16 rounded-lg shrink-0"
               loading="lazy"
               width="64"
               height="64"

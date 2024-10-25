@@ -10,6 +10,7 @@ const ProtectedRoute = ({ children }) => {
   }
 
   if (!userLoggedIn) {
+    localStorage.setItem('loggedOutDueToInactivity', 'true');
     return <Navigate to="/adminlogin" replace />;
   }
 

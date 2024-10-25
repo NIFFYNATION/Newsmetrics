@@ -36,6 +36,11 @@ const Politics = () => {
         <title>Politics News - News Metrics</title>
         <meta name="description" content="Latest politics news from News Metrics" />
         <link rel="canonical" href="https://newsmetrics.ng/politics" />
+        <meta property="og:title" content="Politics News - News Metrics" />
+        <meta property="og:description" content="Latest politics news from News Metrics" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://newsmetrics.ng/politics" />
+        <meta property="og:image" content="https://newsmetrics.ng/politics-news-image.jpg" />
       </Helmet>
       <JsonLd
         item={{
