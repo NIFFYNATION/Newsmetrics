@@ -38,7 +38,10 @@ const Crime = () => {
         <meta property="og:description" content="Latest crime news from News Metrics" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://newsmetrics.ng/crime" />
-        <meta property="og:image" content="https://newsmetrics.ng/crime-news-image.jpg" />
+        <meta
+          property="og:image"
+          content="https://newsmetrics.ng/favicon.svg"
+        />
       </Helmet>
       <JsonLd
         item={{

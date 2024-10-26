@@ -46,7 +46,7 @@ const Business = () => {
         <meta property="og:url" content="https://newsmetrics.ng/business" />
         <meta
           property="og:image"
-          content="/favicon.svg"
+          content="https://newsmetrics.ng/favicon.svg"
         />
       </>
       <JsonLd
