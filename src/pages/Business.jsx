@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from "react";
-import { Helmet } from "react-helmet-async";
+// import { Helmet } from "react-helmet-async";
 import { BusinessArticle } from "../components/BusinessArticle";
 import Pagination from "../components/Pagination";
 import { usePostsQuery } from "../hooks/usePostsQuery";
@@ -30,7 +30,7 @@ const Business = () => {
 
   return (
     <>
-      <Helmet>
+      <>
         <title>Business News - News Metrics</title>
         <meta
           name="description"
@@ -48,7 +48,7 @@ const Business = () => {
           property="og:image"
           content="https://ogcdn.net/e4b8c678-7bd5-445d-ba03-bfaad510c686/v4/newsmetrics.ng/NewsMetrics/https%3A%2F%2Fopengraph.b-cdn.net%2Fproduction%2Fimages%2F56188dc2-e3c3-4ce5-a8b1-1323953e37b9.jpg%3Ftoken%3DhOY-wLL-tV2Wb6eqlpzb3hUOqYMZbXQ3az2flBDqaSs%26height%3D800%26width%3D1200%26expires%3D33251249770/og.png"
         />
-      </Helmet>
+      </>
       <JsonLd
         item={{
           "@context": "https://schema.org",
