@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from "react";
-// import { Helmet } from "react-helmet-async";
+import { Helmet } from "react-helmet-async";
 import { BusinessArticle } from "../components/BusinessArticle";
 import Pagination from "../components/Pagination";
 import { usePostsQuery } from "../hooks/usePostsQuery";
@@ -30,12 +30,12 @@ const Business = () => {
 
   return (
     <>
-      <>
+      <Helmet>
         <title>Business News - News Metrics</title>
         <meta
-          name="description"
-          content="Latest business news from News Metrics"
-        />
+  name="description"
+  content="Stay updated with the latest business news, trends, and insights from News Metrics. Explore in-depth analysis, expert opinions, and comprehensive coverage of the global business landscape."
+/>
         <link rel="canonical" href="https://newsmetrics.ng/business" />
         <meta property="og:title" content="Business News - News Metrics" />
         <meta
@@ -44,11 +44,10 @@ const Business = () => {
         />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://newsmetrics.ng/business" />
-        <meta
-          property="og:image"
-          content="https://newsmetrics.ng/favicon.svg"
-        />
-      </>
+        <meta property="og:image" content="/favicon.svg" />
+        <meta property="og:image:width" content="300" />
+        <meta property="og:image:height" content="300" />
+      </Helmet>
       <JsonLd
         item={{
           "@context": "https://schema.org",

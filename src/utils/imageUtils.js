@@ -1,8 +1,18 @@
-// Add this function to your utilities file (e.g., src/utils/imageUtils.js)
-export const getImageUrl = (imageRef) => {
-  if (!imageRef) return 'https://newsmetrics.ng/default-article-image.jpg';
-  if (typeof imageRef === 'string') return imageRef;
-  // Assuming imageRef is a Firebase storage reference
-  return `https://firebasestorage.googleapis.com/v0/b/${imageRef.bucket}/o/${encodeURIComponent(imageRef.fullPath)}?alt=media`;
-};
+import { ref, getDownloadURL } from "firebase/storage";
+import { imgStorage } from "../services/firebase";
 
+export const getImageUrl = async (imageRef) => {
+  if (!imageRef) return 'https://newsmetrics.ng/favicon.svg';
+  if (typeof imageRef === 'string') return imageRef;
+
+  try {
+    const storageRef = ref(imgStorage, imageRef);
+    const bucket = storageRef.bucket;
+    const fullPath = storageRef.fullPath;
+    const downloadURL = await getDownloadURL(storageRef);
+    return downloadURL;
+  } catch (error) {
+    console.error("Error getting image URL:", error);
+    return 'https://newsmetrics.ng/favicon.svg';
+  }
+};

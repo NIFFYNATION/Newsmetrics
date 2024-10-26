@@ -35,13 +35,15 @@ const Crime = () => {
         <meta name="description" content="Latest crime news from News Metrics" />
         <link rel="canonical" href="https://newsmetrics.ng/crime" />
         <meta property="og:title" content="Crime News - News Metrics" />
-        <meta property="og:description" content="Latest crime news from News Metrics" />
+        <meta name="description" content="Stay informed with the latest crime news from News Metrics. Explore in-depth articles, expert analysis, and comprehensive coverage of crime stories from around the world. Join our community for timely updates and insights into the criminal justice system." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://newsmetrics.ng/crime" />
         <meta
           property="og:image"
           content="https://newsmetrics.ng/favicon.svg"
         />
+        <meta property="og:image:width" content="300" />
+        <meta property="og:image:height" content="300" />
       </Helmet>
       <JsonLd
         item={{

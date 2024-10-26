@@ -37,13 +37,15 @@ const Politics = () => {
         <meta name="description" content="Latest politics news from News Metrics" />
         <link rel="canonical" href="https://newsmetrics.ng/politics" />
         <meta property="og:title" content="Politics News - News Metrics" />
-        <meta property="og:description" content="Latest politics news from News Metrics" />
+        <meta property="og:description" content="Stay informed with the latest political news, in-depth analysis, and expert commentary from News Metrics. Explore comprehensive coverage on local and global politics, elections, and policy updates." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://newsmetrics.ng/politics" />
         <meta
           property="og:image"
           content="https://newsmetrics.ng/favicon.svg"
         />
+        <meta property="og:image:width" content="300" />
+        <meta property="og:image:height" content="300" />
       </Helmet>
       <JsonLd
         item={{

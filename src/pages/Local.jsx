@@ -37,10 +37,12 @@ const Local = () => {
         <meta name="description" content="Latest local news from News Metrics" />
         <link rel="canonical" href="https://newsmetrics.ng/local" />
         <meta property="og:title" content="Local News - News Metrics" />
-        <meta property="og:description" content="Latest local news from News Metrics" />
+        <meta name="description" content="Discover the latest local news with News Metrics. Stay informed with comprehensive coverage, expert analysis, and timely updates on local events and stories. Join our community for in-depth insights and discussions on the issues that matter most in your area." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://newsmetrics.ng/local" />
-        <meta property="og:image" content="https://newsmetrics.ng/local-news-image.jpg" />
+        <meta property="og:image" content="https://newsmetrics.ng/favicon.svg" />
+        <meta property="og:image:width" content="300" />
+        <meta property="og:image:height" content="300" />
       </Helmet>
       <JsonLd
         item={{

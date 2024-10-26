@@ -66,6 +66,8 @@ function SinglePost() {
         />
         <meta property="og:type" content="article" />
         <meta property="og:image" content={getImageUrl(post.image)} />
+        <meta property="og:image:width" content="300" />
+        <meta property="og:image:height" content="300" />
         <meta
           property="og:url"
           content={`https://newsmetrics.ng/article/${post.id}`}

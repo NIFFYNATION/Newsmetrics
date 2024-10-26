@@ -34,13 +34,15 @@ const Entertainment = () => {
         <meta name="description" content="Latest entertainment news from News Metrics" />
         <link rel="canonical" href="https://newsmetrics.ng/entertainment" />
         <meta property="og:title" content="Entertainment News - News Metrics" />
-        <meta property="og:description" content="Latest entertainment news from News Metrics" />
+        <meta name="description" content="Discover the latest entertainment news and updates from News Metrics. Stay informed with in-depth articles, expert analysis, and comprehensive coverage of the entertainment industry, including movies, music, TV shows, and celebrity news. Join our community for timely updates and insights into the world of entertainment." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://newsmetrics.ng/entertainment" />
         <meta
           property="og:image"
           content="https://newsmetrics.ng/favicon.svg"
         />
+        <meta property="og:image:width" content="300" />
+        <meta property="og:image:height" content="300" />
       </Helmet>
       <JsonLd
         item={{

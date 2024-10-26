@@ -35,13 +35,15 @@ const Tech = () => {
         <meta name="description" content="Latest technology news from News Metrics" />
         <link rel="canonical" href="https://newsmetrics.ng/tech" />
         <meta property="og:title" content="Tech News - News Metrics" />
-        <meta property="og:description" content="Latest technology news from News Metrics" />
+        <meta name="description" content="Stay ahead with the latest technology news from News Metrics. Explore cutting-edge innovations, in-depth analysis of tech trends, expert reviews, and comprehensive coverage of AI, cybersecurity, gadgets, and more. Your trusted source for timely and accurate tech insights." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://newsmetrics.ng/tech" />
         <meta
           property="og:image"
           content="https://newsmetrics.ng/favicon.svg"
         />
+        <meta property="og:image:width" content="300" />
+        <meta property="og:image:height" content="300" />
       </Helmet>
       <JsonLd
         item={{
