@@ -54,6 +54,8 @@ function App() {
                         <Route path="/Home" element={<Home />} />
                         <Route path="/register" element={<Register />} />
                         <Route path="/adminlogin" element={<AdminLogin />} />
+
+                        <Route path="/article" element={<Home />} />
                         <Route path="/article/:slug" element={<SinglePost />} />
                         <Route
                           path="/local"

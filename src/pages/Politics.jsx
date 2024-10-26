@@ -40,7 +40,10 @@ const Politics = () => {
         <meta property="og:description" content="Latest politics news from News Metrics" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://newsmetrics.ng/politics" />
-        <meta property="og:image" content="https://newsmetrics.ng/politics-news-image.jpg" />
+        <meta
+          property="og:image"
+          content="https://newsmetrics.ng/favicon.svg"
+        />
       </Helmet>
       <JsonLd
         item={{

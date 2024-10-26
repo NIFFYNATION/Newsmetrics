@@ -95,6 +95,10 @@ const Posts = () => {
           property="og:description"
           content="Stay informed with News Metrics. Read the latest news, featured articles, and trending stories across various categories."
         />
+        <meta
+          property="og:image"
+          content="https://newsmetrics.ng/favicon.svg"
+        />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={window.location.href} />
       </Helmet>
