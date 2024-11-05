@@ -50,6 +50,7 @@ function SinglePost() {
 
   return (
     <>
+      <head>
       <Helmet>
         <title>{post.metaTitle || post.title} - News Metrics</title>
         <meta
@@ -82,6 +83,7 @@ function SinglePost() {
       <meta name="twitter:description" content={post.metaDescription || metaDescription} />
       {post.image && <meta name="twitter:image" content={post.image} />}
       </Helmet>
+      </head>
       <ArticleStructuredData article={post} />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <SinglePostArticle {...post} comments={post.comments || []} />
