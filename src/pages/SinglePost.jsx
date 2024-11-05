@@ -65,18 +65,22 @@ function SinglePost() {
           content={post.metaDescription || metaDescription}
         />
         <meta property="og:type" content="article" />
-        <meta property="og:image" content={getImageUrl(post.image)} />
-        <meta property="og:image:width" content="300" />
-        <meta property="og:image:height" content="300" />
+        {/* <meta property="og:image" content={getImageUrl(post.image)} /> */}
+        
         <meta
           property="og:url"
-          content={`https://newsmetrics.ng/article/${post.id}`}
+          content={`https://newsmetrics.ng/article/${slug}`}
         />
         {post.image && <meta property="og:image" content={post.image} />}
         <meta
           name="keywords"
           content={post.keywords ? post.keywords.join(", ") : ""}
         />
+
+<meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content= {post.metaTitle || post.title} />
+      <meta name="twitter:description" content={post.metaDescription || metaDescription} />
+      {post.image && <meta name="twitter:image" content={post.image} />}
       </Helmet>
       <ArticleStructuredData article={post} />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
